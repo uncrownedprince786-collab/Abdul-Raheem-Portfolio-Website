@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://abdulraheemitmanager.vercel.app"),
+  metadataBase: new URL("https://abdulraheem-pm.vercel.app"),
   title:
     "Abdul Raheem — Technical Project Manager | Agile Delivery | Scrum Master",
   description:

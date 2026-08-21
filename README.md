@@ -45,7 +45,7 @@ vercel link --project abdulraheemitmanager
 vercel --prod
 ```
 
-Live site: https://abdulraheemitmanager.vercel.app
+Live site: https://abdulraheem-pm.vercel.app
 
 ## Project structure
 
