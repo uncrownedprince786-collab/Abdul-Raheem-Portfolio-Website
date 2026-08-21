@@ -1,0 +1,9 @@
+PLACE YOUR PHOTO HERE
+=====================
+
+1. Rename your professional photo to:  profile.jpg
+2. Copy it into this folder (abdul-raheem-portfolio/public/images/).
+3. Rebuild / redeploy — the hero section picks it up automatically.
+
+Recommended: a square image, at least 600×600 px, well-lit head-and-shoulders
+crop against a plain background. It is displayed as a soft-edged circle.
