@@ -158,6 +158,18 @@ li[data-passed="true"] .tl-ring {
   border-color: rgba(27, 54, 93, 0.45);
 }
 
+/* ---------------------------------------------------------------------------
+   Horizontal scroller — hide the scrollbar, keep native swipe/snap
+--------------------------------------------------------------------------- */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

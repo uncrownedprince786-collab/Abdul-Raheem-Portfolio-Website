@@ -2,6 +2,7 @@ import Image from "next/image";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import type { CSSProperties } from "react";
+import ProjectScroller from "@/components/ProjectScroller";
 
 /* -----------------------------------------------------------------------------
  * PHOTO
@@ -117,6 +118,16 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    title: "Shorex Recycling Platform",
+    challenge:
+      "Shorex Environment Care & Recycling SL in Spain needed one digital system to run recycling requests, warehouse stock, driver assignments, and a customer points program instead of juggling separate tools.",
+    approach:
+      "Owned delivery end to end, from user-flow documentation through development and testing: an admin panel where recyclable items are priced in Euro points, customer request submission, a driver flow for handling requests, warehouse stocking, and automatic points calculation with redemption rules.",
+    outcome:
+      "A working end-to-end platform where every request moves cleanly from customer to driver to warehouse, and customers earn and redeem points under rules the admin controls.",
+    role: "Project Manager · Full delivery ownership",
+  },
+  {
     title: "Learning Management System with AI Chatbot",
     challenge:
       "A full learning platform with courses, attendance, assessments, live classes, and an AI chatbot, where vague requirements risked rework across several teams.",
@@ -145,6 +156,36 @@ const PROJECTS: Project[] = [
     outcome:
       "A dashboard giving operators one clear view of customers, subscriptions, and results.",
     role: "Project Manager · Stakeholders & releases",
+  },
+  {
+    title: "Custom WordPress Plugins",
+    challenge:
+      "International clients needed features that off-the-shelf themes and plugins could not cover, from backend tools to custom form handling.",
+    approach:
+      "Developed multiple custom plugins across client projects: backend utilities, form handlers, and admin tooling built to sit cleanly alongside standard WordPress rather than fight it.",
+    outcome:
+      "Plugins doing quiet, specific jobs inside client sites, extending WordPress exactly where the standard ecosystem stopped.",
+    role: "Project Manager & Developer",
+  },
+  {
+    title: "E-commerce & Order Management",
+    challenge:
+      "Online sellers needed dependable product catalogs, clean order flows, and admin control they could trust as order volume grew.",
+    approach:
+      "Delivered custom e-commerce and order management builds for international clients, shaping catalog structure, order lifecycles, and admin controls around how each business actually operates.",
+    outcome:
+      "Stores that process orders predictably and give owners a clear handle on day-to-day operations.",
+    role: "Project Manager · International clients",
+  },
+  {
+    title: "Chrome Extension Projects",
+    challenge:
+      "Teams were losing small amounts of time all day to repetitive browser tasks that no standard tool addressed.",
+    approach:
+      "Built and delivered Chrome extensions as part of client work at Karigar, focused on productivity and lightweight browser-based utilities.",
+    outcome:
+      "Small tools that live exactly where the work happens and quietly remove repetitive steps from daily routines.",
+    role: "Project Manager · Karigar client work",
   },
 ];
 
@@ -503,13 +544,17 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
           <SectionHeading id="projects-title" num="03" eyebrow="Selected Projects" title="Problems taken seriously" />
 
-          <div className="grid gap-6 md:grid-cols-3">
+          <p className="-mt-6 mb-12 max-w-2xl text-base leading-relaxed text-mist md:-mt-10 md:mb-14" data-reveal>
+            A slow scroll through recent work. Hover to pause, or use the arrows.
+          </p>
+
+          <ProjectScroller>
             {PROJECTS.map((project, i) => (
               <article
                 key={project.title}
                 data-reveal
-                style={delay(i * 120)}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-ivory p-8 pt-9 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)]"
+                style={delay(i === 0 ? 0 : (i % 2) * 120)}
+                className="group relative flex w-[85vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-hairline bg-ivory p-8 pt-9 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)] sm:w-[400px]"
               >
                 <span
                   aria-hidden="true"
@@ -545,7 +590,7 @@ export default function Home() {
                 </p>
               </article>
             ))}
-          </div>
+          </ProjectScroller>
         </div>
       </section>
 
