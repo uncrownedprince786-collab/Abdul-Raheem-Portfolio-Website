@@ -6,7 +6,10 @@ const LINKS = [
   { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "How I Work", href: "#how-i-work" },
   { label: "Skills", href: "#skills" },
+  { label: "Certificates", href: "#certificates" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -60,13 +63,13 @@ export default function Nav() {
           className="text-[15px] font-semibold tracking-tight text-navy transition-opacity hover:opacity-70"
         >
           Abdul&nbsp;Raheem
-          <span className="ml-2 hidden font-normal text-mist sm:inline">
+          <span className="ml-2 hidden font-normal text-mist xl:inline">
             Technical Project Manager
           </span>
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-6 lg:flex">
           {LINKS.map(({ label, href }) => (
             <li key={href}>
               <a
@@ -89,7 +92,7 @@ export default function Nav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-lg md:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-lg lg:hidden"
         >
           <span
             className={`h-px w-5 bg-navy transition-transform duration-300 ${
@@ -107,20 +110,23 @@ export default function Nav() {
       {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className={`overflow-hidden transition-[max-height,opacity] duration-300 md:hidden ${
-          open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden ${
+          open ? "max-h-[26rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="space-y-1 px-6 pb-6 pt-2">
-          {LINKS.map(({ label, href }) => (
+          {LINKS.map(({ label, href }, i) => (
             <li key={href}>
               <a
                 href={href}
                 onClick={() => setOpen(false)}
-                className={`block rounded-lg px-3 py-3 text-[15px] transition-colors hover:bg-white hover:text-navy ${
+                className={`flex items-baseline gap-3 rounded-lg px-3 py-2.5 text-[15px] transition-colors hover:bg-white hover:text-navy ${
                   active === href.slice(1) ? "font-medium text-navy" : "text-mist"
                 }`}
               >
+                <span aria-hidden="true" className="text-[11px] font-medium tabular-nums text-mist/60">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 {label}
               </a>
             </li>
