@@ -710,6 +710,10 @@ export default function Home() {
               lifecycles, system thinking, and how technical decisions shape
               timelines.
             </p>
+            <p className="mx-auto mt-6 max-w-xl border-t border-hairline pt-5 text-xs leading-relaxed text-mist">
+              Degree and professional experience letters are available upon
+              request.
+            </p>
           </div>
         </div>
       </section>

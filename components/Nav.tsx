@@ -13,6 +13,8 @@ const LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
+const RESUME_HREF = "/abdul-raheem-resume.pdf";
+
 const SECTION_IDS = LINKS.map((l) => l.href.slice(1));
 
 export default function Nav() {
@@ -85,33 +87,49 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-lg lg:hidden"
-        >
-          <span
-            className={`h-px w-5 bg-navy transition-transform duration-300 ${
-              open ? "translate-y-[3px] rotate-45" : ""
+        {/* Resume + mobile toggle */}
+        <div className="flex items-center gap-2.5">
+          <a
+            href={RESUME_HREF}
+            download="Abdul_Raheem_Resume.pdf"
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-medium transition-all duration-300 sm:text-sm ${
+              open
+                ? "bg-navy text-ivory"
+                : "bg-navy text-ivory hover:bg-navy-deep hover:shadow-md hover:shadow-navy/20"
             }`}
-          />
-          <span
-            className={`h-px w-5 bg-navy transition-transform duration-300 ${
-              open ? "-translate-y-[3px] -rotate-45" : ""
-            }`}
-          />
-        </button>
+          >
+            Resume
+            <span aria-hidden="true" className="text-[10px] opacity-70">
+              ↓
+            </span>
+          </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-lg lg:hidden"
+          >
+            <span
+              className={`h-px w-5 bg-navy transition-transform duration-300 ${
+                open ? "translate-y-[3px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-5 bg-navy transition-transform duration-300 ${
+                open ? "-translate-y-[3px] -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
       <div
         id="mobile-menu"
         className={`overflow-hidden transition-[max-height,opacity] duration-300 lg:hidden ${
-          open ? "max-h-[26rem] opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="space-y-1 px-6 pb-6 pt-2">
@@ -132,6 +150,15 @@ export default function Nav() {
             </li>
           ))}
         </ul>
+        <div className="px-3 pb-6 pt-3">
+          <a
+            href={RESUME_HREF}
+            download="Abdul_Raheem_Resume.pdf"
+            className="block rounded-full bg-navy px-4 py-3 text-center text-sm font-medium text-ivory transition-colors hover:bg-navy-deep"
+          >
+            Download Resume
+          </a>
+        </div>
       </div>
     </header>
   );
