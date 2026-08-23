@@ -10,9 +10,12 @@ const LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
+const SECTION_IDS = LINKS.map((l) => l.href.slice(1));
+
 export default function Nav() {
   const [elevated, setElevated] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("");
 
   useEffect(() => {
     const onScroll = () => setElevated(window.scrollY > 12);
@@ -21,11 +24,30 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scrollspy: highlight the link for the section currently in view
+  useEffect(() => {
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => el !== null
+    );
+    if (!("IntersectionObserver" in window) || sections.length === 0) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         elevated || open
-          ? "border-b border-hairline bg-ivory/85 shadow-[0_1px_24px_rgba(27,54,93,0.06)] backdrop-blur-md"
+          ? "border-b border-hairline bg-ivory/85 shadow-[0_1px_24px_rgba(27,54,93,0.07)] backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -47,7 +69,13 @@ export default function Nav() {
         <ul className="hidden items-center gap-8 md:flex">
           {LINKS.map(({ label, href }) => (
             <li key={href}>
-              <a href={href} className="nav-link text-sm text-mist hover:text-navy">
+              <a
+                href={href}
+                aria-current={active === href.slice(1) ? "true" : undefined}
+                className={`nav-link text-sm ${
+                  active === href.slice(1) ? "nav-active text-navy" : "text-mist hover:text-navy"
+                }`}
+              >
                 {label}
               </a>
             </li>
@@ -89,7 +117,9 @@ export default function Nav() {
               <a
                 href={href}
                 onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-3 text-[15px] text-mist transition-colors hover:bg-white hover:text-navy"
+                className={`block rounded-lg px-3 py-3 text-[15px] transition-colors hover:bg-white hover:text-navy ${
+                  active === href.slice(1) ? "font-medium text-navy" : "text-mist"
+                }`}
               >
                 {label}
               </a>

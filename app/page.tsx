@@ -16,6 +16,7 @@ type Role = {
   title: string;
   company: string;
   meta: string;
+  span: string;
   story: string;
   bullets: string[];
 };
@@ -25,6 +26,7 @@ const EXPERIENCE: Role[] = [
     title: "Technical Project Manager / Scrum Master",
     company: "DG Cars",
     meta: "United Kingdom (Remote) · Aug 2025 to Present",
+    span: "Current",
     story:
       "Leading Agile delivery for a UK mobility platform where every sprint has to end with progress you can see.",
     bullets: [
@@ -38,6 +40,7 @@ const EXPERIENCE: Role[] = [
     title: "Project Manager / QA Lead",
     company: "BrainCell",
     meta: "Saudi Arabia (Remote) · May 2024 to Jul 2025",
+    span: "1 yr 2 mos",
     story:
       "Ran delivery and quality side by side, because a release is only ready when testing says so.",
     bullets: [
@@ -51,6 +54,7 @@ const EXPERIENCE: Role[] = [
     title: "Project Manager",
     company: "App4orce",
     meta: "Pakistan · Mar 2023 to Apr 2024",
+    span: "1 yr 1 mo",
     story:
       "Owned the full delivery lifecycle across web, mobile, and SaaS products, from first requirement to production.",
     bullets: [
@@ -64,6 +68,7 @@ const EXPERIENCE: Role[] = [
     title: "Project Manager",
     company: "Karigar Web Solutions",
     meta: "Pakistan · Aug 2020 to Feb 2023",
+    span: "2 yrs 7 mos",
     story:
       "Where I learned scale: more than fifty international projects and a team of twenty, moved onto a shipping rhythm they could trust.",
     bullets: [
@@ -78,6 +83,7 @@ const EXPERIENCE: Role[] = [
     title: "Project Manager",
     company: "TechnoSofts",
     meta: "Pakistan · Jan 2020 to Jul 2020",
+    span: "7 mos",
     story:
       "Cut my project management teeth on WordPress and e-commerce builds for clients abroad.",
     bullets: [
@@ -91,6 +97,7 @@ const EXPERIENCE: Role[] = [
     title: "QA Engineer",
     company: "HI Tech IT Company",
     meta: "Pakistan · Jan 2019 to Dec 2019",
+    span: "1 yr",
     story:
       "The year I learned to see software the way users do, by trying to break it before they could.",
     bullets: [
@@ -276,16 +283,26 @@ const CERTIFICATES: Certificate[] = [
 
 function SectionHeading({
   id,
+  num,
   eyebrow,
   title,
 }: {
   id?: string;
+  num?: string;
   eyebrow: string;
   title: string;
 }) {
   return (
     <div className="mb-12 md:mb-16" data-reveal>
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-mist">{eyebrow}</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-mist">
+        {num ? (
+          <>
+            <span className="tabular-nums text-navy/60">{num}</span>
+            <span className="mx-2 text-hairline">·</span>
+          </>
+        ) : null}
+        {eyebrow}
+      </p>
       <h2 id={id} className="mt-3 text-3xl font-semibold tracking-tight text-navy md:text-4xl">
         {title}
         <span className="title-rule" aria-hidden="true" />
@@ -299,7 +316,13 @@ export default function Home() {
     <main id="main">
       {/* ============================== HERO ============================== */}
       <section id="top" className="relative overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6 pb-24 pt-36 md:pb-32 md:pt-44">
+        <div aria-hidden="true" className="dot-field pointer-events-none absolute inset-0 opacity-40" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 top-24 h-[460px] w-[460px] rounded-full bg-navy/[0.05] blur-3xl"
+        />
+
+        <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-36 md:pb-28 md:pt-44">
           <div className="grid items-center gap-16 lg:grid-cols-[1fr_auto]">
             <div data-reveal>
               <p className="text-xs font-medium uppercase tracking-[0.22em] text-mist">
@@ -337,12 +360,33 @@ export default function Home() {
                   Contact Me
                 </a>
               </div>
+
+              <dl className="mt-14 flex divide-x divide-hairline border-t border-hairline pt-8">
+                {[
+                  { n: "7+", t: "Years leading delivery" },
+                  { n: "50+", t: "Projects shipped worldwide" },
+                  { n: "95%", t: "Completed on schedule" },
+                ].map((s, i) => (
+                  <div key={s.t} className={i === 0 ? "pr-8 md:pr-10" : "px-8 md:px-10"}>
+                    <dt className="text-3xl font-semibold tracking-tight text-navy">{s.n}</dt>
+                    <dd className="mt-1.5 text-[11px] uppercase tracking-[0.16em] text-mist">{s.t}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
 
             {/* Photo */}
             <div className="justify-self-center" data-reveal style={delay(150)}>
               <div className="relative">
+                <div
+                  aria-hidden="true"
+                  className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(27,54,93,0.12),transparent_65%)] blur-2xl"
+                />
                 <div aria-hidden="true" className="absolute -inset-4 rounded-full border border-hairline" />
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-3 -right-3 h-16 w-16 rounded-2xl border border-hairline bg-paper/70 backdrop-blur-sm"
+                />
                 <div className="relative h-60 w-60 overflow-hidden rounded-full bg-paper shadow-[0_24px_60px_-24px_rgba(27,54,93,0.35)] ring-1 ring-hairline md:h-72 md:w-72">
                   {hasProfilePhoto ? (
                     <Image
@@ -369,27 +413,46 @@ export default function Home() {
       {/* ============================== ABOUT ============================== */}
       <section id="about" aria-labelledby="about-title" className="scroll-mt-24 border-t border-hairline bg-paper">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="about-title" eyebrow="About" title="From QA to the delivery seat" />
-          <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-ink/90" data-reveal>
-            <p>
-              I started in QA, testing software and learning exactly how good
-              products fail. That year taught me a lesson I still carry into
-              every sprint: most project failures are clarity failures before
-              they are anything else.
-            </p>
-            <p>
-              That instinct pulled me into project management. At Karigar Web
-              Solutions I directed more than 50 international client projects,
-              introduced structured Scrum to a team of 20, and kept delivery
-              predictable enough to finish 95% of projects on schedule.
-            </p>
-            <p>
-              Today I work as a Technical Project Manager and Scrum Master,
-              leading remote teams for clients in Saudi Arabia and the United
-              Kingdom. I understand REST APIs well enough to challenge an
-              estimate, and I put AI tools to work on documentation and analysis
-              while verifying every output myself.
-            </p>
+          <SectionHeading id="about-title" num="01" eyebrow="About" title="From QA to the delivery seat" />
+          <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
+            <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-ink/90" data-reveal>
+              <p>
+                I started in QA, testing software and learning exactly how good
+                products fail. That year taught me a lesson I still carry into
+                every sprint: most project failures are clarity failures before
+                they are anything else.
+              </p>
+              <p>
+                That instinct pulled me into project management. At Karigar Web
+                Solutions I directed more than 50 international client projects,
+                introduced structured Scrum to a team of 20, and kept delivery
+                predictable enough to finish 95% of projects on schedule.
+              </p>
+              <p>
+                Today I work as a Technical Project Manager and Scrum Master,
+                leading remote teams for clients in Saudi Arabia and the United
+                Kingdom. I understand REST APIs well enough to challenge an
+                estimate, and I put AI tools to work on documentation and analysis
+                while verifying every output myself.
+              </p>
+            </div>
+
+            <aside data-reveal style={delay(150)} className="h-fit rounded-2xl border border-hairline bg-ivory p-7 lg:sticky lg:top-28">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">At a glance</h3>
+              <dl className="mt-5 space-y-4">
+                {[
+                  { k: "Currently", v: "Technical PM · DG Cars (UK)" },
+                  { k: "Based in", v: "Lahore, Pakistan" },
+                  { k: "Focus", v: "Remote Agile & SaaS delivery" },
+                  { k: "Status", v: "Open to opportunities", accent: true },
+                ].map((row) => (
+                  <div key={row.k} className="border-b border-hairline pb-4 last:border-0 last:pb-0">
+                    <dt className="text-[11px] font-medium uppercase tracking-[0.16em] text-mist">{row.k}</dt>
+                    <dd className={`mt-1 text-sm ${row.accent ? "font-medium text-navy" : "text-ink/85"}`}>{row.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
           </div>
         </div>
       </section>
@@ -397,15 +460,22 @@ export default function Home() {
       {/* ============================ EXPERIENCE ============================ */}
       <section id="experience" aria-labelledby="experience-title" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="experience-title" eyebrow="Experience" title="Seven years, six teams, one standard" />
+          <SectionHeading id="experience-title" num="02" eyebrow="Experience" title="Seven years, six teams, one standard" />
 
-          <ol className="relative ml-2 space-y-14 border-l border-hairline pl-8 md:ml-6 md:pl-12">
+          <ol className="relative ml-2 space-y-14 border-l border-hairline md:ml-6">
+            <span aria-hidden="true" className="tl-line" />
             {EXPERIENCE.map((role, i) => (
-              <li key={`${role.company}-${role.meta}`} data-reveal style={delay(i === 0 ? 0 : 60)}>
-                <span aria-hidden="true" className="absolute -left-[9px] top-1.5 grid place-items-center">
-                  <span className="tl-ring block h-4 w-4 rounded-full border border-navy/30 bg-ivory" />
-                  <span className="tl-dot absolute block h-[9px] w-[9px] rounded-full bg-navy" />
+              <li key={`${role.company}-${role.meta}`} data-reveal style={delay(i === 0 ? 0 : 60)} className="relative pl-8 md:pl-12">
+                <span aria-hidden="true" className="absolute -left-2 top-1.5 grid place-items-center">
+                  <span className="tl-ring block h-4 w-4 rounded-full border bg-ivory" />
+                  <span className="tl-dot absolute block h-[9px] w-[9px] rounded-full" />
                 </span>
+
+                <p className="mb-3 hidden md:block">
+                  <span className="rounded-full border border-hairline bg-paper px-3 py-1 text-[11px] font-medium tabular-nums text-mist">
+                    {role.span}
+                  </span>
+                </p>
 
                 <h3 className="text-xl font-semibold tracking-tight text-navy">{role.title}</h3>
                 <p className="mt-2 text-sm text-mist">
@@ -431,7 +501,7 @@ export default function Home() {
       {/* ============================= PROJECTS ============================= */}
       <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 border-t border-hairline bg-paper">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="projects-title" eyebrow="Selected Projects" title="Problems taken seriously" />
+          <SectionHeading id="projects-title" num="03" eyebrow="Selected Projects" title="Problems taken seriously" />
 
           <div className="grid gap-6 md:grid-cols-3">
             {PROJECTS.map((project, i) => (
@@ -439,12 +509,19 @@ export default function Home() {
                 key={project.title}
                 data-reveal
                 style={delay(i * 120)}
-                className="group flex flex-col rounded-2xl border border-hairline bg-ivory p-8 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)]"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-ivory p-8 pt-9 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)]"
               >
-                <span className="text-xs font-medium tabular-nums text-mist/70">
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-navy to-navy/30 transition-transform duration-500 group-hover:scale-x-100"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-6 top-3 select-none text-6xl font-bold leading-none text-navy/[0.06]"
+                >
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight text-navy">
+                <h3 className="max-w-[85%] text-lg font-semibold leading-snug tracking-tight text-navy">
                   {project.title}
                 </h3>
 
@@ -459,7 +536,7 @@ export default function Home() {
                   </div>
                   <div>
                     <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">Outcome</dt>
-                    <dd className="mt-1.5 text-sm leading-relaxed text-ink/75">{project.outcome}</dd>
+                    <dd className="mt-1.5 text-sm font-medium leading-relaxed text-navy/90">{project.outcome}</dd>
                   </div>
                 </dl>
 
@@ -475,16 +552,16 @@ export default function Home() {
       {/* ============================ HOW I WORK ============================ */}
       <section id="how-i-work" aria-labelledby="how-i-work-title" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="how-i-work-title" eyebrow="How I Work" title="My approach" />
+          <SectionHeading id="how-i-work-title" num="04" eyebrow="How I Work" title="My approach" />
 
-          <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {HOW_I_WORK.map((point, i) => (
-              <div key={point.title} data-reveal style={delay(i * 90)} className="border-t border-hairline pt-6">
-                <h3 className="flex items-baseline gap-3 text-base font-semibold tracking-tight text-navy">
-                  <span className="text-xs font-medium tabular-nums text-mist/70">{String(i + 1).padStart(2, "0")}</span>
-                  {point.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink/75">{point.text}</p>
+              <div key={point.title} data-reveal style={delay(i * 100)} className="border-t-2 border-navy/15 pt-7">
+                <span aria-hidden="true" className="block text-5xl font-semibold leading-none text-navy/10">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 text-base font-semibold tracking-tight text-navy">{point.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink/75">{point.text}</p>
               </div>
             ))}
           </div>
@@ -494,7 +571,7 @@ export default function Home() {
       {/* ============================== SKILLS ============================== */}
       <section id="skills" aria-labelledby="skills-title" className="scroll-mt-24 border-t border-hairline bg-paper">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="skills-title" eyebrow="Skills" title="Tools of the trade" />
+          <SectionHeading id="skills-title" num="05" eyebrow="Skills" title="Tools of the trade" />
 
           <div className="grid gap-x-12 gap-y-12 md:grid-cols-2">
             {SKILL_GROUPS.map((group, i) => (
@@ -505,7 +582,7 @@ export default function Home() {
                   {group.items.map((skill) => (
                     <li
                       key={skill}
-                      className="rounded-full border border-hairline bg-ivory px-4 py-1.5 text-sm text-ink/80 transition-colors duration-200 hover:border-navy/30 hover:text-navy"
+                      className="rounded-full border border-hairline bg-ivory px-4 py-1.5 text-sm text-ink/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-navy hover:bg-navy hover:text-ivory"
                     >
                       {skill}
                     </li>
@@ -520,7 +597,7 @@ export default function Home() {
       {/* =========================== CERTIFICATES =========================== */}
       <section id="certificates" aria-labelledby="certificates-title" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="certificates-title" eyebrow="Credentials" title="Certificates" />
+          <SectionHeading id="certificates-title" num="06" eyebrow="Credentials" title="Certificates" />
 
           <p className="-mt-6 mb-12 max-w-2xl text-base leading-relaxed text-mist md:-mt-10 md:mb-16" data-reveal>
             Every certificate below links to its official record where one
@@ -580,7 +657,7 @@ export default function Home() {
       {/* ====================== EDUCATION & PROFESSIONAL ====================== */}
       <section id="education" aria-labelledby="education-title" className="scroll-mt-24 border-t border-hairline bg-paper">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="education-title" eyebrow="Foundations" title="Education & Certifications" />
+          <SectionHeading id="education-title" num="07" eyebrow="Foundations" title="Education & Certifications" />
 
           <div className="grid gap-6 md:grid-cols-2">
             <div data-reveal className="rounded-2xl border border-hairline bg-ivory p-8">
@@ -620,14 +697,25 @@ export default function Home() {
       </section>
 
       {/* ============================== CONTACT ============================== */}
-      <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-6 pb-28 pt-24 md:pt-32">
+      <section id="contact" aria-labelledby="contact-title" className="relative scroll-mt-24 overflow-hidden bg-navy text-ivory">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage: "radial-gradient(rgba(248,247,244,0.9) 0.65px, transparent 0.65px)",
+            backgroundSize: "22px 22px",
+            WebkitMaskImage: "radial-gradient(ellipse 60% 70% at 80% 20%, black 20%, transparent 72%)",
+            maskImage: "radial-gradient(ellipse 60% 70% at 80% 20%, black 20%, transparent 72%)",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-6xl px-6 pb-28 pt-24 md:pt-32">
           <div data-reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-mist">Contact</p>
-            <h2 id="contact-title" className="mt-4 text-4xl font-semibold tracking-tight text-navy md:text-5xl">
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/50">08 · Contact</p>
+            <h2 id="contact-title" className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
               Let&rsquo;s build something steady.
             </h2>
-            <p className="mt-6 leading-relaxed text-mist">
+            <p className="mt-6 leading-relaxed text-white/70">
               If your product needs a Technical Project Manager who brings calm,
               structure, and honest timelines to remote Agile delivery, I would
               genuinely enjoy hearing about it.
@@ -647,10 +735,10 @@ export default function Home() {
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                 data-reveal
                 style={delay(i * 100)}
-                className="rounded-2xl border border-hairline bg-ivory p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_20px_40px_-20px_rgba(27,54,93,0.18)]"
+                className="rounded-2xl border border-white/15 bg-white/[0.05] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.09]"
               >
-                <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-mist">{label}</span>
-                <span className="mt-2 block break-words text-sm font-medium text-navy">{value}</span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-white/50">{label}</span>
+                <span className="mt-2 block break-words text-sm font-medium text-white">{value}</span>
               </a>
             ))}
           </div>
@@ -658,8 +746,8 @@ export default function Home() {
       </section>
 
       {/* =============================== FOOTER =============================== */}
-      <footer className="border-t border-hairline">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-mist sm:flex-row">
+      <footer className="border-t border-white/10 bg-navy">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-white/55 sm:flex-row">
           <p>© {new Date().getFullYear()} Abdul Raheem. All rights reserved.</p>
           <p>Lahore, Pakistan</p>
         </div>
