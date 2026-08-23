@@ -191,40 +191,87 @@ const SKILL_GROUPS = [
   },
 ];
 
-const CERTIFICATIONS = [
+type Certificate = {
+  src: string;
+  name: string;
+  issuer: string;
+  detail?: string;
+  href?: string;
+  alt: string;
+};
+
+const CERTIFICATES: Certificate[] = [
   {
+    src: "/certificates/google-pm-cert.png",
     name: "Google Project Management Professional Certificate",
     issuer: "Google",
-    status: "2023",
+    detail: "2023",
     href: "https://www.credly.com/badges/6433352a-e1ec-4f97-b006-db00d9ae8f64",
+    alt: "Google Project Management Professional Certificate badge issued to Abdul Raheem",
   },
   {
-    name: "Professional Scrum Master (PSM I)",
-    issuer: "Scrum.org",
-    status: "Certified",
-    href: null,
+    src: "/certificates/foundations.jpg",
+    name: "Foundations of Project Management",
+    issuer: "Google · Coursera",
+    detail: "Jun 1, 2023",
+    href: "https://coursera.org/share/5a5192df79d64d815412060bba985793",
+    alt: "Coursera certificate for Foundations of Project Management, completed by Abdul Raheem Butt",
   },
   {
-    name: "Project Management Professional (PMP)",
-    issuer: "Project Management Institute",
-    status: "In Progress",
-    href: null,
+    src: "/certificates/initiation.jpg",
+    name: "Project Initiation: Starting a Successful Project",
+    issuer: "Google · Coursera",
+    detail: "Jun 7, 2023",
+    href: "https://coursera.org/share/afb45c0da6b66816f27ab3356aa5abe9",
+    alt: "Coursera certificate for Project Initiation: Starting a Successful Project, completed by Abdul Raheem Butt",
   },
   {
+    src: "/certificates/planning.jpg",
+    name: "Project Planning: Putting It All Together",
+    issuer: "Google · Coursera",
+    detail: "Jun 13, 2023",
+    href: "https://coursera.org/share/71f2d3900ac8e95851d9077fbd16e0f3",
+    alt: "Coursera certificate for Project Planning: Putting It All Together, completed by Abdul Raheem Butt",
+  },
+  {
+    src: "/certificates/execution.jpg",
+    name: "Project Execution: Running the Project",
+    issuer: "Google · Coursera",
+    detail: "Jun 16, 2023",
+    href: "https://coursera.org/share/e85c26ba8d4c08d02c25c79009495a14",
+    alt: "Coursera certificate for Project Execution: Running the Project, completed by Abdul Raheem Butt",
+  },
+  {
+    src: "/certificates/agile.jpg",
+    name: "Agile Project Management",
+    issuer: "Google · Coursera",
+    detail: "Jun 20, 2023",
+    href: "https://coursera.org/share/e467bfc7b4d26336d506ea1674f86edd",
+    alt: "Coursera certificate for Agile Project Management, completed by Abdul Raheem Butt",
+  },
+  {
+    src: "/certificates/capstone.jpg",
+    name: "Capstone: Applying Project Management in the Real World",
+    issuer: "Google · Coursera",
+    detail: "Jun 21, 2023",
+    href: "https://coursera.org/share/2ebcdac133fa2cfad6137e056a5ade92",
+    alt: "Coursera capstone certificate for Applying Project Management in the Real World, completed by Abdul Raheem Butt",
+  },
+  {
+    src: "/certificates/six-sigma.png",
     name: "Six Sigma Yellow Belt",
-    issuer: "Abdul Raheem Butt",
-    status: "Certified",
+    issuer: "Certificate No. 875264",
+    detail: "View PDF",
     href: "https://c46e136a583f7e334124-ac22991740ab4ff17e21daf2ed577041.ssl.cf1.rackcdn.com/Certificate/SixSigmaYellowBelt-AbdulRaheemButt-875264.pdf",
+    alt: "Six Sigma Yellow Belt certificate awarded to Abdul Raheem Butt",
   },
-];
-
-const GOOGLE_PM_COURSES = [
-  { name: "Foundations of Project Management", date: "Jun 1, 2023", href: "https://coursera.org/share/5a5192df79d64d815412060bba985793" },
-  { name: "Project Initiation: Starting a Successful Project", date: "Jun 7, 2023", href: "https://coursera.org/share/afb45c0da6b66816f27ab3356aa5abe9" },
-  { name: "Project Planning: Putting It All Together", date: "Jun 13, 2023", href: "https://coursera.org/share/71f2d3900ac8e95851d9077fbd16e0f3" },
-  { name: "Project Execution: Running the Project", date: "Jun 16, 2023", href: "https://coursera.org/share/e85c26ba8d4c08d02c25c79009495a14" },
-  { name: "Agile Project Management", date: "Jun 20, 2023", href: "https://coursera.org/share/e467bfc7b4d26336d506ea1674f86edd" },
-  { name: "Capstone: Applying Project Management in the Real World", date: "Jun 21, 2023", href: "https://coursera.org/share/2ebcdac133fa2cfad6137e056a5ade92" },
+  {
+    src: "/certificates/scrum-fundamentals.jpg",
+    name: "Scrum Fundamentals Certified (SFC)",
+    issuer: "SCRUMstudy",
+    detail: "Certified",
+    alt: "Scrum Fundamentals Certified certificate awarded to Abdul Raheem Butt",
+  },
 ];
 
 function SectionHeading({
@@ -470,13 +517,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ====================== EDUCATION & CERTIFICATIONS ====================== */}
-      <section id="education" aria-labelledby="education-title" className="scroll-mt-24">
+      {/* =========================== CERTIFICATES =========================== */}
+      <section id="certificates" aria-labelledby="certificates-title" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="education-title" eyebrow="Credentials" title="Education & Certifications" />
+          <SectionHeading id="certificates-title" eyebrow="Credentials" title="Certificates" />
+
+          <p className="-mt-6 mb-12 max-w-2xl text-base leading-relaxed text-mist md:-mt-10 md:mb-16" data-reveal>
+            Every certificate below links to its official record where one
+            exists, so you can verify each credential yourself.
+          </p>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {CERTIFICATES.map((cert, i) => {
+              const frame = (
+                <>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-hairline bg-white">
+                    <Image
+                      src={cert.src}
+                      alt={cert.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex items-start justify-between gap-3 px-1 pb-1 pt-4">
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-semibold leading-snug tracking-tight text-navy group-hover:text-navy-deep">
+                        {cert.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-mist">
+                        {cert.issuer}
+                        {cert.detail ? <span className="mx-1.5 text-hairline">·</span> : null}
+                        {cert.detail}
+                      </p>
+                    </div>
+                    {cert.href ? (
+                      <span aria-hidden="true" className="shrink-0 text-sm text-mist transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy">
+                        ↗
+                      </span>
+                    ) : null}
+                  </div>
+                </>
+              );
+              const cls =
+                "group flex flex-col rounded-2xl border border-hairline bg-paper p-4 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)]";
+              return (
+                <div key={cert.src} data-reveal style={delay((i % 3) * 110)}>
+                  {cert.href ? (
+                    <a href={cert.href} target="_blank" rel="noopener noreferrer" className={`${cls} h-full`}>
+                      {frame}
+                    </a>
+                  ) : (
+                    <div className={`${cls} h-full`}>{frame}</div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== EDUCATION & PROFESSIONAL ====================== */}
+      <section id="education" aria-labelledby="education-title" className="scroll-mt-24 border-t border-hairline bg-paper">
+        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+          <SectionHeading id="education-title" eyebrow="Foundations" title="Education & Certifications" />
 
           <div className="grid gap-6 md:grid-cols-2">
-            <div data-reveal className="rounded-2xl border border-hairline bg-paper p-8">
+            <div data-reveal className="rounded-2xl border border-hairline bg-ivory p-8">
               <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Education</h3>
               <p className="mt-5 text-lg font-semibold tracking-tight text-ink">
                 Bachelor of Software Engineering
@@ -484,71 +591,36 @@ export default function Home() {
               <p className="mt-1.5 text-sm text-mist">Superior University, Lahore, Pakistan · Graduated 2018</p>
             </div>
 
-            <div data-reveal style={delay(120)} className="rounded-2xl border border-hairline bg-paper p-8">
+            <div data-reveal style={delay(120)} className="rounded-2xl border border-hairline bg-ivory p-8">
               <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Certifications</h3>
               <ul className="mt-3 divide-y divide-hairline">
-                {CERTIFICATIONS.map((cert) => {
-                  const inner = (
-                    <>
-                      <span className="min-w-0">
-                        <span className="block text-sm font-medium text-ink/90 group-hover:text-navy">{cert.name}</span>
-                        <span className="mt-0.5 block text-xs text-mist">{cert.issuer}</span>
-                      </span>
-                      <span className="ml-4 shrink-0 text-xs text-mist transition-colors group-hover:text-navy">
-                        {cert.status}
-                        {cert.href ? <span aria-hidden="true" className="ml-1.5 inline-block">↗</span> : null}
-                      </span>
-                    </>
-                  );
-                  const cls =
-                    "group flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0 text-left";
-                  return (
-                    <li key={cert.name}>
-                      {cert.href ? (
-                        <a href={cert.href} target="_blank" rel="noopener noreferrer" className={cls}>
-                          {inner}
-                        </a>
-                      ) : (
-                        <div className={cls}>{inner}</div>
-                      )}
-                    </li>
-                  );
-                })}
+                {[
+                  { name: "Professional Scrum Master (PSM I)", issuer: "Scrum.org", status: "Certified" },
+                  { name: "Project Management Professional (PMP)", issuer: "Project Management Institute", status: "In Progress" },
+                ].map((cert) => (
+                  <li key={cert.name} className="group flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                    <span>
+                      <span className="block text-sm font-medium text-ink/90">{cert.name}</span>
+                      <span className="mt-0.5 block text-xs text-mist">{cert.issuer}</span>
+                    </span>
+                    <span className="shrink-0 text-xs text-mist">{cert.status}</span>
+                  </li>
+                ))}
+                <li className="pt-3.5 text-sm text-mist">
+                  The visual certificates live in the{" "}
+                  <a href="#certificates" className="font-medium text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy">
+                    certificates gallery
+                  </a>{" "}
+                  above.
+                </li>
               </ul>
             </div>
-          </div>
-
-          <div data-reveal style={delay(180)} className="mt-6 rounded-2xl border border-hairline bg-paper p-8">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
-              Google PM Certificate · Coursework
-            </h3>
-            <p className="mt-3 text-sm text-mist">
-              The six course program behind the certificate, completed on Coursera in June 2023.
-            </p>
-            <ul className="mt-5 grid gap-x-10 sm:grid-cols-2">
-              {GOOGLE_PM_COURSES.map((course) => (
-                <li key={course.href} className="border-b border-hairline last:border-0 sm:[&:nth-last-child(2)]:border-0">
-                  <a
-                    href={course.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-baseline justify-between gap-4 py-2.5"
-                  >
-                    <span className="text-sm text-ink/85 transition-colors group-hover:text-navy">{course.name}</span>
-                    <span className="shrink-0 text-xs text-mist transition-colors group-hover:text-navy">
-                      {course.date}
-                      <span aria-hidden="true" className="ml-1.5 inline-block">↗</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
 
       {/* ============================== CONTACT ============================== */}
-      <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24 border-t border-hairline bg-paper">
+      <section id="contact" aria-labelledby="contact-title" className="scroll-mt-24">
         <div className="mx-auto max-w-6xl px-6 pb-28 pt-24 md:pt-32">
           <div data-reveal className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.22em] text-mist">Contact</p>
