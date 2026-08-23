@@ -651,47 +651,65 @@ export default function Home() {
               );
             })}
           </div>
+
+          <div data-reveal className="mt-8 rounded-2xl border border-hairline bg-paper p-7 md:p-8">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+              Professional credentials
+            </h3>
+            <ul className="mt-2 divide-y divide-hairline">
+              {[
+                {
+                  name: "Professional Scrum Master (PSM I)",
+                  issuer: "Scrum.org",
+                  status: "Certified",
+                  done: true,
+                },
+                {
+                  name: "Project Management Professional (PMP)",
+                  issuer: "Project Management Institute",
+                  status: "In Progress",
+                  done: false,
+                },
+              ].map((cred) => (
+                <li key={cred.name} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3.5 first:pt-1 last:pb-0">
+                  <span>
+                    <span className="block text-sm font-medium text-ink/90">{cred.name}</span>
+                    <span className="mt-0.5 block text-xs text-mist">{cred.issuer}</span>
+                  </span>
+                  <span
+                    className={`shrink-0 rounded-full px-3 py-1 text-[11px] font-medium ${
+                      cred.done ? "bg-navy text-ivory" : "border border-hairline bg-ivory text-mist"
+                    }`}
+                  >
+                    {cred.status}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* ====================== EDUCATION & PROFESSIONAL ====================== */}
+      {/* ============================= EDUCATION ============================= */}
       <section id="education" aria-labelledby="education-title" className="scroll-mt-24 border-t border-hairline bg-paper">
         <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="education-title" num="07" eyebrow="Foundations" title="Education & Certifications" />
+          <SectionHeading id="education-title" num="07" eyebrow="Foundations" title="Education" />
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div data-reveal className="rounded-2xl border border-hairline bg-ivory p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Education</h3>
-              <p className="mt-5 text-lg font-semibold tracking-tight text-ink">
-                Bachelor of Software Engineering
-              </p>
-              <p className="mt-1.5 text-sm text-mist">Superior University, Lahore, Pakistan · Graduated 2018</p>
-            </div>
-
-            <div data-reveal style={delay(120)} className="rounded-2xl border border-hairline bg-ivory p-8">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">Certifications</h3>
-              <ul className="mt-3 divide-y divide-hairline">
-                {[
-                  { name: "Professional Scrum Master (PSM I)", issuer: "Scrum.org", status: "Certified" },
-                  { name: "Project Management Professional (PMP)", issuer: "Project Management Institute", status: "In Progress" },
-                ].map((cert) => (
-                  <li key={cert.name} className="group flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
-                    <span>
-                      <span className="block text-sm font-medium text-ink/90">{cert.name}</span>
-                      <span className="mt-0.5 block text-xs text-mist">{cert.issuer}</span>
-                    </span>
-                    <span className="shrink-0 text-xs text-mist">{cert.status}</span>
-                  </li>
-                ))}
-                <li className="pt-3.5 text-sm text-mist">
-                  The visual certificates live in the{" "}
-                  <a href="#certificates" className="font-medium text-navy underline decoration-navy/30 underline-offset-4 hover:decoration-navy">
-                    certificates gallery
-                  </a>{" "}
-                  above.
-                </li>
-              </ul>
-            </div>
+          <div data-reveal className="mx-auto max-w-3xl rounded-2xl border border-hairline bg-ivory p-9 text-center md:p-14">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+              Superior University · Lahore, Pakistan
+            </p>
+            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
+              Bachelor of Software Engineering
+            </h3>
+            <p className="mt-5 inline-block rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs font-medium tabular-nums text-mist">
+              Graduated 2018
+            </p>
+            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-mist">
+              The engineering foundation behind the delivery work: software
+              lifecycles, system thinking, and how technical decisions shape
+              timelines.
+            </p>
           </div>
         </div>
       </section>
