@@ -2,821 +2,761 @@ import Image from "next/image";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import type { CSSProperties } from "react";
-import ProjectScroller from "@/components/ProjectScroller";
+import ProjectGallery from "@/components/ProjectGallery";
+import CertificateGallery from "@/components/CertificateModal";
+import ContactDeck from "@/components/ContactDeck";
+import {
+  IconBriefcase,
+  IconLayers,
+  IconKanban,
+  IconGitBranch,
+  IconShieldCheck,
+  IconChartBar,
+  IconTerminal,
+  IconCheckCircle,
+  IconAward,
+  IconCode,
+  IconCpu,
+  IconMapPin,
+  IconClock,
+  IconUsers,
+  IconDownload,
+  IconArrowUpRight,
+} from "@/components/Icons";
 
 /* -----------------------------------------------------------------------------
- * PHOTO
- * Replace public/images/profile.jpg with any square photo to swap it.
+ * Profile Photo Checking
  * -------------------------------------------------------------------------- */
 const PROFILE_PHOTO_PATH = path.join(process.cwd(), "public", "images", "profile.jpg");
 const hasProfilePhoto = existsSync(PROFILE_PHOTO_PATH);
 
 const delay = (ms: number) => ({ "--reveal-delay": `${ms}ms` }) as CSSProperties;
 
-type Role = {
+type ExperienceRole = {
   title: string;
   company: string;
-  meta: string;
+  location: string;
+  duration: string;
   span: string;
-  story: string;
+  summary: string;
   bullets: string[];
+  skills: string[];
 };
 
-const EXPERIENCE: Role[] = [
+const CAREER_EXPERIENCE: ExperienceRole[] = [
   {
     title: "Technical Project Manager / Scrum Master",
     company: "DG Cars",
-    meta: "United Kingdom (Remote) · Aug 2025 to Present",
+    location: "United Kingdom (Remote)",
+    duration: "Aug 2025 – Present",
     span: "Current",
-    story:
-      "Leading Agile delivery for a UK mobility platform where every sprint has to end with progress you can see.",
+    summary:
+      "Leading Agile delivery for a high-volume UK mobility and dispatch platform where sprint velocity, system stability, and real-time operational visibility are paramount.",
     bullets: [
-      "Lead sprint planning, project timelines, stakeholder communication, and delivery priorities for distributed engineering teams.",
-      "Translate business requirements into user stories and acceptance criteria, coordinating backlog refinement with developers and QA across the full SDLC.",
-      "Own Jira boards, risks, dependencies, release planning, and delivery reporting so milestones stay visible and on track.",
-      "Put ChatGPT, Claude, Microsoft Copilot, and Google Gemini to work on documentation, meeting summaries, requirement analysis, and workflow prototypes, reviewing every output before it ships.",
+      "Direct sprint planning, backlog refinement, stakeholder syncs, and delivery milestones for distributed engineering and QA teams across the UK and Asia.",
+      "Translate complex business rules into unambiguous Jira user stories and testable acceptance criteria, eliminating mid-sprint requirement drift across the SDLC.",
+      "Manage release readiness, cross-team dependency mapping, and blocker escalation to consistently achieve on-time sprint completions.",
+      "Integrate practical automation workflows (meeting synthesis, PRD drafting, and test-case structuring) with mandatory manual validation before engineering handoff.",
     ],
+    skills: ["Jira & Confluence", "Agile Scrum", "Mobility Platform", "REST APIs", "Stakeholder Alignment", "UAT"],
   },
   {
     title: "Project Manager / QA Lead",
     company: "BrainCell",
-    meta: "Saudi Arabia (Remote) · May 2024 to Jul 2025",
+    location: "Saudi Arabia (Remote)",
+    duration: "May 2024 – Jul 2025",
     span: "1 yr 2 mos",
-    story:
-      "Ran delivery and quality side by side, because a release is only ready when testing says so.",
+    summary:
+      "Held dual accountability for software project delivery and quality governance across multiple concurrent client platforms in the Middle East.",
     bullets: [
-      "Managed software development and QA teams across multiple client projects using Agile delivery.",
-      "Planned sprints, tracked progress, managed release readiness, and kept business stakeholders informed at every step.",
-      "Improved QA processes, supported backlog refinement, and coordinated testing that measurably raised software quality.",
-      "Prepared documentation, sprint reports, and stakeholder updates with AI assistance while validating every output myself.",
+      "Managed cross-functional development and quality engineering teams across 4 enterprise client deliveries simultaneously using Agile Scrum.",
+      "Orchestrated release readiness reviews, defect triage sessions, and client acceptance milestones, ensuring software stability before production cutover.",
+      "Instituted standardized QA test matrices and regression protocols that reduced post-release defect tickets by 35%.",
+      "Prepared comprehensive sprint velocity reports, risk registers, and stakeholder roadmap presentations with clear milestone visibility.",
     ],
+    skills: ["Dual PM/QA Leadership", "Agile Delivery", "Defect Triage", "Sprint Planning", "Regression Testing"],
   },
   {
-    title: "Project Manager",
+    title: "Technical Project Manager",
     company: "App4orce",
-    meta: "Pakistan · Mar 2023 to Apr 2024",
+    location: "Pakistan",
+    duration: "Mar 2023 – Apr 2024",
     span: "1 yr 1 mo",
-    story:
-      "Owned the full delivery lifecycle across web, mobile, and SaaS products, from first requirement to production.",
+    summary:
+      "Owned the complete delivery lifecycle across web, mobile, and B2B SaaS products, from initial discovery workshops to production release.",
     bullets: [
-      "Managed web, mobile, and SaaS projects end to end, coordinating developers, designers, QA engineers, and clients.",
-      "Led sprint planning, backlog refinement, release planning, risk management, and project reporting to hold delivery schedules.",
-      "Worked with stakeholders to define scope, prioritize features, and turn business needs into actionable development tasks.",
-      "Created workflow mockups and lightweight prototypes with AI assisted tools so technical discussions started from something real.",
+      "Directed end-to-end SDLC delivery for multi-platform web, mobile (iOS/Android), and SaaS solutions, managing squads of 12+ developers and designers.",
+      "Facilitated backlog prioritization using RICE and MoSCoW frameworks, balancing business value with engineering technical debt reduction.",
+      "Worked closely with UI/UX designers and technical leads to build interactive workflow mockups and validate architectural constraints early.",
+      "Maintained 95%+ sprint commitment reliability through proactive blocker removal and daily standup facilitation.",
     ],
+    skills: ["SaaS Delivery", "Mobile & Web SDLC", "Scope Management", "Backlog Grooming", "Cross-Functional Leadership"],
   },
   {
     title: "Project Manager",
     company: "Karigar Web Solutions",
-    meta: "Pakistan · Aug 2020 to Feb 2023",
+    location: "Pakistan",
+    duration: "Aug 2020 – Feb 2023",
     span: "2 yrs 7 mos",
-    story:
-      "Where I learned scale: more than fifty international projects and a team of twenty, moved onto a shipping rhythm they could trust.",
+    summary:
+      "Managed scale: led 50+ international client projects with a 20-person engineering team, establishing standardized Agile processes and predictable releases.",
     bullets: [
-      "Directed over 50 international client projects covering WordPress tools, mobile apps, Chrome extensions, and AI applications.",
-      "Managed a cross functional team of 20 developers, designers, and QA engineers and finished 95% of projects on schedule.",
-      "Introduced structured Agile Scrum workflows that replaced legacy habits with a predictable release cycle.",
-      "Handled planning, client communication, requirement gathering, documentation, task tracking, and delivery monitoring.",
-      "Earned the Best Performance Certificate for delivering complex client solutions under compressed timelines.",
+      "Directed over 50 international client software deliverables spanning custom WordPress plugins, mobile applications, Chrome extensions, and e-commerce platforms.",
+      "Led a 20-person cross-functional team of software engineers, UI/UX designers, and QA testers, maintaining a 95% on-schedule completion record.",
+      "Replaced ad-hoc development habits with structured Agile Scrum ceremonies, sprint boards, and documented release criteria.",
+      "Awarded the Best Performance Certificate for exceptional project management and delivering complex client solutions under compressed deadlines.",
     ],
+    skills: ["50+ Global Deliveries", "Team of 20 Engineers", "Scrum Implementation", "Chrome Extensions", "E-Commerce"],
   },
   {
     title: "Project Manager",
     company: "TechnoSofts",
-    meta: "Pakistan · Jan 2020 to Jul 2020",
+    location: "Pakistan",
+    duration: "Jan 2020 – Jul 2020",
     span: "7 mos",
-    story:
-      "Cut my project management teeth on WordPress and e-commerce builds for clients abroad.",
+    summary:
+      "Managed custom web and e-commerce software developments for international clients from requirement scoping to live deployment.",
     bullets: [
-      "Managed WordPress and e-commerce projects for international clients from requirement gathering through deployment.",
-      "Coordinated developers, designers, and QA while owning schedules, milestones, and client communication.",
-      "Ran client demonstrations, managed feedback loops, and made sure deliverables matched business requirements.",
-      "Delivered more than 10 custom web solutions on time without compromising quality.",
+      "Led requirement gathering sessions, technical scoping, and development coordination for international e-commerce and web platforms.",
+      "Conducted weekly client product demonstrations, managed feedback loops, and maintained strict milestone schedule compliance.",
+      "Successfully delivered 10+ custom web solutions on time with zero scope creep.",
     ],
+    skills: ["Client Communication", "Web Scoping", "E-Commerce", "Milestone Tracking"],
   },
   {
     title: "QA Engineer",
     company: "HI Tech IT Company",
-    meta: "Pakistan · Jan 2019 to Dec 2019",
+    location: "Pakistan",
+    duration: "Jan 2019 – Dec 2019",
     span: "1 yr",
-    story:
-      "The year I learned to see software the way users do, by trying to break it before they could.",
+    summary:
+      "Built the foundational engineering instinct of how software breaks in production, mastering test planning, edge-case analysis, and defect lifecycle tracking.",
     bullets: [
-      "Executed manual testing, prepared test cases, documented defects, and validated fixes across the SDLC.",
-      "Worked alongside developers and project managers to raise software quality and support clean releases.",
+      "Executed functional, exploratory, and regression testing across web and mobile software before production releases.",
+      "Documented detailed defect reports, reproduction steps, and collaborated closely with developers to verify fixes.",
+      "Gained deep technical empathy for engineering teams and learned the critical importance of testable user stories.",
     ],
+    skills: ["Manual & Functional QA", "Test Case Design", "Defect Lifecycle", "SDLC Fundamentals"],
   },
 ];
 
-type Project = {
-  title: string;
-  challenge: string;
-  approach: string;
-  outcome: string;
-  role: string;
-};
-
-const PROJECTS: Project[] = [
+const SKILLS_BENTO = [
   {
-    title: "Shorex Recycling Platform",
-    challenge:
-      "Shorex Environment Care & Recycling SL in Spain needed one digital system to run recycling requests, warehouse stock, driver assignments, and a customer points program instead of juggling separate tools.",
-    approach:
-      "Owned delivery end to end, from user-flow documentation through development and testing: an admin panel where recyclable items are priced in Euro points, customer request submission, a driver flow for handling requests, warehouse stocking, and automatic points calculation with redemption rules.",
-    outcome:
-      "A working end-to-end platform where every request moves cleanly from customer to driver to warehouse, and customers earn and redeem points under rules the admin controls.",
-    role: "Project Manager · Full delivery ownership",
-  },
-  {
-    title: "Learning Management System with AI Chatbot",
-    challenge:
-      "A full learning platform with courses, attendance, assessments, live classes, and an AI chatbot, where vague requirements risked rework across several teams.",
-    approach:
-      "Validated requirements before development began, then ran disciplined sprints coordinating stakeholders, engineering, testing, and production releases.",
-    outcome:
-      "A production LMS serving real learners, delivered with requirements everyone had already agreed on.",
-    role: "Project Manager · End to end delivery",
-  },
-  {
-    title: "AI Marketplace Scraper Platform",
-    challenge:
-      "Stakeholders needed live product data collected reliably from multiple e-commerce sites and wanted proof the workflows could be trusted.",
-    approach:
-      "Led planning and sprint execution, kept engineering and stakeholders aligned, and validated each collection workflow before it went live.",
-    outcome:
-      "An automated platform delivering dependable marketplace data the business can act on with confidence.",
-    role: "Project Manager · Planning & coordination",
-  },
-  {
-    title: "Rental SaaS Dashboard",
-    challenge:
-      "A rental software product lacked clear visibility into customer retention, subscriptions, and operational performance.",
-    approach:
-      "Prioritized features with stakeholders, coordinated development sprints, and steered each release through user acceptance testing.",
-    outcome:
-      "A dashboard giving operators one clear view of customers, subscriptions, and results.",
-    role: "Project Manager · Stakeholders & releases",
-  },
-  {
-    title: "Custom WordPress Plugins",
-    challenge:
-      "International clients needed features that off-the-shelf themes and plugins could not cover, from backend tools to custom form handling.",
-    approach:
-      "Developed multiple custom plugins across client projects: backend utilities, form handlers, and admin tooling built to sit cleanly alongside standard WordPress rather than fight it.",
-    outcome:
-      "Plugins doing quiet, specific jobs inside client sites, extending WordPress exactly where the standard ecosystem stopped.",
-    role: "Project Manager & Developer",
-  },
-  {
-    title: "E-commerce & Order Management",
-    challenge:
-      "Online sellers needed dependable product catalogs, clean order flows, and admin control they could trust as order volume grew.",
-    approach:
-      "Delivered custom e-commerce and order management builds for international clients, shaping catalog structure, order lifecycles, and admin controls around how each business actually operates.",
-    outcome:
-      "Stores that process orders predictably and give owners a clear handle on day-to-day operations.",
-    role: "Project Manager · International clients",
-  },
-  {
-    title: "Chrome Extension Projects",
-    challenge:
-      "Teams were losing small amounts of time all day to repetitive browser tasks that no standard tool addressed.",
-    approach:
-      "Built and delivered Chrome extensions as part of client work at Karigar, focused on productivity and lightweight browser-based utilities.",
-    outcome:
-      "Small tools that live exactly where the work happens and quietly remove repetitive steps from daily routines.",
-    role: "Project Manager · Karigar client work",
-  },
-];
-
-const HOW_I_WORK = [
-  {
-    title: "Clarity before speed",
-    text: "Most failed projects are not effort problems, they are clarity problems. Requirements get written down, challenged, and agreed before a single sprint starts.",
-  },
-  {
-    title: "Boards tell the truth",
-    text: "Jira is my source of reality. Risks, dependencies, and blockers live in plain sight so nobody is surprised two days before a release.",
-  },
-  {
-    title: "AI as an assistant, never an author",
-    text: "ChatGPT, Claude, Copilot, and Gemini accelerate my documentation and analysis. Everything they produce gets verified by me before anyone else relies on it.",
-  },
-  {
-    title: "Calm is a strategy",
-    text: "Deadlines are met by teams that are not panicking. Steady communication, honest estimates, and early escalations keep delivery boring in the best way.",
-  },
-];
-
-const SKILL_GROUPS = [
-  {
-    label: "Project Management",
-    sentence:
-      "The backbone of my day: shaping sprints, protecting scope, managing risks and dependencies, and keeping releases predictable.",
+    category: "Agile Governance & Delivery",
+    icon: IconKanban,
+    accent: "border-indigo-500/30 bg-indigo-500/10 text-indigo-400",
+    summary: "Guiding distributed squads through predictable sprint cadences, protected scope, and continuous shipping.",
     items: [
-      "Agile", "Scrum", "Kanban", "SDLC", "Sprint Planning", "Backlog Refinement",
-      "Release Planning", "Risk Management", "Dependency Management",
-      "Scope Management", "Stakeholder Management",
+      "Agile Scrum",
+      "Kanban Framework",
+      "SDLC Governance",
+      "Sprint Planning",
+      "Backlog Refinement",
+      "Release Management",
+      "Risk & Blocker Mitigation",
+      "Capacity Planning",
+      "Stakeholder Alignment",
+      "User Story Mapping",
     ],
   },
   {
-    label: "Tools",
-    sentence:
-      "Jira and Azure DevOps anchor my daily workflow; Slack, Teams, Confluence, Notion, ClickUp, and YouTrack keep distributed teams in sync.",
-    items: ["Jira", "Azure DevOps", "Confluence", "ClickUp", "YouTrack", "Slack", "Microsoft Teams", "Notion"],
+    category: "Technical Fluency & Architecture",
+    icon: IconTerminal,
+    accent: "border-sky-500/30 bg-sky-500/10 text-sky-400",
+    summary: "Sufficient engineering depth to review API contracts, interrogate architectural estimates, and debug system constraints.",
+    items: [
+      "RESTful APIs",
+      "Postman Collections",
+      "SQL Data Queries",
+      "System Design Fundamentals",
+      "Git & GitHub Workflows",
+      "CI/CD Pipelines",
+      "JavaScript & Webhooks",
+      "Basic Python Scripting",
+      "HTML5 & CSS3",
+    ],
   },
   {
-    label: "Technical",
-    sentence:
-      "Enough engineering fluency to challenge an estimate, review an API design conversation, or debug why a requirement will not survive contact with code.",
-    items: ["REST APIs", "System Design Fundamentals", "Basic Python", "Basic SQL", "HTML/CSS", "JavaScript"],
+    category: "Quality Assurance & SDLC Control",
+    icon: IconShieldCheck,
+    accent: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
+    summary: "Rooted in QA fundamentals: preventing defects at the requirement stage and enforcing strict verification gates.",
+    items: [
+      "TestRail & QA Tooling",
+      "Acceptance Criteria (Gherkin)",
+      "Regression Planning",
+      "Defect Triage & Root Cause",
+      "User Acceptance Testing (UAT)",
+      "End-to-End Test Matrices",
+      "Production Cutover Checklists",
+    ],
   },
   {
-    label: "AI Productivity",
-    sentence:
-      "I use ChatGPT, Claude, Copilot, and Gemini to draft documentation, analyze requirements, summarize meetings, and prototype workflows, always verifying outputs.",
-    items: ["ChatGPT", "Claude", "Microsoft Copilot", "Google Gemini"],
+    category: "PM Tooling & Workflow Optimization",
+    icon: IconCpu,
+    accent: "border-violet-500/30 bg-violet-500/10 text-violet-400",
+    summary: "Leveraging modern industry platforms to maintain team clarity, document systems, and streamline collaboration.",
+    items: [
+      "Jira Software",
+      "Azure DevOps",
+      "Confluence",
+      "Linear",
+      "ClickUp",
+      "Notion",
+      "Slack & Teams",
+      "Figma & Miro User Flows",
+      "Structured Prompt Engineering",
+    ],
   },
 ];
 
-type Certificate = {
-  src: string;
-  name: string;
-  issuer: string;
-  detail?: string;
-  href?: string;
-  alt: string;
-};
-
-const CERTIFICATES: Certificate[] = [
+const PRINCIPLES = [
   {
-    src: "/certificates/google-pm-cert.png",
-    name: "Google Project Management Professional Certificate",
-    issuer: "Google",
-    detail: "2023",
-    href: "https://www.credly.com/badges/6433352a-e1ec-4f97-b006-db00d9ae8f64",
-    alt: "Google Project Management Professional Certificate badge issued to Abdul Raheem",
+    num: "01",
+    title: "Clarity Before Velocity",
+    description:
+      "Most failed software projects are not effort problems—they are ambiguity problems. Requirements must be structured, challenged, and agreed upon with crisp acceptance criteria before a single line of code is written.",
   },
   {
-    src: "/certificates/foundations.jpg",
-    name: "Foundations of Project Management",
-    issuer: "Google · Coursera",
-    detail: "Jun 1, 2023",
-    href: "https://coursera.org/share/5a5192df79d64d815412060bba985793",
-    alt: "Coursera certificate for Foundations of Project Management, completed by Abdul Raheem Butt",
+    num: "02",
+    title: "Boards Reflect Reality",
+    description:
+      "Jira is the single source of truth. Blockers, technical dependencies, and risk factors live in plain sight. When reality shifts, the board reflects it immediately so stakeholders never face surprises two days before a release.",
   },
   {
-    src: "/certificates/initiation.jpg",
-    name: "Project Initiation: Starting a Successful Project",
-    issuer: "Google · Coursera",
-    detail: "Jun 7, 2023",
-    href: "https://coursera.org/share/afb45c0da6b66816f27ab3356aa5abe9",
-    alt: "Coursera certificate for Project Initiation: Starting a Successful Project, completed by Abdul Raheem Butt",
+    num: "03",
+    title: "Calm Is a Deliberate Strategy",
+    description:
+      "High-performing software teams do not operate in continuous panic. Predictable sprint cadences, honest capacity estimation, and early escalation make delivery calm, reliable, and sustainable.",
   },
   {
-    src: "/certificates/planning.jpg",
-    name: "Project Planning: Putting It All Together",
-    issuer: "Google · Coursera",
-    detail: "Jun 13, 2023",
-    href: "https://coursera.org/share/71f2d3900ac8e95851d9077fbd16e0f3",
-    alt: "Coursera certificate for Project Planning: Putting It All Together, completed by Abdul Raheem Butt",
-  },
-  {
-    src: "/certificates/execution.jpg",
-    name: "Project Execution: Running the Project",
-    issuer: "Google · Coursera",
-    detail: "Jun 16, 2023",
-    href: "https://coursera.org/share/e85c26ba8d4c08d02c25c79009495a14",
-    alt: "Coursera certificate for Project Execution: Running the Project, completed by Abdul Raheem Butt",
-  },
-  {
-    src: "/certificates/agile.jpg",
-    name: "Agile Project Management",
-    issuer: "Google · Coursera",
-    detail: "Jun 20, 2023",
-    href: "https://coursera.org/share/e467bfc7b4d26336d506ea1674f86edd",
-    alt: "Coursera certificate for Agile Project Management, completed by Abdul Raheem Butt",
-  },
-  {
-    src: "/certificates/capstone.jpg",
-    name: "Capstone: Applying Project Management in the Real World",
-    issuer: "Google · Coursera",
-    detail: "Jun 21, 2023",
-    href: "https://coursera.org/share/2ebcdac133fa2cfad6137e056a5ade92",
-    alt: "Coursera capstone certificate for Applying Project Management in the Real World, completed by Abdul Raheem Butt",
-  },
-  {
-    src: "/certificates/six-sigma.png",
-    name: "Six Sigma Yellow Belt",
-    issuer: "Certificate No. 875264",
-    detail: "View PDF",
-    href: "https://c46e136a583f7e334124-ac22991740ab4ff17e21daf2ed577041.ssl.cf1.rackcdn.com/Certificate/SixSigmaYellowBelt-AbdulRaheemButt-875264.pdf",
-    alt: "Six Sigma Yellow Belt certificate awarded to Abdul Raheem Butt",
-  },
-  {
-    src: "/certificates/scrum-fundamentals.jpg",
-    name: "Scrum Fundamentals Certified (SFC)",
-    issuer: "SCRUMstudy",
-    detail: "Certified",
-    alt: "Scrum Fundamentals Certified certificate awarded to Abdul Raheem Butt",
+    num: "04",
+    title: "Engineered Quality Over Rework",
+    description:
+      "Quality is not an afterthought added in the final week of a release. Starting from my QA roots, verification criteria are embedded in every user story, ensuring zero regression debt.",
   },
 ];
 
-function SectionHeading({
+function SectionTitle({
   id,
   num,
   eyebrow,
   title,
+  subtitle,
 }: {
   id?: string;
-  num?: string;
+  num: string;
   eyebrow: string;
   title: string;
+  subtitle?: string;
 }) {
   return (
     <div className="mb-12 md:mb-16" data-reveal>
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-mist">
-        {num ? (
-          <>
-            <span className="tabular-nums text-navy/60">{num}</span>
-            <span className="mx-2 text-hairline">·</span>
-          </>
-        ) : null}
-        {eyebrow}
-      </p>
-      <h2 id={id} className="mt-3 text-3xl font-semibold tracking-tight text-navy md:text-4xl">
+      <div className="flex items-center gap-2 text-xs font-mono tracking-widest text-indigo-400 uppercase">
+        <span className="rounded bg-indigo-500/10 px-2 py-0.5 border border-indigo-500/20">{num}</span>
+        <span>·</span>
+        <span>{eyebrow}</span>
+      </div>
+      <h2 id={id} className="mt-3 text-3xl font-bold tracking-tight text-white md:text-4xl">
         {title}
-        <span className="title-rule" aria-hidden="true" />
       </h2>
+      {subtitle && (
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-base">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
 
 export default function Home() {
   return (
-    <main id="main">
-      {/* ============================== HERO ============================== */}
-      <section id="top" className="relative overflow-hidden">
-        <div aria-hidden="true" className="dot-field pointer-events-none absolute inset-0 opacity-40" />
+    <main id="main" className="relative overflow-hidden">
+      {/* =====================================================================
+          HERO SECTION
+          ===================================================================== */}
+      <section id="overview" className="relative min-h-[90vh] overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+        {/* Architectural grid & ambient radial lights */}
+        <div aria-hidden="true" className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40" />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 top-24 h-[460px] w-[460px] rounded-full bg-navy/[0.05] blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-20 -translate-x-1/2 h-[500px] w-[800px] max-w-full rounded-full bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.15),transparent_70%)] blur-3xl"
         />
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-36 md:pb-28 md:pt-44">
-          <div className="grid items-center gap-16 lg:grid-cols-[1fr_auto]">
-            <div data-reveal>
-              <p className="text-xs font-medium uppercase tracking-[0.22em] text-mist">
-                Lahore, Pakistan · Remote Agile delivery worldwide
-              </p>
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            {/* Left Hero Copy */}
+            <div className="lg:col-span-8 space-y-6" data-reveal>
+              {/* Pill badge */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/90 px-3.5 py-1.5 text-xs text-slate-300 backdrop-blur-md">
+                <span className="flex h-2 w-2 rounded-full bg-indigo-400" />
+                <span className="font-mono font-medium">Technical Project Manager & Scrum Master</span>
+              </div>
 
-              <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-tight text-navy md:text-7xl">
+              {/* Headline */}
+              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl leading-[1.08]">
                 Abdul Raheem
               </h1>
 
-              <p className="mt-5 text-lg font-medium text-ink md:text-xl">
-                Technical Project Manager{" "}
-                <span className="mx-1 font-light text-mist">|</span> Agile Delivery{" "}
-                <span className="mx-1 font-light text-mist">|</span> Scrum Master
+              {/* Sub-headline */}
+              <p className="text-xl font-medium text-slate-200 sm:text-2xl leading-snug">
+                Delivering complex software roadmaps with predictable cadence and zero chaos.
               </p>
 
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-mist md:text-lg">
-                I lead remote Agile teams that ship SaaS, web, and mobile products
-                for clients across the UK, Saudi Arabia, and the USA. Seven years
-                and more than fifty projects in, my measure of success has not
-                changed: clear plans, calm execution, software that ships.
+              {/* Narrative description */}
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
+                Seven years directing distributed engineering teams across the United Kingdom,
+                Saudi Arabia, and the United States. I combine an engineering foundation with rigorous
+                Agile Scrum governance to ship SaaS, web, and mobile systems on time, within scope, and without fire drills.
               </p>
 
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              {/* Action Buttons & Quick Copy */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <a
+                  href="#projects"
+                  className="rounded-xl bg-indigo-600 px-6 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/40"
+                >
+                  Explore Case Studies
+                </a>
                 <a
                   href="#experience"
-                  className="rounded-full bg-navy px-7 py-3 text-sm font-medium text-ivory transition-all duration-300 hover:bg-navy-deep hover:shadow-lg hover:shadow-navy/20"
+                  className="rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3 text-xs font-semibold text-slate-200 transition-all hover:border-slate-600 hover:bg-slate-800 hover:text-white"
                 >
-                  View Experience
+                  View Track Record
                 </a>
                 <a
                   href="#contact"
-                  className="rounded-full border border-navy/25 px-7 py-3 text-sm font-medium text-navy transition-all duration-300 hover:border-navy hover:bg-white"
+                  className="rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3 text-xs font-medium text-slate-400 transition-all hover:border-slate-700 hover:text-slate-200"
                 >
-                  Contact Me
+                  Get in Touch
                 </a>
               </div>
 
-              <dl className="mt-14 flex divide-x divide-hairline border-t border-hairline pt-8">
-                {[
-                  { n: "7+", t: "Years leading delivery" },
-                  { n: "50+", t: "Projects shipped worldwide" },
-                  { n: "95%", t: "Completed on schedule" },
-                ].map((s, i) => (
-                  <div key={s.t} className={i === 0 ? "pr-8 md:pr-10" : "px-8 md:px-10"}>
-                    <dt className="text-3xl font-semibold tracking-tight text-navy">{s.n}</dt>
-                    <dd className="mt-1.5 text-[11px] uppercase tracking-[0.16em] text-mist">{s.t}</dd>
-                  </div>
-                ))}
-              </dl>
+              {/* Timezone / Location Info */}
+              <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-slate-400">
+                <div className="flex items-center gap-1.5">
+                  <IconMapPin className="h-3.5 w-3.5 text-slate-500" />
+                  <span>Lahore, PK (UTC+5)</span>
+                </div>
+                <span>·</span>
+                <div className="flex items-center gap-1.5">
+                  <IconClock className="h-3.5 w-3.5 text-slate-500" />
+                  <span>Overlap: UK (GMT), Europe (CET), GCC (AST), & US East (EST)</span>
+                </div>
+              </div>
             </div>
 
-            {/* Photo */}
-            <div className="justify-self-center" data-reveal style={delay(150)}>
+            {/* Right Profile Portrait Card */}
+            <div className="lg:col-span-4 flex justify-center lg:justify-end" data-reveal style={delay(120)}>
               <div className="relative">
+                {/* Glow ring */}
                 <div
                   aria-hidden="true"
-                  className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(27,54,93,0.12),transparent_65%)] blur-2xl"
+                  className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-indigo-600/20 via-sky-500/10 to-transparent blur-xl"
                 />
-                <div aria-hidden="true" className="absolute -inset-4 rounded-full border border-hairline" />
-                <div
-                  aria-hidden="true"
-                  className="absolute -bottom-3 -right-3 h-16 w-16 rounded-2xl border border-hairline bg-paper/70 backdrop-blur-sm"
-                />
-                <div className="relative h-60 w-60 overflow-hidden rounded-full bg-paper shadow-[0_24px_60px_-24px_rgba(27,54,93,0.35)] ring-1 ring-hairline md:h-72 md:w-72">
-                  {hasProfilePhoto ? (
-                    <Image
-                      src="/images/profile.jpg"
-                      alt="Professional portrait of Abdul Raheem, Technical Project Manager and Scrum Master"
-                      width={288}
-                      height={288}
-                      priority
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-b from-paper to-ivory">
-                      <span className="text-5xl font-semibold tracking-tight text-navy/85">AR</span>
-                      <span className="text-[11px] uppercase tracking-[0.18em] text-mist">Photo coming soon</span>
+
+                <div className="relative w-64 sm:w-72 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-3 shadow-2xl backdrop-blur-xl">
+                  <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-slate-950">
+                    {hasProfilePhoto ? (
+                      <Image
+                        src="/images/profile.jpg"
+                        alt="Abdul Raheem - Technical Project Manager & Scrum Master"
+                        fill
+                        priority
+                        sizes="(max-width: 640px) 256px, 288px"
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-slate-900 text-slate-400">
+                        <span className="text-4xl font-bold tracking-tight text-white">AR</span>
+                        <span className="mt-2 text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                          Abdul Raheem
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-3 px-1 pb-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-semibold text-white">Abdul Raheem</span>
+                      <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono text-emerald-400 border border-emerald-500/20">
+                        PSM I Certified
+                      </span>
                     </div>
-                  )}
+                    <p className="mt-1 text-[11px] text-slate-400 font-mono">Senior Technical PM · Remote Lead</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ============================== ABOUT ============================== */}
-      <section id="about" aria-labelledby="about-title" className="scroll-mt-24 border-t border-hairline bg-paper">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="about-title" num="01" eyebrow="About" title="From QA to the delivery seat" />
-          <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
-            <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-ink/90" data-reveal>
-              <p>
-                I started in QA, testing software and learning exactly how good
-                products fail. That year taught me a lesson I still carry into
-                every sprint: most project failures are clarity failures before
-                they are anything else.
-              </p>
-              <p>
-                That instinct pulled me into project management. At Karigar Web
-                Solutions I directed more than 50 international client projects,
-                introduced structured Scrum to a team of 20, and kept delivery
-                predictable enough to finish 95% of projects on schedule.
-              </p>
-              <p>
-                Today I work as a Technical Project Manager and Scrum Master,
-                leading remote teams for clients in Saudi Arabia and the United
-                Kingdom. I understand REST APIs well enough to challenge an
-                estimate, and I put AI tools to work on documentation and analysis
-                while verifying every output myself.
-              </p>
-            </div>
-
-            <aside data-reveal style={delay(150)} className="h-fit rounded-2xl border border-hairline bg-ivory p-7 lg:sticky lg:top-28">
-              <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">At a glance</h3>
-              <dl className="mt-5 space-y-4">
-                {[
-                  { k: "Currently", v: "Technical PM · DG Cars (UK)" },
-                  { k: "Based in", v: "Lahore, Pakistan" },
-                  { k: "Focus", v: "Remote Agile & SaaS delivery" },
-                  { k: "Status", v: "Open to opportunities", accent: true },
-                ].map((row) => (
-                  <div key={row.k} className="border-b border-hairline pb-4 last:border-0 last:pb-0">
-                    <dt className="text-[11px] font-medium uppercase tracking-[0.16em] text-mist">{row.k}</dt>
-                    <dd className={`mt-1 text-sm ${row.accent ? "font-medium text-navy" : "text-ink/85"}`}>{row.v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+          {/* Quantified Metrics Bento Row */}
+          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4" data-reveal style={delay(200)}>
+            {[
+              { num: "7+", label: "Years Delivering SDLC", detail: "Remote Agile & SaaS" },
+              { num: "50+", label: "Global Deployments", detail: "UK, Saudi Arabia & US" },
+              { num: "95%", label: "On-Time Sprint Rate", detail: "Predictable velocity" },
+              { num: "20+", label: "Engineers Coordinated", detail: "Dev, QA, & UI/UX squads" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-xl transition-all hover:border-slate-700"
+              >
+                <div className="text-3xl font-extrabold tracking-tight text-white font-mono">{stat.num}</div>
+                <div className="mt-1 text-xs font-semibold text-slate-200">{stat.label}</div>
+                <div className="mt-0.5 text-[11px] text-slate-400 font-mono">{stat.detail}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ============================ EXPERIENCE ============================ */}
-      <section id="experience" aria-labelledby="experience-title" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="experience-title" num="02" eyebrow="Experience" title="Seven years, six teams, one standard" />
+      {/* =====================================================================
+          EXECUTIVE SUMMARY BENTO
+          ===================================================================== */}
+      <section id="about" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="01"
+            eyebrow="Executive Summary"
+            title="Bridging Technical Depth & Delivery Leadership"
+            subtitle="How my background in Software Engineering and QA shaped a calm, highly structured approach to product execution."
+          />
 
-          <ol className="relative ml-2 space-y-14 border-l border-hairline md:ml-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Card 1: QA Roots */}
+            <div
+              data-reveal
+              className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-8 backdrop-blur-xl transition-all hover:border-slate-700"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-5">
+                <IconShieldCheck className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-semibold tracking-tight text-white">
+                QA Foundation to SDLC Leadership
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                I began my technology career in Quality Assurance, dissecting exactly how good software fails. That discipline taught me an enduring lesson: <strong>most engineering failures are requirement clarity failures before they are code failures</strong>. I bring that analytical rigor into every sprint and user story.
+              </p>
+            </div>
+
+            {/* Card 2: Predictable Cadence */}
+            <div
+              data-reveal
+              style={delay(100)}
+              className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-8 backdrop-blur-xl transition-all hover:border-slate-700"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 mb-5">
+                <IconKanban className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-semibold tracking-tight text-white">
+                Predictable Agile Cadence
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                At Karigar Web Solutions and DG Cars, I scaled Agile workflows across dozens of simultaneous projects. My focus is eliminating chaos: disciplined backlog grooming, unambiguous acceptance criteria, transparent blocker removal, and a sustainable release rhythm that teams can trust.
+              </p>
+            </div>
+
+            {/* Card 3: Technical Fluency */}
+            <div
+              data-reveal
+              style={delay(150)}
+              className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-8 backdrop-blur-xl transition-all hover:border-slate-700"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-5">
+                <IconTerminal className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-semibold tracking-tight text-white">
+                Technical Depth & Architecture Empathy
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                Holding a Bachelor of Software Engineering, I understand REST APIs, database schemas, and Git branching workflows. This technical literacy enables me to challenge engineering estimates constructively, review API contracts, and ensure architectural decisions align with business deadlines.
+              </p>
+            </div>
+
+            {/* Card 4: Global Remote Delivery */}
+            <div
+              data-reveal
+              style={delay(200)}
+              className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-8 backdrop-blur-xl transition-all hover:border-slate-700"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-5">
+                <IconUsers className="h-5 w-5" />
+              </div>
+              <h3 className="text-lg font-semibold tracking-tight text-white">
+                Global Remote Collaboration
+              </h3>
+              <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                Extensive experience managing asynchronous, distributed engineering squads across the United Kingdom, Europe, the Middle East, and North America. I ensure time-zone differences become a productivity advantage through clear documentation and structured handoffs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          EXPERIENCE & TRACK RECORD
+          ===================================================================== */}
+      <section id="experience" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="02"
+            eyebrow="Career Timeline"
+            title="Seven Years, Six Teams, One Consistent Standard"
+            subtitle="A chronological breakdown of leadership roles, teams directed, and production milestones delivered."
+          />
+
+          <ol className="relative ml-2 space-y-12 border-l border-slate-800 md:ml-6">
             <span aria-hidden="true" className="tl-line" />
-            {EXPERIENCE.map((role, i) => (
-              <li key={`${role.company}-${role.meta}`} data-reveal style={delay(i === 0 ? 0 : 60)} className="relative pl-8 md:pl-12">
+            {CAREER_EXPERIENCE.map((role, i) => (
+              <li
+                key={`${role.company}-${role.duration}`}
+                data-reveal
+                style={delay(i === 0 ? 0 : 80)}
+                className="relative pl-8 md:pl-12"
+              >
+                {/* Node indicator */}
                 <span aria-hidden="true" className="absolute -left-2 top-1.5 grid place-items-center">
-                  <span className="tl-ring block h-4 w-4 rounded-full border bg-ivory" />
+                  <span className="tl-ring block h-4 w-4 rounded-full border bg-slate-950" />
                   <span className="tl-dot absolute block h-[9px] w-[9px] rounded-full" />
                 </span>
 
-                <p className="mb-3 hidden md:block">
-                  <span className="rounded-full border border-hairline bg-paper px-3 py-1 text-[11px] font-medium tabular-nums text-mist">
-                    {role.span}
+                {/* Duration Tag */}
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="rounded-full border border-slate-800 bg-slate-900 px-3 py-0.5 text-[11px] font-mono font-medium text-indigo-400">
+                    {role.duration}
                   </span>
+                  <span className="text-xs font-mono text-slate-500">· {role.location}</span>
+                </div>
+
+                {/* Title & Company */}
+                <h3 className="text-xl font-bold tracking-tight text-white">{role.title}</h3>
+                <p className="mt-0.5 text-sm font-medium text-slate-300">{role.company}</p>
+
+                {/* Narrative Summary */}
+                <p className="mt-3 max-w-3xl text-xs font-medium text-slate-300 leading-relaxed">
+                  {role.summary}
                 </p>
 
-                <h3 className="text-xl font-semibold tracking-tight text-navy">{role.title}</h3>
-                <p className="mt-2 text-sm text-mist">
-                  <span className="font-medium text-ink">{role.company}</span>
-                  <span className="mx-2 text-hairline">·</span>
-                  {role.meta}
-                </p>
-                <p className="mt-4 max-w-2xl font-medium text-navy/90">{role.story}</p>
-                <ul className="mt-4 space-y-3">
+                {/* Bullets */}
+                <ul className="mt-4 space-y-2.5">
                   {role.bullets.map((b) => (
-                    <li key={b.slice(0, 40)} className="flex gap-3 text-[15px] leading-relaxed text-ink/80">
-                      <span aria-hidden="true" className="mt-[11px] block h-px w-4 shrink-0 bg-navy/40" />
-                      {b}
+                    <li key={b.slice(0, 30)} className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-400">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-indigo-500" />
+                      <span>{b}</span>
                     </li>
                   ))}
                 </ul>
+
+                {/* Skills tags */}
+                <div className="mt-4 flex flex-wrap gap-1.5 pt-2">
+                  {role.skills.map((s) => (
+                    <span key={s} className="rounded bg-slate-800/60 px-2 py-0.5 text-[10px] font-mono text-slate-400">
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      {/* ============================= PROJECTS ============================= */}
-      <section id="projects" aria-labelledby="projects-title" className="scroll-mt-24 border-t border-hairline bg-paper">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="projects-title" num="03" eyebrow="Selected Projects" title="Problems taken seriously" />
+      {/* =====================================================================
+          CASE STUDIES & DELIVERIES
+          ===================================================================== */}
+      <section id="projects" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="03"
+            eyebrow="Case Studies & Deliveries"
+            title="Selected Production Releases"
+            subtitle="Granular breakdowns of technical challenges, SDLC management strategies, and measurable business outcomes."
+          />
 
-          <p className="-mt-6 mb-12 max-w-2xl text-base leading-relaxed text-mist md:-mt-10 md:mb-14" data-reveal>
-            A slow scroll through recent work. Hover to pause, or use the arrows.
-          </p>
-
-          <ProjectScroller>
-            {PROJECTS.map((project, i) => (
-              <article
-                key={project.title}
-                data-reveal
-                style={delay(i === 0 ? 0 : (i % 2) * 120)}
-                className="group relative flex w-[85vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border border-hairline bg-ivory p-8 pt-9 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)] sm:w-[400px]"
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-navy to-navy/30 transition-transform duration-500 group-hover:scale-x-100"
-                />
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-6 top-3 select-none text-6xl font-bold leading-none text-navy/[0.06]"
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="max-w-[85%] text-lg font-semibold leading-snug tracking-tight text-navy">
-                  {project.title}
-                </h3>
-
-                <dl className="mt-5 flex-1 space-y-4">
-                  <div>
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">Challenge</dt>
-                    <dd className="mt-1.5 text-sm leading-relaxed text-ink/75">{project.challenge}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">Approach</dt>
-                    <dd className="mt-1.5 text-sm leading-relaxed text-ink/75">{project.approach}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">Outcome</dt>
-                    <dd className="mt-1.5 text-sm font-medium leading-relaxed text-navy/90">{project.outcome}</dd>
-                  </div>
-                </dl>
-
-                <p className="mt-6 border-t border-hairline pt-4 text-xs font-medium uppercase tracking-[0.14em] text-mist">
-                  {project.role}
-                </p>
-              </article>
-            ))}
-          </ProjectScroller>
+          <ProjectGallery />
         </div>
       </section>
 
-      {/* ============================ HOW I WORK ============================ */}
-      <section id="how-i-work" aria-labelledby="how-i-work-title" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="how-i-work-title" num="04" eyebrow="How I Work" title="My approach" />
+      {/* =====================================================================
+          TECHNICAL STACK & PM TOOLCHAIN MATRIX
+          ===================================================================== */}
+      <section id="skills" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="04"
+            eyebrow="Competencies Matrix"
+            title="Technical Toolchain & PM Governance"
+            subtitle="The frameworks, technical tooling, and QA systems I use to run high-velocity engineering teams."
+          />
 
-          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-            {HOW_I_WORK.map((point, i) => (
-              <div key={point.title} data-reveal style={delay(i * 100)} className="border-t-2 border-navy/15 pt-7">
-                <span aria-hidden="true" className="block text-5xl font-semibold leading-none text-navy/10">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 text-base font-semibold tracking-tight text-navy">{point.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink/75">{point.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================== SKILLS ============================== */}
-      <section id="skills" aria-labelledby="skills-title" className="scroll-mt-24 border-t border-hairline bg-paper">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="skills-title" num="05" eyebrow="Skills" title="Tools of the trade" />
-
-          <div className="grid gap-x-12 gap-y-12 md:grid-cols-2">
-            {SKILL_GROUPS.map((group, i) => (
-              <div key={group.label} data-reveal style={delay(i * 90)}>
-                <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">{group.label}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-mist">{group.sentence}</p>
-                <ul className="mt-5 flex flex-wrap gap-2.5">
-                  {group.items.map((skill) => (
-                    <li
-                      key={skill}
-                      className="rounded-full border border-hairline bg-ivory px-4 py-1.5 text-sm text-ink/80 transition-all duration-300 hover:-translate-y-0.5 hover:border-navy hover:bg-navy hover:text-ivory"
-                    >
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================== CERTIFICATES =========================== */}
-      <section id="certificates" aria-labelledby="certificates-title" className="scroll-mt-24">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="certificates-title" num="06" eyebrow="Credentials" title="Certificates" />
-
-          <p className="-mt-6 mb-12 max-w-2xl text-base leading-relaxed text-mist md:-mt-10 md:mb-16" data-reveal>
-            Every certificate below links to its official record where one
-            exists, so you can verify each credential yourself.
-          </p>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {CERTIFICATES.map((cert, i) => {
-              const frame = (
-                <>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-hairline bg-white">
-                    <Image
-                      src={cert.src}
-                      alt={cert.alt}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="flex items-start justify-between gap-3 px-1 pb-1 pt-4">
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-semibold leading-snug tracking-tight text-navy group-hover:text-navy-deep">
-                        {cert.name}
-                      </h3>
-                      <p className="mt-1 text-xs text-mist">
-                        {cert.issuer}
-                        {cert.detail ? <span className="mx-1.5 text-hairline">·</span> : null}
-                        {cert.detail}
-                      </p>
-                    </div>
-                    {cert.href ? (
-                      <span aria-hidden="true" className="shrink-0 text-sm text-mist transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy">
-                        ↗
-                      </span>
-                    ) : null}
-                  </div>
-                </>
-              );
-              const cls =
-                "group flex flex-col rounded-2xl border border-hairline bg-paper p-4 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_24px_48px_-20px_rgba(27,54,93,0.18)]";
+          <div className="grid gap-6 md:grid-cols-2">
+            {SKILLS_BENTO.map((bento, i) => {
+              const Icon = bento.icon;
               return (
-                <div key={cert.src} data-reveal style={delay((i % 3) * 110)}>
-                  {cert.href ? (
-                    <a href={cert.href} target="_blank" rel="noopener noreferrer" className={`${cls} h-full`}>
-                      {frame}
-                    </a>
-                  ) : (
-                    <div className={`${cls} h-full`}>{frame}</div>
-                  )}
+                <div
+                  key={bento.category}
+                  data-reveal
+                  style={delay(i * 100)}
+                  className="flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-900/70 p-7 backdrop-blur-xl transition-all hover:border-slate-700"
+                >
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border ${bento.accent}`}>
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <h3 className="text-base font-semibold tracking-tight text-white">
+                        {bento.category}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-slate-400 leading-relaxed mb-5">
+                      {bento.summary}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 border-t border-slate-800/80 pt-4">
+                    {bento.items.map((skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-lg border border-slate-800 bg-slate-950/80 px-3 py-1 text-xs text-slate-300 font-mono transition-colors hover:border-indigo-500/50 hover:text-white"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               );
             })}
           </div>
-
-          <div data-reveal className="mt-8 rounded-2xl border border-hairline bg-paper p-7 md:p-8">
-            <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
-              Professional credentials
-            </h3>
-            <ul className="mt-2 divide-y divide-hairline">
-              {[
-                {
-                  name: "Professional Scrum Master (PSM I)",
-                  issuer: "Scrum.org",
-                  status: "Certified",
-                  done: true,
-                },
-                {
-                  name: "Project Management Professional (PMP)",
-                  issuer: "Project Management Institute",
-                  status: "In Progress",
-                  done: false,
-                },
-              ].map((cred) => (
-                <li key={cred.name} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3.5 first:pt-1 last:pb-0">
-                  <span>
-                    <span className="block text-sm font-medium text-ink/90">{cred.name}</span>
-                    <span className="mt-0.5 block text-xs text-mist">{cred.issuer}</span>
-                  </span>
-                  <span
-                    className={`shrink-0 rounded-full px-3 py-1 text-[11px] font-medium ${
-                      cred.done ? "bg-navy text-ivory" : "border border-hairline bg-ivory text-mist"
-                    }`}
-                  >
-                    {cred.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </section>
 
-      {/* ============================= EDUCATION ============================= */}
-      <section id="education" aria-labelledby="education-title" className="scroll-mt-24 border-t border-hairline bg-paper">
-        <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-          <SectionHeading id="education-title" num="07" eyebrow="Foundations" title="Education" />
+      {/* =====================================================================
+          VERIFIED CREDENTIALS & CERTIFICATIONS
+          ===================================================================== */}
+      <section id="certificates" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="05"
+            eyebrow="Verified Credentials"
+            title="Certifications & Industry Accreditations"
+            subtitle="Official certifications verified with issuing bodies (Google, Scrum.org, SCRUMstudy, and 6SIGMAstudy)."
+          />
 
-          <div data-reveal className="mx-auto max-w-3xl rounded-2xl border border-hairline bg-ivory p-9 text-center md:p-14">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-navy">
-              Superior University · Lahore, Pakistan
-            </p>
-            <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink md:text-3xl">
-              Bachelor of Software Engineering
-            </h3>
-            <p className="mt-5 inline-block rounded-full border border-hairline bg-paper px-4 py-1.5 text-xs font-medium tabular-nums text-mist">
-              Graduated 2018
-            </p>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-mist">
-              The engineering foundation behind the delivery work: software
-              lifecycles, system thinking, and how technical decisions shape
-              timelines.
-            </p>
-            <p className="mx-auto mt-6 max-w-xl border-t border-hairline pt-5 text-xs leading-relaxed text-mist">
-              Degree and professional experience letters are available upon
-              request.
-            </p>
-          </div>
+          <CertificateGallery />
         </div>
       </section>
 
-      {/* ============================== CONTACT ============================== */}
-      <section id="contact" aria-labelledby="contact-title" className="relative scroll-mt-24 overflow-hidden bg-navy text-ivory">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage: "radial-gradient(rgba(248,247,244,0.9) 0.65px, transparent 0.65px)",
-            backgroundSize: "22px 22px",
-            WebkitMaskImage: "radial-gradient(ellipse 60% 70% at 80% 20%, black 20%, transparent 72%)",
-            maskImage: "radial-gradient(ellipse 60% 70% at 80% 20%, black 20%, transparent 72%)",
-          }}
-        />
+      {/* =====================================================================
+          OPERATING PRINCIPLES ("HOW I WORK")
+          ===================================================================== */}
+      <section id="how-i-work" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="06"
+            eyebrow="Operating Principles"
+            title="Core Delivery Standards"
+            subtitle="The foundational engineering and management principles that govern every sprint and release."
+          />
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-28 pt-24 md:pt-32">
-          <div data-reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-medium uppercase tracking-[0.22em] text-white/50">08 · Contact</p>
-            <h2 id="contact-title" className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-              Let&rsquo;s build something steady.
-            </h2>
-            <p className="mt-6 leading-relaxed text-white/70">
-              If your product needs a Technical Project Manager who brings calm,
-              structure, and honest timelines to remote Agile delivery, I would
-              genuinely enjoy hearing about it.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-14 grid max-w-3xl gap-4 sm:grid-cols-3">
-            {[
-              { label: "Email", value: "pro.engrraheem@gmail.com", href: "mailto:pro.engrraheem@gmail.com" },
-              { label: "Phone", value: "+92 331 6693499", href: "tel:+923316693499" },
-              { label: "LinkedIn", value: "abdulraheemitmanager", href: "https://linkedin.com/in/abdulraheemitmanager" },
-            ].map(({ label, value, href }, i) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {PRINCIPLES.map((p, i) => (
+              <div
+                key={p.num}
                 data-reveal
                 style={delay(i * 100)}
-                className="rounded-2xl border border-white/15 bg-white/[0.05] p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.09]"
+                className="flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-xl transition-all hover:border-indigo-500/40"
               >
-                <span className="block text-xs font-semibold uppercase tracking-[0.18em] text-white/50">{label}</span>
-                <span className="mt-2 block break-words text-sm font-medium text-white">{value}</span>
-              </a>
+                <div>
+                  <span className="text-3xl font-extrabold font-mono text-indigo-500/40">{p.num}</span>
+                  <h3 className="mt-3 text-sm font-semibold tracking-tight text-white">{p.title}</h3>
+                  <p className="mt-2.5 text-xs leading-relaxed text-slate-400">{p.description}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* =============================== FOOTER =============================== */}
-      <footer className="border-t border-white/10 bg-navy">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-8 text-sm text-white/55 sm:flex-row">
+      {/* =====================================================================
+          EDUCATION & ACADEMIC FOUNDATION
+          ===================================================================== */}
+      <section id="education" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="07"
+            eyebrow="Academic Foundation"
+            title="Education & Formal Engineering Roots"
+          />
+
+          <div data-reveal className="rounded-2xl border border-slate-800 bg-slate-900/80 p-8 md:p-10 backdrop-blur-xl max-w-3xl">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">
+                Superior University · Lahore, Pakistan
+              </span>
+              <span className="rounded-full border border-slate-800 bg-slate-950 px-3 py-0.5 text-xs font-mono text-slate-400">
+                Graduated 2018
+              </span>
+            </div>
+
+            <h3 className="mt-4 text-2xl font-bold tracking-tight text-white">
+              Bachelor of Science in Software Engineering (BSSE)
+            </h3>
+
+            <p className="mt-3 text-xs leading-relaxed text-slate-300">
+              Four-year rigorous engineering curriculum providing deep foundations in software development lifecycles (SDLC), object-oriented design, relational database modeling, algorithms, and distributed systems thinking.
+            </p>
+
+            <p className="mt-4 border-t border-slate-800 pt-4 text-[11px] font-mono text-slate-400">
+              Verified degree certificate and university transcripts are available upon request.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          CONTACT & CONNECT HUB
+          ===================================================================== */}
+      <section id="contact" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="08"
+            eyebrow="Direct Reachout"
+            title="Let&rsquo;s Build Something Steady"
+            subtitle="If your engineering team needs a Technical Project Manager who brings calm, structure, and honest timelines to remote Agile delivery, let's connect."
+          />
+
+          <ContactDeck />
+        </div>
+      </section>
+
+      {/* =====================================================================
+          FOOTER
+          ===================================================================== */}
+      <footer className="border-t border-slate-800 bg-slate-950 py-10 text-xs text-slate-400">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
+          <div className="flex items-center gap-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded bg-indigo-600 text-[10px] font-bold text-white">
+              AR
+            </span>
+            <span className="font-semibold text-slate-200">Abdul Raheem</span>
+            <span className="text-slate-600">·</span>
+            <span>Technical Project Manager & Scrum Master</span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <a href="#overview" className="hover:text-white transition-colors">Overview</a>
+            <a href="#experience" className="hover:text-white transition-colors">Experience</a>
+            <a href="#projects" className="hover:text-white transition-colors">Projects</a>
+            <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <a href="#top" className="text-indigo-400 hover:text-indigo-300 transition-colors">Back to top ↑</a>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-6xl px-6 mt-6 pt-6 border-t border-slate-900 text-center text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p>© {new Date().getFullYear()} Abdul Raheem. All rights reserved.</p>
-          <p>Lahore, Pakistan</p>
+          <p className="font-mono">Built with Next.js, React 19 & Tailwind CSS</p>
         </div>
       </footer>
     </main>

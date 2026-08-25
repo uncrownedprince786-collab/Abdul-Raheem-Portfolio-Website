@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Nav from "@/components/Nav";
 import ScrollEffects from "@/components/ScrollEffects";
+import CommandPalette from "@/components/CommandPalette";
+import { ToastProvider } from "@/components/Toast";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,10 +16,9 @@ const SITE_URL = "https://abdulraheem-pm.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title:
-    "Abdul Raheem | Technical Project Manager & Scrum Master | Remote Agile Delivery",
+  title: "Abdul Raheem | Technical Project Manager & Scrum Master",
   description:
-    "Technical Project Manager and Scrum Master with 7+ years delivering SaaS, web, and mobile products for UK, US, and Saudi clients through calm remote Agile delivery.",
+    "Technical Project Manager & Certified Scrum Master with 7+ years directing distributed engineering teams across the UK, Saudi Arabia, and USA. Predictable Agile delivery, rigorous QA governance, and scalable SaaS solutions.",
   keywords: [
     "Technical Project Manager",
     "Scrum Master",
@@ -29,6 +30,7 @@ export const metadata: Metadata = {
     "Jira",
     "Azure DevOps",
     "Abdul Raheem",
+    "Software Engineering PM",
   ],
   authors: [{ name: "Abdul Raheem" }],
   alternates: { canonical: "/" },
@@ -36,15 +38,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Abdul Raheem | Technical Project Manager",
-    title:
-      "Abdul Raheem | Technical Project Manager & Scrum Master | Remote Agile Delivery",
+    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
     description:
       "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA. Clear plans, calm execution, software that ships.",
   },
   twitter: {
-    card: "summary",
-    title:
-      "Abdul Raheem | Technical Project Manager & Scrum Master | Remote Agile Delivery",
+    card: "summary_large_image",
+    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
     description:
       "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA.",
   },
@@ -75,6 +75,7 @@ const personJsonLd = {
     "Azure DevOps",
     "Risk Management",
     "Stakeholder Management",
+    "SDLC Governance",
   ],
   alumniOf: { "@type": "CollegeOrUniversity", name: "Superior University, Lahore" },
   hasCredential: [
@@ -102,20 +103,23 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans">
+      <body className="font-sans antialiased bg-slate-950 text-slate-100 selection:bg-indigo-600 selection:text-white">
         <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-navy focus:px-4 focus:py-2 focus:text-sm focus:text-ivory"
+          href="#overview"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-xs font-semibold focus:text-white"
         >
-          Skip to content
+          Skip to main content
         </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        <Nav />
-        <ScrollEffects />
-        {children}
+        <ToastProvider>
+          <Nav />
+          <CommandPalette />
+          <ScrollEffects />
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );
