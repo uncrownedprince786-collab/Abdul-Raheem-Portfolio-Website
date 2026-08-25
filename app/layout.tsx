@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
   description:
-    "Technical Project Manager (TPM) & Certified Scrum Master with 7+ years directing remote Agile engineering teams across the UK, Saudi Arabia, and USA. Specialized in SaaS delivery, API architecture, and predictable sprint cadences.",
+    "Technical Project Manager (TPM) & Certified Scrum Master with 7+ years directing remote and onsite Agile engineering teams across the UK, Saudi Arabia, and USA. Specialized in SaaS delivery, API architecture, and predictable sprint cadences.",
   keywords: [
     "Technical Project Manager",
     "Technical Product Manager",
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     "Jira Scrum Master",
     "Abdul Raheem",
     "Abdul Raheem Project Manager",
+    "Remote and Onsite Agile Delivery",
   ],
   authors: [{ name: "Abdul Raheem" }],
   alternates: { canonical: "/" },
@@ -40,13 +41,13 @@ export const metadata: Metadata = {
     siteName: "Abdul Raheem | Technical Project & Product Manager",
     title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
     description:
-      "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA. Predictable sprint cadences, deep technical fluency, and zero drama.",
+      "Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. With a background in Software Engineering and QA, I eliminate requirement ambiguity, protect developer focus, and give stakeholders reliable delivery dates without the drama.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
     description:
-      "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA.",
+      "Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. Clear plans, calm execution, software that ships.",
   },
 };
 
@@ -60,7 +61,7 @@ const structuredData = {
       url: SITE_URL,
       jobTitle: "Technical Project Manager & Scrum Master",
       description:
-        "Technical Project Manager (TPM) with 7+ years directing distributed engineering teams across the UK, Saudi Arabia, and USA through remote Agile delivery and software architecture leadership.",
+        "Technical Project Manager (TPM) with 7+ years directing distributed engineering teams across the UK, Saudi Arabia, and USA through remote and onsite Agile delivery and software architecture leadership.",
       email: "mailto:pro.engrraheem@gmail.com",
       telephone: "+92 331 6693499",
       address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" },
@@ -77,7 +78,7 @@ const structuredData = {
         "REST APIs & System Architecture",
         "Jira & Confluence",
         "Quality Assurance & Test Automation",
-        "Remote Team Leadership",
+        "Remote & Onsite Team Leadership",
       ],
       alumniOf: { "@type": "CollegeOrUniversity", name: "Superior University, Lahore" },
       hasCredential: [
@@ -118,7 +119,7 @@ const structuredData = {
         },
         {
           "@type": "Question",
-          name: "How does Abdul Raheem manage distributed remote teams across UK, US, and Middle East time zones?",
+          name: "How does Abdul Raheem manage distributed remote and onsite teams across UK, US, and Middle East time zones?",
           acceptedAnswer: {
             "@type": "Answer",
             text: "Through asynchronous clarity, structured Definitions of Ready (DoR), and proactive blocker removal, turning time zone differences into a continuous delivery advantage.",

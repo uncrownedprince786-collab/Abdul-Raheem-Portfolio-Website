@@ -6,7 +6,6 @@ import ProjectGallery from "@/components/ProjectGallery";
 import CertificateGallery from "@/components/CertificateModal";
 import ContactDeck from "@/components/ContactDeck";
 import SprintLifecycle from "@/components/SprintLifecycle";
-import { SystemDiagram } from "@/components/SystemDiagrams";
 import {
   IconBriefcase,
   IconLayers,
@@ -46,11 +45,11 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
   {
     title: "Technical Project Manager / Scrum Master",
     company: "DG Cars",
-    location: "United Kingdom (Remote)",
+    location: "United Kingdom (Remote & Hybrid)",
     duration: "Aug 2025 – Present",
     span: "Current",
     storyQuote:
-      "Leading Agile delivery for a high-velocity UK mobility platform where dispatch latency is measured in seconds and milestones have to end with visible code in staging.",
+      "Leading Agile delivery for a high-velocity UK mobility platform where dispatch latency is measured in seconds and milestones must end with visible code in staging.",
     bullets: [
       "Drive sprint planning, daily blocker triage, and release milestones for distributed engineering and QA teams across the UK and Asia.",
       "Translate complex UK transport regulations and dispatch business rules into crisp, testable Jira user stories with zero ambiguity for developers.",
@@ -211,11 +210,11 @@ const SKILLS_BENTO = [
 
 const FAQS = [
   {
-    q: "What makes Abdul Raheem different from traditional Project Managers?",
+    q: "What distinguishes Abdul Raheem as a Technical Project & Product Manager?",
     a: "I started in Software Engineering and QA, not theoretical management. I understand REST APIs, database schemas, and edge cases. This means I write user stories developers actually enjoy building, challenge unrealistic estimates constructively, and ensure zero regression debt reaches production.",
   },
   {
-    q: "How do you manage distributed remote teams across UK, US, and Middle East time zones?",
+    q: "How do you manage distributed remote and onsite teams across UK, US, and Middle East time zones?",
     a: "Through asynchronous clarity. I establish written 'Definitions of Ready', clear acceptance criteria, and structured daily updates so engineers never sit blocked waiting for a meeting. Time zones become an advantage when handoffs are crystal clear.",
   },
   {
@@ -290,10 +289,8 @@ export default function Home() {
                 I turn complex technical roadmaps into calm, predictable software releases that ship on time.
               </p>
 
-              <p className="max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
-                Seven years leading remote Agile teams across the UK, Saudi Arabia, and the United States.
-                With a background in Software Engineering and QA, I eliminate requirement ambiguity, protect developer focus,
-                and give stakeholders reliable delivery dates without the drama.
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base font-normal">
+                Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. With a background in Software Engineering and QA, I eliminate requirement ambiguity, protect developer focus, and give stakeholders reliable delivery dates without the drama.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
@@ -366,7 +363,7 @@ export default function Home() {
                         PSM I Certified
                       </span>
                     </div>
-                    <p className="mt-1 text-[11px] text-slate-400 font-mono">Senior Technical PM · Remote Lead</p>
+                    <p className="mt-1 text-[11px] text-slate-400 font-mono">Senior Technical PM · Remote & Onsite Lead</p>
                   </div>
                 </div>
               </div>
@@ -450,7 +447,7 @@ export default function Home() {
                 Technical Literacy: Speaking Developer Language
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                With a Bachelor of Software Engineering, I don’t just move cards on a board. I read API documentation, review Postman collections, understand database relationships, and inspect Git pull requests. When a developer says an integration is complex, we talk architecture, not excuses.
+                With a Bachelor of Software Engineering, I don&rsquo;t just move cards on a board. I read API documentation, review Postman collections, understand database relationships, and inspect Git pull requests. When a developer says an integration is complex, we talk architecture, not excuses.
               </p>
             </div>
 
@@ -463,10 +460,10 @@ export default function Home() {
                 <IconUsers className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-white">
-                Asynchronous Remote Mastery
+                Asynchronous Remote & Onsite Mastery
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                Managing remote engineers across London, Riyadh, and New York taught me that great documentation replaces 80% of synchronous calls. Detailed Jira tickets, video walkthroughs, and clear staging environments keep teams productive around the clock.
+                Managing remote and onsite engineers across London, Riyadh, and New York taught me that great documentation replaces 80% of synchronous calls. Detailed Jira tickets, video walkthroughs, and clear staging environments keep teams productive around the clock.
               </p>
             </div>
           </div>
