@@ -5,6 +5,8 @@ import type { CSSProperties } from "react";
 import ProjectGallery from "@/components/ProjectGallery";
 import CertificateGallery from "@/components/CertificateModal";
 import ContactDeck from "@/components/ContactDeck";
+import SprintLifecycle from "@/components/SprintLifecycle";
+import { SystemDiagram } from "@/components/SystemDiagrams";
 import {
   IconBriefcase,
   IconLayers,
@@ -24,9 +26,6 @@ import {
   IconArrowUpRight,
 } from "@/components/Icons";
 
-/* -----------------------------------------------------------------------------
- * Profile Photo Checking
- * -------------------------------------------------------------------------- */
 const PROFILE_PHOTO_PATH = path.join(process.cwd(), "public", "images", "profile.jpg");
 const hasProfilePhoto = existsSync(PROFILE_PHOTO_PATH);
 
@@ -38,7 +37,7 @@ type ExperienceRole = {
   location: string;
   duration: string;
   span: string;
-  summary: string;
+  storyQuote: string;
   bullets: string[];
   skills: string[];
 };
@@ -50,13 +49,13 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "United Kingdom (Remote)",
     duration: "Aug 2025 – Present",
     span: "Current",
-    summary:
-      "Leading Agile delivery for a high-volume UK mobility and dispatch platform where sprint velocity, system stability, and real-time operational visibility are paramount.",
+    storyQuote:
+      "Leading Agile delivery for a high-velocity UK mobility platform where dispatch latency is measured in seconds and milestones have to end with visible code in staging.",
     bullets: [
-      "Direct sprint planning, backlog refinement, stakeholder syncs, and delivery milestones for distributed engineering and QA teams across the UK and Asia.",
-      "Translate complex business rules into unambiguous Jira user stories and testable acceptance criteria, eliminating mid-sprint requirement drift across the SDLC.",
-      "Manage release readiness, cross-team dependency mapping, and blocker escalation to consistently achieve on-time sprint completions.",
-      "Integrate practical automation workflows (meeting synthesis, PRD drafting, and test-case structuring) with mandatory manual validation before engineering handoff.",
+      "Drive sprint planning, daily blocker triage, and release milestones for distributed engineering and QA teams across the UK and Asia.",
+      "Translate complex UK transport regulations and dispatch business rules into crisp, testable Jira user stories with zero ambiguity for developers.",
+      "Manage release readiness, cross-team API dependency mapping, and risk mitigation so milestones stay predictable and on track.",
+      "Use practical automation tools (meeting synthesis, PRD drafting, and test-case structuring) with mandatory manual review before anything touches the sprint board.",
     ],
     skills: ["Jira & Confluence", "Agile Scrum", "Mobility Platform", "REST APIs", "Stakeholder Alignment", "UAT"],
   },
@@ -66,13 +65,13 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "Saudi Arabia (Remote)",
     duration: "May 2024 – Jul 2025",
     span: "1 yr 2 mos",
-    summary:
-      "Held dual accountability for software project delivery and quality governance across multiple concurrent client platforms in the Middle East.",
+    storyQuote:
+      "Ran project delivery and quality assurance hand-in-hand, because a release is only ready when thorough testing proves it can survive production traffic.",
     bullets: [
-      "Managed cross-functional development and quality engineering teams across 4 enterprise client deliveries simultaneously using Agile Scrum.",
-      "Orchestrated release readiness reviews, defect triage sessions, and client acceptance milestones, ensuring software stability before production cutover.",
-      "Instituted standardized QA test matrices and regression protocols that reduced post-release defect tickets by 35%.",
-      "Prepared comprehensive sprint velocity reports, risk registers, and stakeholder roadmap presentations with clear milestone visibility.",
+      "Managed software development and quality engineering teams across 4 concurrent enterprise client platforms in Saudi Arabia using Agile Scrum.",
+      "Orchestrated release readiness reviews, defect triage sessions, and client acceptance demos, ensuring software stability before production cutover.",
+      "Standardized QA regression matrices and defect triage workflows, reducing post-release defect tickets by 35%.",
+      "Delivered transparent sprint velocity reports, risk registers, and stakeholder roadmap presentations with clear milestone visibility.",
     ],
     skills: ["Dual PM/QA Leadership", "Agile Delivery", "Defect Triage", "Sprint Planning", "Regression Testing"],
   },
@@ -82,10 +81,10 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "Pakistan",
     duration: "Mar 2023 – Apr 2024",
     span: "1 yr 1 mo",
-    summary:
-      "Owned the complete delivery lifecycle across web, mobile, and B2B SaaS products, from initial discovery workshops to production release.",
+    storyQuote:
+      "Owned the complete delivery lifecycle across web, mobile, and SaaS products, turning broad client requirements into structured, shipped releases.",
     bullets: [
-      "Directed end-to-end SDLC delivery for multi-platform web, mobile (iOS/Android), and SaaS solutions, managing squads of 12+ developers and designers.",
+      "Directed end-to-end SDLC delivery for multi-platform web, mobile (iOS/Android), and B2B SaaS solutions, managing squads of 12+ developers and designers.",
       "Facilitated backlog prioritization using RICE and MoSCoW frameworks, balancing business value with engineering technical debt reduction.",
       "Worked closely with UI/UX designers and technical leads to build interactive workflow mockups and validate architectural constraints early.",
       "Maintained 95%+ sprint commitment reliability through proactive blocker removal and daily standup facilitation.",
@@ -98,8 +97,8 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "Pakistan",
     duration: "Aug 2020 – Feb 2023",
     span: "2 yrs 7 mos",
-    summary:
-      "Managed scale: led 50+ international client projects with a 20-person engineering team, establishing standardized Agile processes and predictable releases.",
+    storyQuote:
+      "Where I mastered scale: delivered over 50 international client projects with a 20-person engineering team, establishing standardized Agile processes and predictable releases.",
     bullets: [
       "Directed over 50 international client software deliverables spanning custom WordPress plugins, mobile applications, Chrome extensions, and e-commerce platforms.",
       "Led a 20-person cross-functional team of software engineers, UI/UX designers, and QA testers, maintaining a 95% on-schedule completion record.",
@@ -114,8 +113,8 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "Pakistan",
     duration: "Jan 2020 – Jul 2020",
     span: "7 mos",
-    summary:
-      "Managed custom web and e-commerce software developments for international clients from requirement scoping to live deployment.",
+    storyQuote:
+      "Managed custom web and e-commerce builds for international clients, establishing clear scope boundaries and sprint demonstrations.",
     bullets: [
       "Led requirement gathering sessions, technical scoping, and development coordination for international e-commerce and web platforms.",
       "Conducted weekly client product demonstrations, managed feedback loops, and maintained strict milestone schedule compliance.",
@@ -129,8 +128,8 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
     location: "Pakistan",
     duration: "Jan 2019 – Dec 2019",
     span: "1 yr",
-    summary:
-      "Built the foundational engineering instinct of how software breaks in production, mastering test planning, edge-case analysis, and defect lifecycle tracking.",
+    storyQuote:
+      "The year I learned to see software the way users do—by trying to break it before they could. It formed the foundation for how I lead technical projects today.",
     bullets: [
       "Executed functional, exploratory, and regression testing across web and mobile software before production releases.",
       "Documented detailed defect reports, reproduction steps, and collaborated closely with developers to verify fixes.",
@@ -142,18 +141,18 @@ const CAREER_EXPERIENCE: ExperienceRole[] = [
 
 const SKILLS_BENTO = [
   {
-    category: "Agile Governance & Delivery",
+    category: "Agile & Product Delivery Governance",
     icon: IconKanban,
     accent: "border-indigo-500/30 bg-indigo-500/10 text-indigo-400",
-    summary: "Guiding distributed squads through predictable sprint cadences, protected scope, and continuous shipping.",
+    summary: "Shaping backlogs, protecting engineer focus, breaking down epics, and keeping releases predictable.",
     items: [
       "Agile Scrum",
-      "Kanban Framework",
+      "Kanban",
       "SDLC Governance",
       "Sprint Planning",
-      "Backlog Refinement",
+      "Backlog Grooming",
       "Release Management",
-      "Risk & Blocker Mitigation",
+      "Risk Mitigation",
       "Capacity Planning",
       "Stakeholder Alignment",
       "User Story Mapping",
@@ -163,12 +162,12 @@ const SKILLS_BENTO = [
     category: "Technical Fluency & Architecture",
     icon: IconTerminal,
     accent: "border-sky-500/30 bg-sky-500/10 text-sky-400",
-    summary: "Sufficient engineering depth to review API contracts, interrogate architectural estimates, and debug system constraints.",
+    summary: "Deep technical fluency to challenge estimates, review API contracts, and unblock engineering discussions.",
     items: [
       "RESTful APIs",
       "Postman Collections",
       "SQL Data Queries",
-      "System Design Fundamentals",
+      "System Architecture",
       "Git & GitHub Workflows",
       "CI/CD Pipelines",
       "JavaScript & Webhooks",
@@ -177,25 +176,25 @@ const SKILLS_BENTO = [
     ],
   },
   {
-    category: "Quality Assurance & SDLC Control",
+    category: "Quality Assurance & Risk Control",
     icon: IconShieldCheck,
     accent: "border-emerald-500/30 bg-emerald-500/10 text-emerald-400",
-    summary: "Rooted in QA fundamentals: preventing defects at the requirement stage and enforcing strict verification gates.",
+    summary: "Built from QA roots: embedding acceptance criteria upfront and enforcing strict release verification gates.",
     items: [
       "TestRail & QA Tooling",
-      "Acceptance Criteria (Gherkin)",
+      "Gherkin Acceptance Criteria",
       "Regression Planning",
-      "Defect Triage & Root Cause",
+      "Defect Triage & RCA",
       "User Acceptance Testing (UAT)",
-      "End-to-End Test Matrices",
-      "Production Cutover Checklists",
+      "Cross-Browser Matrices",
+      "Release Gateways",
     ],
   },
   {
-    category: "PM Tooling & Workflow Optimization",
+    category: "Product Toolchain & Collaboration",
     icon: IconCpu,
     accent: "border-violet-500/30 bg-violet-500/10 text-violet-400",
-    summary: "Leveraging modern industry platforms to maintain team clarity, document systems, and streamline collaboration.",
+    summary: "Using modern industry platforms to maintain team clarity, document systems, and streamline asynchronous work.",
     items: [
       "Jira Software",
       "Azure DevOps",
@@ -210,30 +209,22 @@ const SKILLS_BENTO = [
   },
 ];
 
-const PRINCIPLES = [
+const FAQS = [
   {
-    num: "01",
-    title: "Clarity Before Velocity",
-    description:
-      "Most failed software projects are not effort problems—they are ambiguity problems. Requirements must be structured, challenged, and agreed upon with crisp acceptance criteria before a single line of code is written.",
+    q: "What makes Abdul Raheem different from traditional Project Managers?",
+    a: "I started in Software Engineering and QA, not theoretical management. I understand REST APIs, database schemas, and edge cases. This means I write user stories developers actually enjoy building, challenge unrealistic estimates constructively, and ensure zero regression debt reaches production.",
   },
   {
-    num: "02",
-    title: "Boards Reflect Reality",
-    description:
-      "Jira is the single source of truth. Blockers, technical dependencies, and risk factors live in plain sight. When reality shifts, the board reflects it immediately so stakeholders never face surprises two days before a release.",
+    q: "How do you manage distributed remote teams across UK, US, and Middle East time zones?",
+    a: "Through asynchronous clarity. I establish written 'Definitions of Ready', clear acceptance criteria, and structured daily updates so engineers never sit blocked waiting for a meeting. Time zones become an advantage when handoffs are crystal clear.",
   },
   {
-    num: "03",
-    title: "Calm Is a Deliberate Strategy",
-    description:
-      "High-performing software teams do not operate in continuous panic. Predictable sprint cadences, honest capacity estimation, and early escalation make delivery calm, reliable, and sustainable.",
+    q: "How do you prevent scope creep while keeping stakeholders happy?",
+    a: "By using the RICE and MoSCoW prioritization frameworks. I never say an outright 'no' to valuable ideas—instead, I make trade-offs transparent: 'We can build this new feature, but here is what moves to next sprint to protect our release date.' This builds immense trust with executives.",
   },
   {
-    num: "04",
-    title: "Engineered Quality Over Rework",
-    description:
-      "Quality is not an afterthought added in the final week of a release. Starting from my QA roots, verification criteria are embedded in every user story, ensuring zero regression debt.",
+    q: "What is your approach to AI in product delivery?",
+    a: "AI is a powerful productivity accelerator, not an autonomous author. I use ChatGPT, Claude, and Copilot for rapid PRD drafting, meeting synthesis, and test-case structuring, but every single output is manually verified and tailored before engineering touches it.",
   },
 ];
 
@@ -276,7 +267,6 @@ export default function Home() {
           HERO SECTION
           ===================================================================== */}
       <section id="overview" className="relative min-h-[90vh] overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-        {/* Architectural grid & ambient radial lights */}
         <div aria-hidden="true" className="bg-grid-pattern pointer-events-none absolute inset-0 opacity-40" />
         <div
           aria-hidden="true"
@@ -287,52 +277,46 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-12">
             {/* Left Hero Copy */}
             <div className="lg:col-span-8 space-y-6" data-reveal>
-              {/* Pill badge */}
               <div className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/90 px-3.5 py-1.5 text-xs text-slate-300 backdrop-blur-md">
                 <span className="flex h-2 w-2 rounded-full bg-indigo-400" />
-                <span className="font-mono font-medium">Technical Project Manager & Scrum Master</span>
+                <span className="font-mono font-medium">Technical Project & Product Manager · Scrum Master</span>
               </div>
 
-              {/* Headline */}
               <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl leading-[1.08]">
                 Abdul Raheem
               </h1>
 
-              {/* Sub-headline */}
               <p className="text-xl font-medium text-slate-200 sm:text-2xl leading-snug">
-                Delivering complex software roadmaps with predictable cadence and zero chaos.
+                I turn complex technical roadmaps into calm, predictable software releases that ship on time.
               </p>
 
-              {/* Narrative description */}
               <p className="max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
-                Seven years directing distributed engineering teams across the United Kingdom,
-                Saudi Arabia, and the United States. I combine an engineering foundation with rigorous
-                Agile Scrum governance to ship SaaS, web, and mobile systems on time, within scope, and without fire drills.
+                Seven years leading remote Agile teams across the UK, Saudi Arabia, and the United States.
+                With a background in Software Engineering and QA, I eliminate requirement ambiguity, protect developer focus,
+                and give stakeholders reliable delivery dates without the drama.
               </p>
 
-              {/* Action Buttons & Quick Copy */}
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <a
                   href="#projects"
                   className="rounded-xl bg-indigo-600 px-6 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/40"
                 >
-                  Explore Case Studies
+                  Explore Case Studies & Stories
                 </a>
                 <a
                   href="#experience"
                   className="rounded-xl border border-slate-700 bg-slate-900/80 px-6 py-3 text-xs font-semibold text-slate-200 transition-all hover:border-slate-600 hover:bg-slate-800 hover:text-white"
                 >
-                  View Track Record
+                  Career Track Record
                 </a>
                 <a
                   href="#contact"
                   className="rounded-xl border border-slate-800 bg-slate-950/60 px-5 py-3 text-xs font-medium text-slate-400 transition-all hover:border-slate-700 hover:text-slate-200"
                 >
-                  Get in Touch
+                  Send a Message
                 </a>
               </div>
 
-              {/* Timezone / Location Info */}
               <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-slate-400">
                 <div className="flex items-center gap-1.5">
                   <IconMapPin className="h-3.5 w-3.5 text-slate-500" />
@@ -349,7 +333,6 @@ export default function Home() {
             {/* Right Profile Portrait Card */}
             <div className="lg:col-span-4 flex justify-center lg:justify-end" data-reveal style={delay(120)}>
               <div className="relative">
-                {/* Glow ring */}
                 <div
                   aria-hidden="true"
                   className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-indigo-600/20 via-sky-500/10 to-transparent blur-xl"
@@ -360,7 +343,7 @@ export default function Home() {
                     {hasProfilePhoto ? (
                       <Image
                         src="/images/profile.jpg"
-                        alt="Abdul Raheem - Technical Project Manager & Scrum Master"
+                        alt="Abdul Raheem - Technical Project & Product Manager"
                         fill
                         priority
                         sizes="(max-width: 640px) 256px, 288px"
@@ -393,10 +376,10 @@ export default function Home() {
           {/* Quantified Metrics Bento Row */}
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4" data-reveal style={delay(200)}>
             {[
-              { num: "7+", label: "Years Delivering SDLC", detail: "Remote Agile & SaaS" },
+              { num: "7+", label: "Years in the Trenches", detail: "Software SDLC & Agile" },
               { num: "50+", label: "Global Deployments", detail: "UK, Saudi Arabia & US" },
-              { num: "95%", label: "On-Time Sprint Rate", detail: "Predictable velocity" },
-              { num: "20+", label: "Engineers Coordinated", detail: "Dev, QA, & UI/UX squads" },
+              { num: "95%", label: "On-Time Sprint Rate", detail: "Predictable shipping" },
+              { num: "20+", label: "Engineers Led", detail: "Dev, QA, & UI/UX squads" },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -412,19 +395,18 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          EXECUTIVE SUMMARY BENTO
+          EXECUTIVE STORY & BACKGROUND
           ===================================================================== */}
       <section id="about" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
             num="01"
-            eyebrow="Executive Summary"
-            title="Bridging Technical Depth & Delivery Leadership"
-            subtitle="How my background in Software Engineering and QA shaped a calm, highly structured approach to product execution."
+            eyebrow="My Story & Philosophy"
+            title="From Breaking Code in QA to Steering 50+ Global Releases"
+            subtitle="Why I believe most project delays are clarity problems, not effort problems."
           />
 
           <div className="grid gap-6 md:grid-cols-2">
-            {/* Card 1: QA Roots */}
             <div
               data-reveal
               className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-8 backdrop-blur-xl transition-all hover:border-slate-700"
@@ -433,14 +415,13 @@ export default function Home() {
                 <IconShieldCheck className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-white">
-                QA Foundation to SDLC Leadership
+                The QA Instinct: Preventing Errors at the Source
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                I began my technology career in Quality Assurance, dissecting exactly how good software fails. That discipline taught me an enduring lesson: <strong>most engineering failures are requirement clarity failures before they are code failures</strong>. I bring that analytical rigor into every sprint and user story.
+                I spent my first year in tech in Quality Assurance, deliberately trying to break web and mobile apps. That experience permanently changed how I view software delivery: <strong>90% of bugs and missed deadlines happen because someone gave developers vague requirements with missing edge cases</strong>. Today, I ensure acceptance criteria are airtight before a sprint starts.
               </p>
             </div>
 
-            {/* Card 2: Predictable Cadence */}
             <div
               data-reveal
               style={delay(100)}
@@ -450,14 +431,13 @@ export default function Home() {
                 <IconKanban className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-white">
-                Predictable Agile Cadence
+                Protecting Engineer Focus & Velocity
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                At Karigar Web Solutions and DG Cars, I scaled Agile workflows across dozens of simultaneous projects. My focus is eliminating chaos: disciplined backlog grooming, unambiguous acceptance criteria, transparent blocker removal, and a sustainable release rhythm that teams can trust.
+                Engineers do their best work when they are in flow, not in endless meetings. As a Scrum Master and TPM, my role is to act as a shield: absorbing scope changes, removing blockers within hours, and breaking large epics into clean 2-day user stories so development moves fast and stays calm.
               </p>
             </div>
 
-            {/* Card 3: Technical Fluency */}
             <div
               data-reveal
               style={delay(150)}
@@ -467,14 +447,13 @@ export default function Home() {
                 <IconTerminal className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-white">
-                Technical Depth & Architecture Empathy
+                Technical Literacy: Speaking Developer Language
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                Holding a Bachelor of Software Engineering, I understand REST APIs, database schemas, and Git branching workflows. This technical literacy enables me to challenge engineering estimates constructively, review API contracts, and ensure architectural decisions align with business deadlines.
+                With a Bachelor of Software Engineering, I don’t just move cards on a board. I read API documentation, review Postman collections, understand database relationships, and inspect Git pull requests. When a developer says an integration is complex, we talk architecture, not excuses.
               </p>
             </div>
 
-            {/* Card 4: Global Remote Delivery */}
             <div
               data-reveal
               style={delay(200)}
@@ -484,10 +463,10 @@ export default function Home() {
                 <IconUsers className="h-5 w-5" />
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-white">
-                Global Remote Collaboration
+                Asynchronous Remote Mastery
               </h3>
               <p className="mt-3 text-xs leading-relaxed text-slate-300">
-                Extensive experience managing asynchronous, distributed engineering squads across the United Kingdom, Europe, the Middle East, and North America. I ensure time-zone differences become a productivity advantage through clear documentation and structured handoffs.
+                Managing remote engineers across London, Riyadh, and New York taught me that great documentation replaces 80% of synchronous calls. Detailed Jira tickets, video walkthroughs, and clear staging environments keep teams productive around the clock.
               </p>
             </div>
           </div>
@@ -495,15 +474,31 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          EXPERIENCE & TRACK RECORD
+          INTERACTIVE SPRINT LIFECYCLE (HOW I RUN SPRINTS)
           ===================================================================== */}
-      <section id="experience" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+      <section id="how-i-work" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
             num="02"
-            eyebrow="Career Timeline"
-            title="Seven Years, Six Teams, One Consistent Standard"
-            subtitle="A chronological breakdown of leadership roles, teams directed, and production milestones delivered."
+            eyebrow="Delivery Methodology"
+            title="The 4-Stage Sprint Engine"
+            subtitle="An interactive breakdown of how I take feature ideas from vague concepts to tested, zero-downtime releases."
+          />
+
+          <SprintLifecycle />
+        </div>
+      </section>
+
+      {/* =====================================================================
+          CAREER EXPERIENCE & TRACK RECORD
+          ===================================================================== */}
+      <section id="experience" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionTitle
+            num="03"
+            eyebrow="Track Record"
+            title="Seven Years in the Trenches"
+            subtitle="A chronological journey through companies, teams directed, and technical milestones achieved."
           />
 
           <ol className="relative ml-2 space-y-12 border-l border-slate-800 md:ml-6">
@@ -515,13 +510,11 @@ export default function Home() {
                 style={delay(i === 0 ? 0 : 80)}
                 className="relative pl-8 md:pl-12"
               >
-                {/* Node indicator */}
                 <span aria-hidden="true" className="absolute -left-2 top-1.5 grid place-items-center">
                   <span className="tl-ring block h-4 w-4 rounded-full border bg-slate-950" />
                   <span className="tl-dot absolute block h-[9px] w-[9px] rounded-full" />
                 </span>
 
-                {/* Duration Tag */}
                 <div className="mb-2 flex items-center gap-2">
                   <span className="rounded-full border border-slate-800 bg-slate-900 px-3 py-0.5 text-[11px] font-mono font-medium text-indigo-400">
                     {role.duration}
@@ -529,16 +522,13 @@ export default function Home() {
                   <span className="text-xs font-mono text-slate-500">· {role.location}</span>
                 </div>
 
-                {/* Title & Company */}
                 <h3 className="text-xl font-bold tracking-tight text-white">{role.title}</h3>
                 <p className="mt-0.5 text-sm font-medium text-slate-300">{role.company}</p>
 
-                {/* Narrative Summary */}
-                <p className="mt-3 max-w-3xl text-xs font-medium text-slate-300 leading-relaxed">
-                  {role.summary}
+                <p className="mt-3 max-w-3xl text-xs font-medium text-slate-300 leading-relaxed italic border-l-2 border-indigo-500/40 pl-3">
+                  &ldquo;{role.storyQuote}&rdquo;
                 </p>
 
-                {/* Bullets */}
                 <ul className="mt-4 space-y-2.5">
                   {role.bullets.map((b) => (
                     <li key={b.slice(0, 30)} className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-400">
@@ -548,7 +538,6 @@ export default function Home() {
                   ))}
                 </ul>
 
-                {/* Skills tags */}
                 <div className="mt-4 flex flex-wrap gap-1.5 pt-2">
                   {role.skills.map((s) => (
                     <span key={s} className="rounded bg-slate-800/60 px-2 py-0.5 text-[10px] font-mono text-slate-400">
@@ -563,15 +552,15 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          CASE STUDIES & DELIVERIES
+          CASE STUDIES & VISUAL DELIVERIES
           ===================================================================== */}
-      <section id="projects" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+      <section id="projects" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="03"
+            num="04"
             eyebrow="Case Studies & Deliveries"
-            title="Selected Production Releases"
-            subtitle="Granular breakdowns of technical challenges, SDLC management strategies, and measurable business outcomes."
+            title="Featured Production Deliveries"
+            subtitle="In-depth breakdowns of real technical challenges, interactive system flows, and measurable business results."
           />
 
           <ProjectGallery />
@@ -581,13 +570,13 @@ export default function Home() {
       {/* =====================================================================
           TECHNICAL STACK & PM TOOLCHAIN MATRIX
           ===================================================================== */}
-      <section id="skills" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+      <section id="skills" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="04"
-            eyebrow="Competencies Matrix"
-            title="Technical Toolchain & PM Governance"
-            subtitle="The frameworks, technical tooling, and QA systems I use to run high-velocity engineering teams."
+            num="05"
+            eyebrow="Technical Toolchain"
+            title="Competencies & Governance Matrix"
+            subtitle="The frameworks, developer tooling, and QA systems I use to steer high-velocity engineering squads."
           />
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -635,12 +624,12 @@ export default function Home() {
       {/* =====================================================================
           VERIFIED CREDENTIALS & CERTIFICATIONS
           ===================================================================== */}
-      <section id="certificates" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+      <section id="certificates" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="05"
-            eyebrow="Verified Credentials"
-            title="Certifications & Industry Accreditations"
+            num="06"
+            eyebrow="Credentials"
+            title="Verified Industry Accreditations"
             subtitle="Official certifications verified with issuing bodies (Google, Scrum.org, SCRUMstudy, and 6SIGMAstudy)."
           />
 
@@ -649,30 +638,31 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          OPERATING PRINCIPLES ("HOW I WORK")
+          HIRING & RECRUITER FAQS (HEAVY SEO INJECTION)
           ===================================================================== */}
-      <section id="how-i-work" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+      <section id="faq" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="06"
-            eyebrow="Operating Principles"
-            title="Core Delivery Standards"
-            subtitle="The foundational engineering and management principles that govern every sprint and release."
+            num="07"
+            eyebrow="Recruiter & Hiring Guide"
+            title="Frequently Asked Questions"
+            subtitle="Straight answers on my technical management background, remote team coordination, and delivery philosophy."
           />
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PRINCIPLES.map((p, i) => (
+          <div className="grid gap-6 md:grid-cols-2">
+            {FAQS.map((faq, idx) => (
               <div
-                key={p.num}
+                key={faq.q}
                 data-reveal
-                style={delay(i * 100)}
-                className="flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-xl transition-all hover:border-indigo-500/40"
+                style={delay(idx * 80)}
+                className="rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 sm:p-7 backdrop-blur-xl"
               >
-                <div>
-                  <span className="text-3xl font-extrabold font-mono text-indigo-500/40">{p.num}</span>
-                  <h3 className="mt-3 text-sm font-semibold tracking-tight text-white">{p.title}</h3>
-                  <p className="mt-2.5 text-xs leading-relaxed text-slate-400">{p.description}</p>
-                </div>
+                <h3 className="text-sm font-bold text-white leading-snug">
+                  {faq.q}
+                </h3>
+                <p className="mt-3 text-xs leading-relaxed text-slate-300">
+                  {faq.a}
+                </p>
               </div>
             ))}
           </div>
@@ -680,13 +670,13 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          EDUCATION & ACADEMIC FOUNDATION
+          ACADEMIC FOUNDATION
           ===================================================================== */}
-      <section id="education" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
+      <section id="education" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="07"
-            eyebrow="Academic Foundation"
+            num="08"
+            eyebrow="Foundations"
             title="Education & Formal Engineering Roots"
           />
 
@@ -705,7 +695,7 @@ export default function Home() {
             </h3>
 
             <p className="mt-3 text-xs leading-relaxed text-slate-300">
-              Four-year rigorous engineering curriculum providing deep foundations in software development lifecycles (SDLC), object-oriented design, relational database modeling, algorithms, and distributed systems thinking.
+              Four-year engineering curriculum providing deep foundations in software development lifecycles (SDLC), object-oriented design, relational database modeling, algorithms, and distributed systems thinking.
             </p>
 
             <p className="mt-4 border-t border-slate-800 pt-4 text-[11px] font-mono text-slate-400">
@@ -718,13 +708,13 @@ export default function Home() {
       {/* =====================================================================
           CONTACT & CONNECT HUB
           ===================================================================== */}
-      <section id="contact" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32">
+      <section id="contact" className="relative scroll-mt-24 border-t border-slate-850 py-24 md:py-32 bg-slate-950/60">
         <div className="mx-auto max-w-6xl px-6">
           <SectionTitle
-            num="08"
+            num="09"
             eyebrow="Direct Reachout"
             title="Let&rsquo;s Build Something Steady"
-            subtitle="If your engineering team needs a Technical Project Manager who brings calm, structure, and honest timelines to remote Agile delivery, let's connect."
+            subtitle="Looking for a Technical Project Manager or TPM to lead your next release? Send a direct message below or copy my email."
           />
 
           <ContactDeck />
@@ -742,13 +732,15 @@ export default function Home() {
             </span>
             <span className="font-semibold text-slate-200">Abdul Raheem</span>
             <span className="text-slate-600">·</span>
-            <span>Technical Project Manager & Scrum Master</span>
+            <span>Technical Project & Product Manager</span>
           </div>
 
           <div className="flex items-center gap-6">
             <a href="#overview" className="hover:text-white transition-colors">Overview</a>
+            <a href="#how-i-work" className="hover:text-white transition-colors">Methodology</a>
             <a href="#experience" className="hover:text-white transition-colors">Experience</a>
-            <a href="#projects" className="hover:text-white transition-colors">Projects</a>
+            <a href="#projects" className="hover:text-white transition-colors">Case Studies</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
             <a href="#top" className="text-indigo-400 hover:text-indigo-300 transition-colors">Back to top ↑</a>
           </div>
@@ -756,7 +748,7 @@ export default function Home() {
 
         <div className="mx-auto max-w-6xl px-6 mt-6 pt-6 border-t border-slate-900 text-center text-[11px] text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
           <p>© {new Date().getFullYear()} Abdul Raheem. All rights reserved.</p>
-          <p className="font-mono">Built with Next.js, React 19 & Tailwind CSS</p>
+          <p className="font-mono">Built with Next.js 15, React 19 & Tailwind CSS</p>
         </div>
       </footer>
     </main>

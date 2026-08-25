@@ -11,15 +11,18 @@ import {
   IconX,
   IconArrowUpRight,
 } from "./Icons";
+import { SystemDiagram } from "./SystemDiagrams";
 
 export type ProjectData = {
   id: string;
   title: string;
   category: "Enterprise SaaS" | "AI & Automation Systems" | "E-Commerce & Chrome Tools";
+  diagramType?: "shorex" | "lms" | "scraper" | "dgcars";
   client: string;
   location: string;
   role: string;
   timeline: string;
+  storyIntro: string;
   challenge: string;
   approach: string;
   outcome: string;
@@ -39,80 +42,89 @@ export const PROJECTS_DATA: ProjectData[] = [
     id: "shorex-recycling",
     title: "Shorex Circular Recycling & Logistics Platform",
     category: "Enterprise SaaS",
+    diagramType: "shorex",
     client: "Shorex Environment Care & Recycling SL",
     location: "Spain (Remote)",
-    role: "Lead Technical Project Manager · Full SDLC Ownership",
+    role: "Lead Technical Project Manager · Full Delivery Ownership",
     timeline: "6 Months · Production Live",
+    storyIntro:
+      "When Shorex reached out, their operations team was drowning in fragmented spreadsheets trying to track industrial recycling requests across Spain.",
     challenge:
-      "Shorex operated with fragmented manual spreadsheets to coordinate industrial recycling requests, multi-warehouse inventory, fleet driver dispatch, and customer redemption points across Spanish municipalities.",
+      "Shorex operated with disjointed tools: dispatchers phoned drivers manually, warehouse intakes were scribbled on paper, and calculating client reward points in Euros took hours of manual cross-referencing.",
     approach:
-      "Architected and delivered a unified multi-tenant platform: an administrative portal for dynamic Euro-point pricing and warehouse management, a mobile-optimized driver workflow for field pickups, and an automated customer ledger for point accumulation and redemption.",
+      "I worked directly with the founding team in Spain to map the entire physical lifecycle. We built a unified platform: a dynamic admin portal for Euro-point pricing, a mobile driver flow for instant pickup status, an inventory weighing engine, and an automated customer rewards ledger.",
     outcome:
-      "Eliminated manual inventory reconciliation, reduced pickup coordination time by 40%, and deployed an automated customer rewards mechanism with 100% audit accuracy.",
+      "Cut dispatch coordination time by 40%, completely eliminated lost inventory manifests, and automated rewards payout across multiple Spanish municipalities.",
     metrics: [
       "40% Reduction in pickup dispatch latency",
       "100% Automated inventory reconciliation",
       "Multi-tenant warehouse & driver workflows",
     ],
-    stack: ["Jira & Scrum", "REST APIs", "React", "Node.js", "PostgreSQL", "Role-Based Access Control (RBAC)", "UAT"],
+    stack: ["Jira & Scrum", "REST APIs", "React", "Node.js", "PostgreSQL", "RBAC Security", "UAT"],
     deliverables: ["Admin Control Portal", "Driver Field App Flow", "Customer Points Ledger", "Warehouse Inventory Engine"],
     details: {
       problemAnalysis:
-        "The client had operational friction reconciling pick-ups against warehouse intake. Paper manifests caused latency, lost items, and inaccurate customer loyalty calculations.",
+        "The fundamental issue was latency between pickup and warehouse weighing. Paper manifests led to lost items, disputes over item weight, and delayed customer payouts.",
       pmStrategy:
-        "Formulated modular 2-week sprints with strict acceptance criteria for three core personas: Operations Admins, Field Drivers, and Commercial Customers. Created detailed user journeys and conducted weekly stakeholder demos in staging.",
+        "Formulated modular 2-week sprints. Prioritized core workflows first (Driver Pickup ➔ Scale Weight ➔ Points Credit) before building nice-to-have analytics. Held weekly live demos in Spanish-configured staging environments.",
       architectureAndQuality:
-        "Enforced strict REST API contract validation between frontend forms and backend database state. Implemented automated regression checks for Euro-point financial calculations prior to production sign-off.",
+        "Enforced strict REST API contract validation between frontend forms and database records. Embedded automated regression tests for financial reward calculations to ensure zero double-crediting.",
       impactSummary:
-        "Successfully deployed to production in Spain. Operations staff now handle 3x the pickup volume with zero increase in administrative headcount.",
+        "Now live in production. The operations team handles 3x the daily pickup volume without needing additional administrative staff.",
     },
   },
   {
     id: "lms-ai-chatbot",
-    title: "Enterprise Learning Management System & Contextual AI Assistant",
+    title: "Enterprise Learning Platform with Guardrailed AI Assistant",
     category: "AI & Automation Systems",
+    diagramType: "lms",
     client: "EdTech Enterprise Client",
     location: "United Kingdom (Remote)",
-    role: "Technical Project Manager · Sprint & Quality Lead",
+    role: "Technical Project Manager & Scrum Master",
     timeline: "8 Months · Enterprise Rollout",
+    storyIntro:
+      "The client needed an enterprise-grade LMS with live classes and an AI tutor—but without hallucinations confusing students during exam preparation.",
     challenge:
-      "An ed-tech provider required a scalable LMS with live virtual classrooms, interactive assessments, attendance tracking, and a contextual student-support AI chatbot without ballooning development scope or introducing hallucinations.",
+      "Building courses, live classrooms, and automated grading is hard enough; adding a conversational AI assistant created huge risk of student distraction and hallucinated answers on technical subjects.",
     approach:
-      "Established clear technical boundaries and prompt-guardrails for the AI assistant, ran disciplined Jira sprints with engineering and instructional designers, and created comprehensive QA matrices for live class synchronization.",
+      "I decoupled the AI service into a sandboxed RAG architecture with strict syllabus-bound prompt guardrails. Ran 16 focused sprints coordinating instructional designers, frontend developers, and backend engineers.",
     outcome:
-      "Delivered a production LMS serving thousands of active learners with 99.4% uptime and an AI study assistant that resolved 65% of repetitive student queries automatically.",
+      "Delivered on time for the academic term, serving thousands of active learners with 99.4% platform uptime and resolving 65% of repetitive student queries automatically.",
     metrics: [
-      "65% Tier-1 student support queries resolved autonomously",
+      "65% Tier-1 student questions resolved autonomously",
       "99.4% Platform uptime during concurrent live exams",
       "On-schedule delivery across 16 sequential sprints",
     ],
-    stack: ["Agile Scrum", "RESTful Architecture", "Next.js", "Python / FastAPI", "Vector Search / LLM Guardrails", "Jira & Confluence"],
+    stack: ["Agile Scrum", "RESTful Architecture", "Next.js", "Python / FastAPI", "Vector Search / LLM Guardrails", "Jira"],
     deliverables: ["Live Classroom Engine", "Automated Assessment Portal", "RAG-Powered AI Study Assistant", "Instructor Analytics"],
     details: {
       problemAnalysis:
-        "Integrating a conversational assistant with a dynamic curriculum risked student confusion if the assistant provided out-of-scope answers. Timelines were also tight due to academic term deadlines.",
+        "Students asking out-of-syllabus questions could receive misleading answers from standard AI models, hurting credibility. Delivery was also on a non-negotiable semester deadline.",
       pmStrategy:
-        "Separated core LMS delivery from AI assistant microservice to ensure asynchronous velocity. Held backlog refinement sessions twice weekly to refine edge cases in student grading and attendance states.",
+        "Separated core LMS delivery from the AI microservice so delayed AI testing wouldn't block LMS core releases. Ran backlog grooming twice weekly with explicit Gherkin acceptance criteria.",
       architectureAndQuality:
-        "Implemented strict prompt validation pipelines, token quota limits, and end-to-end regression suites for student progress data.",
+        "Implemented strict token rate limits, prompt validation pipelines, and automated regression suites for student grading records.",
       impactSummary:
-        "Platform launched on time for the academic term, achieving high student satisfaction ratings and reducing support ticket volume for instructors.",
+        "The platform launched smoothly on day one of the academic term, receiving top marks from students and saving teaching assistants dozens of hours weekly.",
     },
   },
   {
     id: "ai-marketplace-scraper",
-    title: "High-Throughput Marketplace Intelligence & Extraction Engine",
+    title: "High-Throughput Marketplace Intelligence Engine",
     category: "AI & Automation Systems",
+    diagramType: "scraper",
     client: "E-Commerce Intelligence Firm",
     location: "USA (Remote)",
     role: "Technical PM · Pipeline & Data Governance",
     timeline: "5 Months · Deployed to Production",
+    storyIntro:
+      "Clients needed real-time pricing intelligence across competitive marketplaces, but existing scrapers constantly broke whenever websites updated their layout.",
     challenge:
-      "Stakeholders required real-time price monitoring and catalog extraction across multiple international e-commerce platforms with high anti-scraping defenses and dynamic rate limits.",
+      "Extracting 500,000+ daily product variations from hostile anti-bot websites while ensuring pricing data was 100% accurate before feeding executive repricing algorithms.",
     approach:
-      "Engineered resilient distributed scraping pipelines with intelligent proxy rotation, automated schema normalization, and an intuitive dashboard for stakeholders to configure scheduled data pipelines.",
+      "Engineered resilient distributed extraction pipelines with rotating proxy meshes, DOM schema sanitizers, and an anomaly filter that flags erratic price swings for human review.",
     outcome:
-      "Built a reliable continuous ingestion engine parsing over 500,000 daily SKU updates with under 0.5% failure rate and real-time anomaly alerting.",
+      "Maintained a continuous 500k+ daily ingestion stream with under 0.5% failure rate, giving the client an unmatched market pricing advantage.",
     metrics: [
       "500K+ Daily SKU data points extracted and normalized",
       "<0.5% Pipeline extraction error rate",
@@ -122,109 +134,115 @@ export const PROJECTS_DATA: ProjectData[] = [
     deliverables: ["Distributed Extractor Engine", "Schema Validation Worker", "Executive Analytics Dashboard", "Alerting Webhook System"],
     details: {
       problemAnalysis:
-        "Competitor price tracking was previously done via spot-checks, causing missed promotional shifts. Existing scrapers broke frequently when target platforms modified their DOM structures.",
+        "Manual price spot-checks were costing the client missed sales. Previous automated tools failed on slight DOM changes, creating silent data corruption.",
       pmStrategy:
-        "Introduced adaptive selector fallbacks and strict sprint tracking for scraper maintenance. Managed dependencies between data engineering, infrastructure, and business analyst teams.",
+        "Established strict sprint velocity tracking and automated alert webhooks into Slack so scraper breaks were resolved within 4 hours.",
       architectureAndQuality:
-        "Implemented automated data anomaly triggers (e.g. sudden 80% price drops flagged for human review) to guarantee data integrity before feeding client pricing models.",
+        "Enforced automated validation rules (e.g. flagging sudden 80% price drops) before data enters the production database.",
       impactSummary:
-        "Enabled client to make algorithmic pricing decisions 4x faster than prior manual workflows, directly driving a 14% lift in client profit margins.",
+        "Enabled the client to make dynamic algorithmic repricing decisions 4x faster, directly driving a 14% lift in client profit margins.",
     },
   },
   {
     id: "rental-saas-dashboard",
-    title: "Commercial Rental Operations & Subscription SaaS Dashboard",
+    title: "Commercial Equipment Rental & Subscription SaaS",
     category: "Enterprise SaaS",
     client: "Commercial Equipment Rental Firm",
     location: "Middle East (Remote)",
-    role: "Project Manager · Release & Stakeholder Management",
+    role: "Project Manager · Release & Stakeholder Lead",
     timeline: "6 Months · Enterprise Launch",
+    storyIntro:
+      "A fast-growing rental company was losing revenue because returned equipment wasn't being tracked and subscription billing was disconnected.",
     challenge:
-      "A fast-growing rental business struggled with disconnected billing, equipment return forecasting, and recurring subscription visibility across regional depots.",
+      "Regional depots used different systems to track heavy machinery, resulting in late returns going unbilled and lost customer renewals.",
     approach:
-      "Led end-to-end requirement discovery, prioritized features using RICE framework, and coordinated 3-week release cycles with multi-currency payment gateway integrations and equipment tracking.",
+      "Led requirement workshops with depot managers, prioritized features using the RICE framework, and delivered a centralized SaaS dashboard with multi-currency Stripe billing.",
     outcome:
-      "Centralized fleet tracking, automated invoicing, and gave executives single-pane visibility over monthly recurring revenue (MRR) and fleet utilization rates.",
+      "Centralized depot visibility, eliminated billing discrepancies across 12 consecutive billing cycles, and saved 25 administrative hours per depot every week.",
     metrics: [
       "98% On-time equipment turnaround tracking",
       "Zero billing discrepancies over 12 consecutive billing cycles",
       "Live multi-depot inventory visibility",
     ],
     stack: ["Agile Delivery", "Jira", "React", "TypeScript", "Node.js", "Stripe Multi-Currency", "Figma User Flows"],
-    deliverables: ["Depot Management Console", "Subscription Billing Engine", "Fleet Utilization Tracker", "Executive Financial KPI Panel"],
+    deliverables: ["Depot Management Console", "Subscription Billing Engine", "Fleet Utilization Tracker", "Executive KPI Panel"],
     details: {
       problemAnalysis:
-        "Late rental returns and manual invoice generation cost the company significant lost revenue and increased customer friction during renewals.",
+        "Late rental returns and manual invoice generation cost the company significant lost revenue and customer friction.",
       pmStrategy:
-        "Built close stakeholder consensus on MVP features. Established clear acceptance criteria for billing webhooks, overdue equipment notifications, and automated late penalty logic.",
+        "Built close stakeholder consensus on MVP features. Established clear acceptance criteria for billing webhooks, overdue notifications, and late penalties.",
       architectureAndQuality:
-        "Ran rigorous UAT across regional depots with depot managers before cutting over production data. Validated payment edge cases (expired cards, partial refunds).",
+        "Ran rigorous UAT across regional depots with depot managers before cutting over production data.",
       impactSummary:
-        "Replaced three siloed legacy software tools with one modern dashboard, saving 25 hours per depot weekly.",
+        "Replaced three disconnected legacy tools with one modern dashboard, saving 25 hours per depot weekly.",
     },
   },
   {
     id: "custom-wordpress-plugins",
-    title: "High-Performance Custom WordPress & Enterprise Tooling Suite",
+    title: "Tailored WordPress Plugins & Enterprise Tooling",
     category: "E-Commerce & Chrome Tools",
     client: "Multiple International Clients (Karigar)",
     location: "Global / UK / US",
     role: "Project Manager & Technical Contributor",
     timeline: "Multi-Year · 15+ Enterprise Plugins",
+    storyIntro:
+      "Commercial off-the-shelf plugins were bloating client websites and causing security headaches. We needed clean, custom engineering.",
     challenge:
-      "Off-the-shelf WordPress plugins introduced code bloat, security vulnerabilities, and incompatible database hooks for high-traffic enterprise publishing and service sites.",
+      "Enterprise clients needed custom CRM syncs, tailored form handlers, and admin tooling without the bloat, slow queries, and security vulnerabilities of third-party plugins.",
     approach:
-      "Led the technical scoping and development of tailor-made, lightweight plugins: secure custom form handlers, bespoke CRM synchronization bridges, and tailored admin control dashboards.",
+      "Led the technical scoping and development of lightweight, bespoke plugins built to sit cleanly alongside WordPress core with sub-50ms database overhead.",
     outcome:
-      "Delivered robust custom extensions deployed across 30+ client installations with zero security incidents and sub-50ms query overhead.",
+      "Delivered 15+ custom plugins deployed across 30+ client installations with zero security incidents and dramatic speed improvements.",
     metrics: [
       "30+ High-traffic client installations",
       "Sub-50ms database query overhead",
       "Zero plugin-conflict downtime recorded",
     ],
-    stack: ["PHP", "JavaScript", "MySQL", "REST API Endpoints", "WordPress Core Architecture", "Git Version Control"],
+    stack: ["PHP", "JavaScript", "MySQL", "REST API Endpoints", "WordPress Core Architecture", "Git"],
     deliverables: ["Custom Form Pipelines", "CRM Sync Bridges", "Admin Dashboard Extensions", "Webhook Triggers"],
     details: {
       problemAnalysis:
-        "Commercial plugins frequently loaded unnecessary scripts on every frontend page, degrading Core Web Vitals and Google search rankings.",
+        "Commercial plugins loaded unused scripts on every page, hurting Core Web Vitals and Google rankings.",
       pmStrategy:
-        "Applied strict software engineering discipline to CMS plugin development: automated linting, modular architecture, and dedicated staging testbeds.",
+        "Applied strict software engineering discipline to plugin development: linting, modular architecture, and dedicated staging testbeds.",
       architectureAndQuality:
-        "Validated database indexing and sanitized all input streams against SQL injection and XSS vulnerabilities before client handover.",
+        "Validated database indexing and sanitized all input streams against SQL injection and XSS before client handover.",
       impactSummary:
-        "Significantly improved client site load times and reduced plugin-maintenance overhead by 70%.",
+        "Improved client load times significantly and reduced maintenance overhead by 70%.",
     },
   },
   {
     id: "ecommerce-order-platform",
-    title: "Scalable E-Commerce Catalog & Multi-Vendor Order Management",
+    title: "High-Volume E-Commerce Order & Fulfillment Engine",
     category: "E-Commerce & Chrome Tools",
     client: "Retail & Wholesale Group",
     location: "UK & International Clients",
     role: "Project Manager · E-Commerce Delivery",
     timeline: "7 Months · High Volume Production",
+    storyIntro:
+      "Flash sales were causing database lockups and inventory double-selling during seasonal campaigns.",
     challenge:
-      "Retail clients needed dependable catalog management, real-time inventory locking during flash sales, and automated courier tracking for growing shipment volumes.",
+      "High concurrent checkout volume caused race conditions on stock quantities, leading to unfulfillable orders and customer dissatisfaction.",
     approach:
-      "Delivered bespoke e-commerce architectures, structured order lifecycle state machines (Pending, Paid, Packed, Shipped, Delivered), and integrated courier logistics APIs.",
+      "Architected a strict order lifecycle state machine with transactional stock reservation locks and automated courier dispatch API integrations.",
     outcome:
-      "Engineered order processing pipelines that scaled smoothly to hundreds of concurrent orders during peak holiday sales without double-selling or inventory lockups.",
+      "Client processed record Black Friday order volume with 100% stock accuracy, zero double-selling, and automated multi-carrier label generation.",
     metrics: [
       "100% Elimination of inventory double-selling during peak traffic",
       "Automated multi-carrier shipping label generation",
       "Seamless checkout conversion rate increase by 18%",
     ],
-    stack: ["WooCommerce & Shopify Customizations", "REST API Integrations", "Courier APIs", "MySQL", "Payment Gateways", "Jira"],
+    stack: ["WooCommerce & Shopify Customizations", "REST API Integrations", "Courier APIs", "MySQL", "Jira"],
     deliverables: ["Real-Time Inventory Engine", "Multi-Carrier Dispatch Connector", "Order Lifecycle State Machine", "Customer Tracking Portal"],
     details: {
       problemAnalysis:
-        "High concurrent traffic during seasonal campaigns caused database deadlocks on stock quantities, leading to unfulfillable customer orders.",
+        "Simultaneous checkout requests locked database tables, causing crashed carts and frustrated buyers.",
       pmStrategy:
-        "Mapped every order state transition and error handling path. Coordinated load testing sprints to simulate 5x normal traffic volume prior to campaign launches.",
+        "Mapped every order state transition and simulated 5x normal traffic volume in staging prior to holiday campaign launches.",
       architectureAndQuality:
-        "Ensured transactional integrity on stock reservation queries and integrated webhook reconciliation for payment status callbacks.",
+        "Ensured transactional integrity on stock queries and integrated webhook reconciliation for payment status callbacks.",
       impactSummary:
-        "Client processed record Black Friday volume with zero order discrepancies or platform downtime.",
+        "Client processed record holiday sales with zero downtime and zero order discrepancies.",
     },
   },
   {
@@ -235,28 +253,30 @@ export const PROJECTS_DATA: ProjectData[] = [
     location: "International Clients",
     role: "Technical PM & Product Lead",
     timeline: "4 Months · Browser Utility Suite",
+    storyIntro:
+      "Operations teams were losing hours every day copying and pasting data between browser tabs, CRMs, and spreadsheets.",
     challenge:
-      "Operations teams were spending hours copying and formatting data between browser tabs, CRM systems, and internal reporting spreadsheets.",
+      "Manual data transcription between web applications caused frequent human errors, employee fatigue, and slow turnaround times.",
     approach:
-      "Spearheaded the design and delivery of lightweight Manifest V3 Chrome extensions that automatically extract contextual page data and inject it into CRM fields with one click.",
+      "Spearheaded Manifest V3 Chrome extensions that automatically extract contextual page data and inject it into CRM fields with a single keystroke.",
     outcome:
-      "Reduced per-record entry time from 3 minutes to 15 seconds, eliminating manual copy-paste errors across thousands of weekly operations records.",
+      "Cut data entry time by 90% (from 3 minutes to 15 seconds per record), saving over 120 operational work hours every month.",
     metrics: [
       "90% Reduction in manual data-entry turnaround time",
       "Manifest V3 compliant with zero background battery drain",
       "Adopted by 150+ operational agents daily",
     ],
     stack: ["Chrome Extension API (Manifest V3)", "JavaScript", "REST APIs", "Secure LocalStorage", "Git"],
-    deliverables: ["One-Click Data Capture Extension", "CRM Injection Script", "Popup Configuration Panel", "OAuth2 Authentication"],
+    deliverables: ["One-Click Data Capture Extension", "CRM Injection Script", "Popup Configuration Panel", "OAuth2 Auth"],
     details: {
       problemAnalysis:
-        "Repetitive human data transcription between web tabs led to transcription errors, fatigue, and substantial operational overhead.",
+        "Repetitive human transcription was causing a 4% error rate across client records.",
       pmStrategy:
-        "Conducted rapid user research directly with operations personnel to map out exact click patterns and keystroke workflows. Iterated prototypes in 1-week cycles.",
+        "Mapped out exact click patterns with agents and iterated functional prototypes in 1-week rapid cycles.",
       architectureAndQuality:
-        "Complied with Google Chrome Web Store privacy security guidelines, ensuring all token authentication remained encrypted in memory.",
+        "Complied with Google Chrome Web Store privacy security guidelines, ensuring all token auth stayed encrypted.",
       impactSummary:
-        "Operational efficiency improved dramatically, directly saving estimated 120 work-hours per month.",
+        "Directly saved an estimated 120 work-hours per month and eliminated data-entry mistakes.",
     },
   },
 ];
@@ -321,9 +341,9 @@ export default function ProjectGallery() {
               </h3>
               <p className="mt-1 text-xs text-slate-400 font-medium">{project.role}</p>
 
-              {/* Challenge / Summary */}
+              {/* Human Story Intro */}
               <p className="mt-4 text-xs leading-relaxed text-slate-300/90 line-clamp-3">
-                {project.challenge}
+                {project.storyIntro || project.challenge}
               </p>
 
               {/* Highlight Metrics */}
@@ -360,7 +380,7 @@ export default function ProjectGallery() {
                 onClick={() => setSelectedProject(project)}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-700/80 bg-slate-800/60 py-2.5 text-xs font-medium text-slate-200 transition-all hover:border-indigo-500/50 hover:bg-indigo-600/20 hover:text-white"
               >
-                <span>Read Full Case Study</span>
+                <span>Read Story & System Flow</span>
                 <IconArrowUpRight className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -393,7 +413,7 @@ export default function ProjectGallery() {
                   {selectedProject.title}
                 </h2>
                 <p className="mt-1 text-sm font-medium text-indigo-300">
-                  {selectedProject.role}
+                  {selectedProject.role} · {selectedProject.timeline}
                 </p>
               </div>
               <button
@@ -406,12 +426,19 @@ export default function ProjectGallery() {
               </button>
             </div>
 
-            {/* Modal Content Sections */}
-            <div className="mt-6 space-y-6 text-sm text-slate-300">
+            {/* Interactive System Flow Diagram in Modal */}
+            {selectedProject.diagramType && (
+              <div className="mt-6">
+                <SystemDiagram type={selectedProject.diagramType} />
+              </div>
+            )}
+
+            {/* Modal Story & Content Sections */}
+            <div className="mt-6 space-y-5 text-sm text-slate-300">
               {/* Problem Analysis */}
               <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  1. Problem Context & Complexity
+                  1. The Real-World Challenge
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-300">
                   {selectedProject.details.problemAnalysis}
@@ -421,7 +448,7 @@ export default function ProjectGallery() {
               {/* PM Strategy & SDLC Cadence */}
               <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  2. PM Execution Strategy & SDLC Cadence
+                  2. PM Strategy & Sprint Execution
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-300">
                   {selectedProject.details.pmStrategy}
@@ -431,7 +458,7 @@ export default function ProjectGallery() {
               {/* Architecture, Quality & Verification */}
               <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  3. Technical Governance & QA Verification
+                  3. Technical Governance & QA Gate
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-300">
                   {selectedProject.details.architectureAndQuality}
@@ -441,7 +468,7 @@ export default function ProjectGallery() {
               {/* Measurable Results */}
               <div className="rounded-xl border border-indigo-500/20 bg-indigo-950/20 p-5">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-indigo-300">
-                  4. Production Outcomes & Quantified Impact
+                  4. Business Impact & Measurable Outcome
                 </h4>
                 <p className="mt-2 text-xs leading-relaxed text-slate-200">
                   {selectedProject.details.impactSummary}
@@ -492,7 +519,7 @@ export default function ProjectGallery() {
                 onClick={() => setSelectedProject(null)}
                 className="rounded-xl bg-slate-800 px-5 py-2.5 text-xs font-medium text-slate-200 hover:bg-slate-700 transition-colors"
               >
-                Close Case Study
+                Close Story
               </button>
             </div>
           </div>

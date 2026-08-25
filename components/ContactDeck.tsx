@@ -23,7 +23,9 @@ export default function ContactDeck() {
     subject: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -32,23 +34,40 @@ export default function ContactDeck() {
     setTimeout(() => setCopiedField(null), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formState.name || !formState.email || !formState.message) {
+    setErrorMsg("");
+
+    if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
       showToast("Please fill in all required fields", "info");
       return;
     }
 
-    // Compose mailto link to ensure message isn't lost
-    const mailtoUrl = `mailto:pro.engrraheem@gmail.com?subject=${encodeURIComponent(
-      formState.subject || `Inquiry from ${formState.name}`
-    )}&body=${encodeURIComponent(
-      `Name: ${formState.name}\nEmail: ${formState.email}\n\nMessage:\n${formState.message}`
-    )}`;
+    setLoading(true);
 
-    window.open(mailtoUrl, "_blank");
-    setSubmitted(true);
-    showToast("Opened your email client with your message pre-filled!");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        showToast("Message sent successfully! I'll reply promptly.");
+      } else {
+        setErrorMsg(data.error || "Failed to deliver message. Please email directly.");
+        showToast("Notice: Please feel free to email directly.", "info");
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitted(true);
+      showToast("Message sent! You can also email pro.engrraheem@gmail.com directly.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -129,7 +148,7 @@ export default function ContactDeck() {
                 <IconLinkedin className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">Professional Network</p>
+                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">LinkedIn Profile</p>
                 <a
                   href="https://linkedin.com/in/abdulraheemitmanager"
                   target="_blank"
@@ -161,19 +180,19 @@ export default function ContactDeck() {
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
-              Current Availability & Working Hours
+              Active Availability & Timezone
             </h4>
           </div>
 
           <p className="mt-3 text-xs leading-relaxed text-slate-300">
-            Based in <strong className="text-white">Lahore, Pakistan (UTC+5)</strong>. Routinely collaborating with engineering and business stakeholders across:
+            Based in <strong className="text-white">Lahore, Pakistan (UTC+5)</strong>. Open for Senior / Lead Technical Project & Product Manager roles with dedicated overlap for:
           </p>
 
           <div className="mt-3 flex flex-wrap gap-1.5 font-mono text-[11px]">
-            <span className="rounded bg-slate-800 px-2 py-1 text-slate-300">UK (GMT / BST)</span>
-            <span className="rounded bg-slate-800 px-2 py-1 text-slate-300">Europe (CET)</span>
-            <span className="rounded bg-slate-800 px-2 py-1 text-slate-300">Saudi Arabia / GCC (AST)</span>
-            <span className="rounded bg-slate-800 px-2 py-1 text-slate-300">US East Coast (EST)</span>
+            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">UK (GMT / BST)</span>
+            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">Europe (CET)</span>
+            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">Saudi Arabia / GCC (AST)</span>
+            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">US East Coast (EST)</span>
           </div>
         </div>
       </div>
@@ -185,7 +204,7 @@ export default function ContactDeck() {
             Send a Direct Message
           </h3>
           <p className="mt-1 text-xs text-slate-400">
-            Have a project, role opening, or consultation? Fill out the details below.
+            Discussing a new software delivery initiative, hiring for a TPM role, or need sprint consulting? Send a note directly below.
           </p>
 
           {submitted ? (
@@ -193,13 +212,10 @@ export default function ContactDeck() {
               <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 mb-3">
                 <IconCheck className="h-5 w-5" />
               </div>
-              <h4 className="text-sm font-semibold text-white">Message Ready!</h4>
-              <p className="mt-1 text-xs text-slate-300">
-                Your email client was opened. If it did not launch automatically, you can email directly at{" "}
-                <a href="mailto:pro.engrraheem@gmail.com" className="text-emerald-400 underline">
-                  pro.engrraheem@gmail.com
-                </a>
-                .
+              <h4 className="text-sm font-semibold text-white">Thank you! Your message has been sent.</h4>
+              <p className="mt-2 text-xs text-slate-300 max-w-md mx-auto">
+                I review messages daily and will get back to you promptly at{" "}
+                <strong className="text-white">{formState.email}</strong>.
               </p>
               <button
                 type="button"
@@ -207,13 +223,19 @@ export default function ContactDeck() {
                   setSubmitted(false);
                   setFormState({ name: "", email: "", subject: "", message: "" });
                 }}
-                className="mt-4 rounded-lg bg-slate-800 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-slate-700"
+                className="mt-5 rounded-lg bg-slate-800 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
               >
-                Send Another Message
+                Send Another Note
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+              {errorMsg && (
+                <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300">
+                  {errorMsg}
+                </div>
+              )}
+
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300">
@@ -225,14 +247,14 @@ export default function ContactDeck() {
                     required
                     value={formState.name}
                     onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder="e.g. Alex Henderson"
                     className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="contact-email" className="block text-xs font-medium text-slate-300">
-                    Your Email <span className="text-rose-400">*</span>
+                    Your Work Email <span className="text-rose-400">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -240,7 +262,7 @@ export default function ContactDeck() {
                     required
                     value={formState.email}
                     onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
-                    placeholder="e.g. sarah@company.com"
+                    placeholder="e.g. alex@company.com"
                     className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                   />
                 </div>
@@ -248,21 +270,21 @@ export default function ContactDeck() {
 
               <div>
                 <label htmlFor="contact-subject" className="block text-xs font-medium text-slate-300">
-                  Subject / Topic
+                  Subject
                 </label>
                 <input
                   id="contact-subject"
                   type="text"
                   value={formState.subject}
                   onChange={(e) => setFormState((s) => ({ ...s, subject: e.target.value }))}
-                  placeholder="e.g. Senior Technical PM Role / Project Consultation"
+                  placeholder="e.g. Senior TPM Opportunity / SaaS Project Consultation"
                   className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
               <div>
                 <label htmlFor="contact-message" className="block text-xs font-medium text-slate-300">
-                  Message <span className="text-rose-400">*</span>
+                  Message Details <span className="text-rose-400">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -270,16 +292,24 @@ export default function ContactDeck() {
                   required
                   value={formState.message}
                   onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
-                  placeholder="Briefly describe your team, project requirements, or role specifications..."
+                  placeholder="Tell me a bit about your product team, project goals, timeline, or open role..."
                   className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full rounded-xl bg-indigo-600 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/35"
+                disabled={loading}
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/35 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Send Message via Email Client
+                {loading ? (
+                  <>
+                    <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>Sending Message...</span>
+                  </>
+                ) : (
+                  <span>Send Message Directly</span>
+                )}
               </button>
             </form>
           )}

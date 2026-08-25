@@ -16,84 +16,123 @@ const SITE_URL = "https://abdulraheem-pm.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Abdul Raheem | Technical Project Manager & Scrum Master",
+  title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
   description:
-    "Technical Project Manager & Certified Scrum Master with 7+ years directing distributed engineering teams across the UK, Saudi Arabia, and USA. Predictable Agile delivery, rigorous QA governance, and scalable SaaS solutions.",
+    "Technical Project Manager (TPM) & Certified Scrum Master with 7+ years directing remote Agile engineering teams across the UK, Saudi Arabia, and USA. Specialized in SaaS delivery, API architecture, and predictable sprint cadences.",
   keywords: [
     "Technical Project Manager",
+    "Technical Product Manager",
+    "TPM portfolio",
     "Scrum Master",
-    "Agile Project Manager",
-    "remote project management",
-    "Agile delivery",
-    "SaaS delivery",
-    "Scrum Master portfolio",
-    "Jira",
-    "Azure DevOps",
+    "Agile Delivery Lead",
+    "Senior Project Manager remote",
+    "SaaS Project Manager",
+    "Software Development Manager",
+    "Jira Scrum Master",
     "Abdul Raheem",
-    "Software Engineering PM",
+    "Abdul Raheem Project Manager",
   ],
   authors: [{ name: "Abdul Raheem" }],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "Abdul Raheem | Technical Project Manager",
-    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
+    siteName: "Abdul Raheem | Technical Project & Product Manager",
+    title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
     description:
-      "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA. Clear plans, calm execution, software that ships.",
+      "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA. Predictable sprint cadences, deep technical fluency, and zero drama.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
+    title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
     description:
       "7+ years leading remote Agile teams shipping SaaS, web, and mobile products across the UK, Saudi Arabia, and the USA.",
   },
 };
 
-const personJsonLd = {
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Abdul Raheem",
-  url: SITE_URL,
-  jobTitle: "Technical Project Manager & Scrum Master",
-  description:
-    "Technical Project Manager with 7+ years delivering SaaS, web, mobile, CRM, LMS, and enterprise software projects for clients in the UK, Saudi Arabia, and USA through remote Agile delivery.",
-  email: "mailto:pro.engrraheem@gmail.com",
-  telephone: "+92 331 6693499",
-  address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" },
-  sameAs: [
-    "https://linkedin.com/in/abdulraheemitmanager",
-    SITE_URL,
-  ],
-  knowsAbout: [
-    "Technical Project Management",
-    "Agile Project Management",
-    "Scrum Mastery",
-    "Remote Agile Delivery",
-    "SaaS Delivery",
-    "Jira",
-    "Azure DevOps",
-    "Risk Management",
-    "Stakeholder Management",
-    "SDLC Governance",
-  ],
-  alumniOf: { "@type": "CollegeOrUniversity", name: "Superior University, Lahore" },
-  hasCredential: [
+  "@graph": [
     {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "certification",
-      name: "Google Project Management Professional Certificate",
-      url: "https://www.credly.com/badges/6433352a-e1ec-4f97-b006-db00d9ae8f64",
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: "Abdul Raheem",
+      url: SITE_URL,
+      jobTitle: "Technical Project Manager & Scrum Master",
+      description:
+        "Technical Project Manager (TPM) with 7+ years directing distributed engineering teams across the UK, Saudi Arabia, and USA through remote Agile delivery and software architecture leadership.",
+      email: "mailto:pro.engrraheem@gmail.com",
+      telephone: "+92 331 6693499",
+      address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" },
+      sameAs: [
+        "https://linkedin.com/in/abdulraheemitmanager",
+        SITE_URL,
+      ],
+      knowsAbout: [
+        "Technical Project Management",
+        "Technical Product Management",
+        "Agile Scrum Framework",
+        "SDLC Governance",
+        "SaaS Product Delivery",
+        "REST APIs & System Architecture",
+        "Jira & Confluence",
+        "Quality Assurance & Test Automation",
+        "Remote Team Leadership",
+      ],
+      alumniOf: { "@type": "CollegeOrUniversity", name: "Superior University, Lahore" },
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          name: "Google Project Management Professional Certificate",
+          url: "https://www.credly.com/badges/6433352a-e1ec-4f97-b006-db00d9ae8f64",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          name: "Professional Scrum Master (PSM I)",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          name: "Scrum Fundamentals Certified (SFC)",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "certification",
+          name: "Six Sigma Yellow Belt",
+        },
+      ],
     },
     {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "certification",
-      name: "Professional Scrum Master (PSM I)",
-    },
-    {
-      "@type": "EducationalOccupationalCredential",
-      credentialCategory: "certification",
-      name: "Six Sigma Yellow Belt",
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What distinguishes Abdul Raheem as a Technical Project & Product Manager?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Abdul Raheem started in Software Engineering and QA, understanding REST APIs, database schemas, and edge cases. He writes user stories developers actually enjoy building and ensures zero regression debt reaches production.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How does Abdul Raheem manage distributed remote teams across UK, US, and Middle East time zones?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Through asynchronous clarity, structured Definitions of Ready (DoR), and proactive blocker removal, turning time zone differences into a continuous delivery advantage.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What is Abdul Raheem's approach to preventing scope creep and meeting tight deadlines?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Using RICE and MoSCoW prioritization frameworks to make trade-offs transparent and protect sprint commitments without friction.",
+          },
+        },
+      ],
     },
   ],
 };
@@ -112,7 +151,7 @@ export default function RootLayout({
         </a>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <ToastProvider>
           <Nav />
