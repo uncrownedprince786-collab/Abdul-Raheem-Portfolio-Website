@@ -66,7 +66,7 @@ const structuredData = {
       telephone: "+92 331 6693499",
       address: { "@type": "PostalAddress", addressLocality: "Lahore", addressCountry: "PK" },
       sameAs: [
-        "https://linkedin.com/in/abdulraheemitmanager",
+        "https://www.linkedin.com/in/abdul-raheem-3489b3107/",
         SITE_URL,
       ],
       knowsAbout: [

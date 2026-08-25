@@ -150,18 +150,18 @@ export default function ContactDeck() {
               <div>
                 <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">LinkedIn Profile</p>
                 <a
-                  href="https://linkedin.com/in/abdulraheemitmanager"
+                  href="https://www.linkedin.com/in/abdul-raheem-3489b3107/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-0.5 block text-sm font-semibold text-slate-100 hover:text-sky-300 transition-colors"
                 >
-                  /in/abdulraheemitmanager
+                  /in/abdul-raheem-3489b3107
                 </a>
               </div>
             </div>
 
             <a
-              href="https://linkedin.com/in/abdulraheemitmanager"
+              href="https://www.linkedin.com/in/abdul-raheem-3489b3107/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/80 text-slate-300 transition-all hover:border-sky-500 hover:bg-sky-600 hover:text-white"

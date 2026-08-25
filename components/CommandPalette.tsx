@@ -129,11 +129,11 @@ export default function CommandPalette() {
     },
     {
       id: "open-linkedin",
-      title: "Open LinkedIn Profile (/in/abdulraheemitmanager)",
+      title: "Open LinkedIn Profile (/in/abdul-raheem-3489b3107)",
       category: "Contact",
       icon: IconLinkedin,
       onSelect: () => {
-        window.open("https://linkedin.com/in/abdulraheemitmanager", "_blank", "noopener,noreferrer");
+        window.open("https://www.linkedin.com/in/abdul-raheem-3489b3107/", "_blank", "noopener,noreferrer");
         setOpen(false);
       },
     },
