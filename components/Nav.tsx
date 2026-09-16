@@ -64,7 +64,10 @@ export default function Nav() {
           scrolled ? "border-line bg-ink/85 backdrop-blur-xl" : "border-transparent bg-transparent"
         }`}
       >
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
+        <nav
+          className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-4 px-5 sm:px-6 lg:px-8"
+          aria-label="Primary"
+        >
           {/* Wordmark */}
           <a href="#top" className="group flex items-baseline gap-2" onClick={() => setOpen(false)}>
             <span className="font-mono text-xs text-acid transition-colors group-hover:text-acid-bright">
@@ -75,13 +78,13 @@ export default function Nav() {
             </span>
           </a>
 
-          {/* Desktop links — optically centered */}
-          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex">
+          {/* Desktop links */}
+          <ul className="hidden min-w-0 flex-1 items-center justify-center gap-7 px-6 min-[1200px]:flex">
             {LINKS.map((link) => (
-              <li key={link.id}>
+              <li key={link.id} className="shrink-0">
                 <a
                   href={`#${link.id}`}
-                  className={`hud relative py-2 transition-colors ${
+                  className={`hud relative whitespace-nowrap py-2 transition-colors ${
                     active === link.id ? "text-paper" : "text-ash hover:text-fawn"
                   }`}
                 >
@@ -98,8 +101,8 @@ export default function Nav() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-4">
-            <span className="hidden items-center gap-2 border border-line bg-ink-2/70 px-3 py-2 lg:inline-flex">
+          <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+            <span className="hidden items-center gap-2 border border-line bg-ink-2/70 px-3 py-2 min-[1440px]:inline-flex">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="blink-dot absolute inset-0 rounded-full bg-acid" />
               </span>
@@ -127,7 +130,7 @@ export default function Nav() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
-              className="border border-line-2 p-2.5 text-fawn transition-colors hover:border-acid hover:text-acid lg:hidden"
+              className="border border-line-2 p-2.5 text-fawn transition-colors hover:border-acid hover:text-acid min-[1200px]:hidden"
             >
               {open ? <IconX className="h-4 w-4" /> : <IconMenu className="h-4 w-4" />}
             </button>
@@ -143,7 +146,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[99] bg-ink/97 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[99] bg-ink/97 backdrop-blur-xl min-[1200px]:hidden"
           >
             <div className="flex h-full flex-col px-6 pt-24 pb-10">
               <ul className="space-y-1">
