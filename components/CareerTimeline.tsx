@@ -19,7 +19,7 @@ function RoleEntry({ role, index }: { role: (typeof CAREER_EXPERIENCE)[number]; 
       <p className="font-mono text-xs text-acid">
         {role.duration}
         <span className="text-smoke"> · </span>
-        <span className="text-ash">{role.year}</span>
+        <span className="text-ash">{role.span}</span>
       </p>
 
       <h3 className="font-display mt-2 text-2xl font-light leading-tight text-paper sm:text-3xl">
@@ -97,14 +97,15 @@ export default function CareerTimeline() {
   const opacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
   return (
-    <section id="experience" className="relative border-t border-line py-24 bg-ink-2/40 md:py-36">
+    <section id="experience" className="relative border-t border-line py-16 bg-ink-2/40 md:py-24">
+      <span aria-hidden="true" className="section-mark" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <motion.div
           initial={reduced ? { opacity: 1 } : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-14 md:mb-20"
+          className="mb-10 md:mb-14"
         >
           <div className="flex items-baseline gap-3">
             <span aria-hidden="true" className="hud text-acid">05</span>
@@ -129,7 +130,7 @@ export default function CareerTimeline() {
             className="absolute top-0 bottom-0 left-0 w-px origin-top bg-gradient-to-b from-acid via-acid/70 to-acid/30"
           />
 
-          <ol ref={listRef} className="space-y-14">
+          <ol ref={listRef} className="space-y-10">
             {CAREER_EXPERIENCE.map((role, i) => (
               <motion.li
                 key={`${role.company}-${role.duration}`}

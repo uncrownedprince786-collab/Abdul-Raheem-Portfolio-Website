@@ -94,6 +94,22 @@ export default function Home() {
         className="bg-ink-2/40"
       >
         <SprintLifecycle />
+
+        <div className="mt-6 border border-line bg-ink-2/60 p-6 sm:p-7">
+          <h3 className="hud text-acid">How I work with teams</h3>
+          <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+            {[
+              "A 15-minute standup and a Definition of Done sharp enough that \u201calmost done\u201d isn\u2019t a status.",
+              "Business intent becomes Gherkin-tested user stories before the sprint ever starts.",
+              "WIP stays tight and blockers clear within 2 hours \u2014 engineers stay in deep work.",
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-2.5 text-sm leading-relaxed text-fawn">
+                <span className="mt-2 h-px w-4 shrink-0 bg-acid/70" aria-hidden="true" />
+                <span className="text-pretty">{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       {/* 04 — How I think */}

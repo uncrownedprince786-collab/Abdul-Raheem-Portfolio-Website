@@ -8,9 +8,10 @@ const ICONS = [IconTarget, IconLedger, IconHumanNode, IconPulse];
 
 export default function Principles() {
   return (
-    <section id="principles" className="relative border-t border-line py-24 md:py-36">
+    <section id="principles" className="relative border-t border-line py-16 md:py-24">
+      <span aria-hidden="true" className="section-mark" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="mb-14 md:mb-20">
+        <Reveal className="mb-10 md:mb-14">
           <div className="flex items-baseline gap-3">
             <span aria-hidden="true" className="hud text-acid">04</span>
             <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />

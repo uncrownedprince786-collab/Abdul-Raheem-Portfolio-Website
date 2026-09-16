@@ -26,7 +26,7 @@ const PIPELINE = [
 
 export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
   return (
-    <section id="overview" className="relative overflow-hidden pt-24 pb-14 md:pt-32 md:pb-20">
+    <section id="overview" className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16">
       {/* Field grid backdrop */}
       <div
         aria-hidden="true"
@@ -38,7 +38,7 @@ export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
       />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6">
-        <div className="grid items-center gap-14 lg:grid-cols-12">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
           {/* ------------------------------ Copy ------------------------------ */}
           <div className="lg:col-span-7">
             <motion.div
@@ -100,17 +100,17 @@ export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
               className="mt-9 flex flex-wrap items-center gap-5"
             >
               <a
-                href="#work"
+                href="#contact"
                 className="group inline-flex items-center gap-2 bg-acid px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-acid-bright"
               >
-                See selected work
+                Book a 20-min intro call
                 <IconArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
-                href="#method"
+                href="#work"
                 className="link-rule inline-flex items-center gap-2 py-3 text-sm font-medium text-paper"
               >
-                How I deliver
+                See selected work
               </a>
               <a
                 href={PROFILE.resume}
@@ -249,7 +249,7 @@ export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.9 }}
-          className="relative mt-16 border-t border-line pt-8 md:mt-20"
+          className="relative mt-12 border-t border-line pt-8 md:mt-16"
           aria-hidden="true"
         >
           <div className="relative">

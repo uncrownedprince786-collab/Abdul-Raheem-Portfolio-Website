@@ -16,9 +16,10 @@ type SectionProps = {
  */
 export function Section({ id, index, eyebrow, title, subtitle, children, className = "" }: SectionProps) {
   return (
-    <section id={id} className={`relative scroll-mt-28 border-t border-line py-24 md:py-36 ${className}`}>
+    <section id={id} className={`relative scroll-mt-28 border-t border-line py-16 md:py-24 ${className}`}>
+      <span aria-hidden="true" className="section-mark" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="mb-14 md:mb-20">
+        <Reveal className="mb-10 md:mb-14">
           <div className="flex items-baseline gap-3">
             <span aria-hidden="true" className="hud text-acid">
               {index}

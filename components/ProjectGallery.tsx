@@ -26,6 +26,8 @@ export type ProjectData = {
   metrics: string[];
   stack: string[];
   deliverables: string[];
+  quote?: { text: string; attribution: string };
+  beforeAfter?: { before: string; after: string };
   details: {
     problemAnalysis: string;
     pmStrategy: string;
@@ -51,6 +53,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       "I worked directly with the founding team in Spain to map the entire physical lifecycle. We built a unified platform: a dynamic admin portal for Euro-point pricing, a mobile driver flow for instant pickup status, an inventory weighing engine, and an automated customer rewards ledger.",
     outcome:
       "Cut dispatch coordination time by 40%, completely eliminated lost inventory manifests, and automated rewards payout across multiple Spanish municipalities.",
+    quote: {
+      text: "One dashboard replaced a week of phone calls and paper manifests. Dispatch and warehouse finally work from the same truth.",
+      attribution: "Operations Director · recycling & logistics group, Spain",
+    },
     metrics: [
       "40% Reduction in pickup dispatch latency",
       "100% Automated inventory reconciliation",
@@ -85,6 +91,10 @@ export const PROJECTS_DATA: ProjectData[] = [
       "I decoupled the AI service into a sandboxed RAG architecture with strict syllabus-bound prompt guardrails. Ran 16 focused sprints coordinating instructional designers, frontend developers, and backend engineers.",
     outcome:
       "Delivered on time for the academic term, serving thousands of active learners with 99.4% platform uptime and resolving 65% of repetitive student queries automatically.",
+    quote: {
+      text: "We launched on day one of term. Students get answers from our syllabus, not the open internet — and tier-1 questions dropped by 65%.",
+      attribution: "Head of Product · enterprise EdTech client, UK",
+    },
     metrics: [
       "65% Tier-1 student questions resolved autonomously",
       "99.4% Platform uptime during concurrent live exams",
@@ -119,6 +129,12 @@ export const PROJECTS_DATA: ProjectData[] = [
       "Engineered resilient distributed extraction pipelines with rotating proxy meshes, DOM schema sanitizers, and an anomaly filter that flags erratic price swings for human review.",
     outcome:
       "Maintained a continuous 500k+ daily ingestion stream with under 0.5% failure rate, giving the client an unmatched market pricing advantage.",
+    beforeAfter: {
+      before:
+        "A website layout change silently corrupted scraped prices — bad numbers fed repricing algorithms for days before anyone noticed.",
+      after:
+        "DOM schema sanitizers plus anomaly flags (sudden swings flagged for human review) quarantine bad rows before the database ever commits.",
+    },
     metrics: [
       "500K+ Daily SKU data points extracted and normalized",
       "<0.5% Pipeline extraction error rate",
@@ -221,6 +237,12 @@ export const PROJECTS_DATA: ProjectData[] = [
       "Architected a strict order lifecycle state machine with transactional stock reservation locks and automated courier dispatch API integrations.",
     outcome:
       "Client processed record Black Friday order volume with 100% stock accuracy, zero double-selling, and automated multi-carrier label generation.",
+    beforeAfter: {
+      before:
+        "Under flash-sale load, concurrent checkout requests locked the same stock rows — double-selling inventory and burning customer trust.",
+      after:
+        "Moved stock reservation into a transactional order state machine, then load-tested at 5x normal traffic in staging: 100% stock accuracy at record volume, zero double-sells.",
+    },
     metrics: [
       "100% Elimination of inventory double-selling during peak traffic",
       "Automated multi-carrier shipping label generation",
@@ -276,6 +298,17 @@ export const PROJECTS_DATA: ProjectData[] = [
 ];
 
 const CATEGORIES = ["All Deliveries", "Enterprise SaaS", "AI & Automation Systems", "E-Commerce & Chrome Tools"] as const;
+
+const TRUSTED_MARKS = ["Shorex", "Karigar", "BrainCell", "App4orce", "DG Cars"];
+
+function QuoteBadge({ quote }: { quote: NonNullable<ProjectData["quote"]> }) {
+  return (
+    <blockquote className="mt-5 max-w-xl border-l-2 border-acid/50 pl-4">
+      <p className="text-sm italic leading-relaxed text-fawn text-pretty">&ldquo;{quote.text}&rdquo;</p>
+      <cite className="hud mt-2 block not-italic text-ash">&mdash; {quote.attribution}</cite>
+    </blockquote>
+  );
+}
 
 /* ------------------------------- Case study ------------------------------- */
 function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => void }) {
@@ -354,6 +387,12 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
           </div>
         )}
 
+        {project.quote && (
+          <div className="px-6 pt-7 sm:px-8">
+            <QuoteBadge quote={project.quote} />
+          </div>
+        )}
+
         {/* Sections */}
         <div className="space-y-0 px-6 pt-6 sm:px-8">
           {sections.map((s) => (
@@ -380,6 +419,20 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
             ))}
           </div>
         </div>
+
+        {/* Before → after */}
+        {project.beforeAfter && (
+          <div className="grid gap-2.5 border-t border-line px-6 py-6 sm:grid-cols-2 sm:px-8">
+            <div className="border border-line bg-ink-3/70 p-4">
+              <h4 className="hud text-ash mb-2">Before</h4>
+              <p className="text-xs leading-relaxed text-fawn text-pretty">{project.beforeAfter.before}</p>
+            </div>
+            <div className="border border-acid/40 bg-acid/10 p-4">
+              <h4 className="hud text-acid mb-2">After</h4>
+              <p className="text-xs leading-relaxed text-fawn text-pretty">{project.beforeAfter.after}</p>
+            </div>
+          </div>
+        )}
 
         {/* Stack + deliverables */}
         <div className="grid gap-6 border-t border-line px-6 py-6 sm:grid-cols-2 sm:px-8">
@@ -490,6 +543,8 @@ export default function ProjectGallery() {
                   {featured.storyIntro || featured.challenge}
                 </p>
 
+                {featured.quote && <QuoteBadge quote={featured.quote} />}
+
                 <div className="mt-6 flex flex-wrap gap-1.5">
                   {featured.metrics.slice(0, 2).map((m) => (
                     <span key={m} className="border border-acid/40 bg-acid/10 px-3 py-1.5 text-xs text-acid">
@@ -550,6 +605,8 @@ export default function ProjectGallery() {
                       {project.storyIntro || project.challenge}
                     </p>
 
+                    {project.quote && <QuoteBadge quote={project.quote} />}
+
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
                       <div className="w-full space-y-2 sm:w-auto">
                         {project.metrics.slice(0, 2).map((m) => (
@@ -583,6 +640,18 @@ export default function ProjectGallery() {
           );
         })}
       </Stagger>
+
+      {/* Trusted-by strip */}
+      <div className="mt-12 flex flex-col gap-4 border-t border-line pt-6 md:flex-row md:items-center md:justify-between">
+        <p className="hud text-ash">Trusted by teams at</p>
+        <ul className="flex flex-wrap items-center gap-x-9 gap-y-4" aria-label="Client organizations">
+          {TRUSTED_MARKS.map((m) => (
+            <li key={m} className="font-display text-xl font-light tracking-tight text-fawn/70">
+              {m}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {selectedProject && (
         <CaseStudy project={selectedProject} onClose={() => setSelectedProject(null)} />

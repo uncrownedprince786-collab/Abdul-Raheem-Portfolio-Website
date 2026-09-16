@@ -100,6 +100,12 @@ export default function Nav() {
 
           <div className="flex items-center gap-3">
             <a
+              href="#contact"
+              className="hidden items-center gap-2 border border-line-2 px-4 py-2 font-mono text-xs text-paper transition-colors hover:border-acid hover:text-acid lg:inline-flex"
+            >
+              Let&rsquo;s talk
+            </a>
+            <a
               href={PROFILE.resume}
               target="_blank"
               rel="noopener noreferrer"
