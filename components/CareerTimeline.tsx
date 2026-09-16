@@ -116,7 +116,7 @@ export default function CareerTimeline() {
             From breaking code in QA to steering 50+ releases
           </h2>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed text-fawn sm:text-base">
-            A progression, not a CV. Each role shaped how I run delivery today — starting with the year
+            A progression, not a checklist. Each role shaped how I run delivery today — starting with the year
             I learned to see software the way users do.
           </p>
         </motion.div>
