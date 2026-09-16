@@ -24,11 +24,14 @@
   --color-ash: #7a7466;
   --color-smoke: #4b463c;
 
-  /* Single chromatic voice — electric lime */
-  --color-acid: #a3e635;
-  --color-acid-bright: #c9f26b;
-  --color-acid-dim: #6b8f1a;
-  --color-acid-soft: rgba(163, 230, 53, 0.09);
+  /* Single chromatic voice — print-stamp lime */
+  --color-acid: #b9ef5f;
+  --color-acid-bright: #d9ff9a;
+  --color-acid-dim: #6f8f1c;
+  --color-acid-soft: rgba(185, 239, 95, 0.09);
+
+  /* Diagram surface — warm drafting plate */
+  --color-plate: #12100d;
 
   /* Functional only — form errors / warnings */
   --color-signal: #ff6a4d;
@@ -63,18 +66,18 @@ body {
 }
 
 ::selection {
-  background-color: #a3e635;
+  background-color: #b9ef5f;
   color: #0a0a0b;
 }
 
 :focus-visible {
-  outline: 2px solid #a3e635;
+  outline: 2px solid #b9ef5f;
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 :where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 2px solid #a3e635;
+  outline: 2px solid #b9ef5f;
   outline-offset: 2px;
 }
 
@@ -101,6 +104,7 @@ h3 {
 }
 .font-display {
   font-optical-sizing: auto;
+  font-weight: 500;
 }
 
 /* Oversized hero scale */
@@ -156,6 +160,19 @@ h3 {
   background-size: 56px 56px;
 }
 
+/* Drafting plate grid — denser, for system plates */
+.plate-grid {
+  background-image:
+    linear-gradient(to right, rgba(240, 233, 218, 0.032) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 233, 218, 0.032) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Marching dashes on route tracks (SVG stroke-dashoffset) */
+@keyframes dash-march {
+  to { stroke-dashoffset: -24; }
+}
+
 /* Corner tick frame (portrait / key visuals) */
 .tick-frame {
   position: relative;
@@ -167,7 +184,7 @@ h3 {
   width: 30px;
   height: 30px;
   pointer-events: none;
-  border: 1px solid rgba(163, 230, 53, 0.6);
+  border: 1px solid rgba(185, 239, 95, 0.6);
 }
 .tick-frame::before {
   top: -9px;
@@ -184,7 +201,7 @@ h3 {
 
 /* Underline treatment for links */
 .link-rule {
-  background-image: linear-gradient(to right, rgba(163, 230, 53, 0.85), rgba(163, 230, 53, 0.85));
+  background-image: linear-gradient(to right, rgba(185, 239, 95, 0.85), rgba(185, 239, 95, 0.85));
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;

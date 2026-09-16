@@ -75,7 +75,8 @@ export default function Home() {
         eyebrow="Selected work"
         title={
           <>
-            Systems I&rsquo;ve taken from whiteboard{<br className="hidden sm:block" />} to production
+            Systems I&rsquo;ve taken from whiteboard{<br className="hidden sm:block" />} to{" "}
+            <em className="em-serif text-acid">production</em>
           </>
         }
         subtitle="Seven deliveries across logistics, AI education, data infrastructure, mobility and e-commerce. Filter by category, open a case study, and trace the system flows I owned."

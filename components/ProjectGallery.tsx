@@ -6,16 +6,15 @@ import {
   IconX,
   IconCheckCircle,
   IconClock,
-  IconMapPin,
 } from "./Icons";
-import { SystemDiagram } from "./SystemDiagrams";
+import FlowPlate from "./FlowPlate";
+import { FLOWS } from "./flowData";
 import { Stagger, StaggerItem } from "./motion";
 
 export type ProjectData = {
   id: string;
   title: string;
   category: "Enterprise SaaS" | "AI & Automation Systems" | "E-Commerce & Chrome Tools";
-  diagramType?: "shorex" | "lms" | "scraper" | "dgcars";
   client: string;
   location: string;
   role: string;
@@ -40,7 +39,6 @@ export const PROJECTS_DATA: ProjectData[] = [
     id: "shorex-recycling",
     title: "Shorex Circular Recycling & Logistics Platform",
     category: "Enterprise SaaS",
-    diagramType: "shorex",
     client: "Shorex Environment Care & Recycling SL",
     location: "Spain (Remote)",
     role: "Lead Technical Project Manager · Full Delivery Ownership",
@@ -75,7 +73,6 @@ export const PROJECTS_DATA: ProjectData[] = [
     id: "lms-ai-chatbot",
     title: "Enterprise Learning Platform with Guardrailed AI Assistant",
     category: "AI & Automation Systems",
-    diagramType: "lms",
     client: "EdTech Enterprise Client",
     location: "United Kingdom (Remote)",
     role: "Technical Project Manager & Scrum Master",
@@ -110,7 +107,6 @@ export const PROJECTS_DATA: ProjectData[] = [
     id: "ai-marketplace-scraper",
     title: "High-Throughput Marketplace Intelligence Engine",
     category: "AI & Automation Systems",
-    diagramType: "scraper",
     client: "E-Commerce Intelligence Firm",
     location: "USA (Remote)",
     role: "Technical PM · Pipeline & Data Governance",
@@ -281,29 +277,6 @@ export const PROJECTS_DATA: ProjectData[] = [
 
 const CATEGORIES = ["All Deliveries", "Enterprise SaaS", "AI & Automation Systems", "E-Commerce & Chrome Tools"] as const;
 
-/* Abstract project plate — the systems pictogram placeholder artwork */
-function ProjectPlate({ index }: { index: number }) {
-  const seeds = [
-    "M20 40 h260 M20 120 h260 M20 200 h260 M20 280 h260",
-    "M30 60 h240 M30 140 h240 M30 220 h240",
-    "M40 40 v240 M120 40 v240 M200 40 v240 M280 40 v240",
-    "M20 40 C 260 40, 20 300, 260 300",
-  ];
-  const pattern = seeds[index % seeds.length];
-  return (
-    <svg aria-hidden="true" viewBox="0 0 300 320" fill="none" className="h-full w-full text-acid/25">
-      <path d={pattern} stroke="currentColor" strokeWidth="1" />
-      <circle cx="20" cy="40" r="3" fill="currentColor" />
-      <circle cx="280" cy="40" r="3" fill="currentColor" />
-      <circle cx="20" cy="280" r="3" fill="currentColor" />
-      <circle cx="280" cy="280" r="3" fill="currentColor" />
-      <text x="16" y="304" className="font-mono" fontSize="10" fill="currentColor" opacity="0.7">
-        0{index + 1} / SYSTEM
-      </text>
-    </svg>
-  );
-}
-
 /* ------------------------------- Case study ------------------------------- */
 function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -371,10 +344,13 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
           {project.client}
         </p>
 
-        {/* Diagram */}
-        {project.diagramType && (
-          <div className="px-6 pt-6 sm:px-8">
-            <SystemDiagram type={project.diagramType} />
+        {/* System plate */}
+        {FLOWS[project.id] && (
+          <div className="px-4 pt-7 sm:px-8">
+            <div className="relative">
+              <span aria-hidden="true" className="absolute -left-1.5 top-3 bottom-3 w-0.5 bg-acid/70" />
+              <FlowPlate config={FLOWS[project.id]} />
+            </div>
           </div>
         )}
 
@@ -485,22 +461,20 @@ export default function ProjectGallery() {
       </div>
 
       {/* Featured spread */}
-      {featured && (
+      {featured && FLOWS[featured.id] && (
         <Stagger className="mt-10">
           <StaggerItem>
-            <article className="group relative grid overflow-hidden border border-line bg-ink-2 lg:grid-cols-[2fr_3fr]">
-              {/* Plate */}
-              <div className="relative hidden min-h-[320px] overflow-hidden lg:block">
-                <div className="absolute inset-0 field-grid opacity-60" />
-                <div className="absolute inset-0 flex items-center justify-center p-10">
-                  <ProjectPlate index={0} />
+            <article className="group relative grid overflow-hidden border border-line bg-ink-2 lg:grid-cols-[7fr_5fr]">
+              {/* System plate */}
+              <div className="relative order-1 p-4 sm:p-6 lg:p-8 lg:pr-0">
+                <span aria-hidden="true" className="absolute left-0 top-8 h-[calc(100%-4rem)] w-0.5 bg-acid/70" />
+                <div className="relative">
+                  <FlowPlate config={FLOWS[featured.id]} />
                 </div>
-                <span aria-hidden="true" className="absolute left-0 top-0 h-full w-0.5 bg-acid/70" />
-                <span aria-hidden="true" className="pulse-through h-1 w-1 rounded-full bg-acid" />
               </div>
 
               {/* Content */}
-              <div className="p-7 sm:p-9 md:p-11">
+              <div className="order-2 p-7 sm:p-9 md:p-11 lg:pl-12">
                 <div className="flex items-center gap-3 text-xs">
                   <span className="hud text-acid">Feat.</span>
                   <span className="h-0.5 w-6 bg-acid/50" aria-hidden="true" />
@@ -543,18 +517,21 @@ export default function ProjectGallery() {
         </Stagger>
       )}
 
-      {/* Editorial rows */}
+      {/* Editorial rows — plate + story alternating */}
       <Stagger className="mt-10 space-y-0 border-t border-line">
-        {rest.map((project, i) => (
-          <StaggerItem key={project.id}>
-            <article className="group grid gap-4 border-b border-line py-8 transition-colors hover:bg-ink-2/40 md:grid-cols-[3rem_1fr] md:gap-8 md:py-10">
-              <span className="hud pt-1 text-smoke transition-colors group-hover:text-acid">
-                0{i + 2}
-              </span>
+        {rest.map((project, i) => {
+          const plate = FLOWS[project.id];
+          const plateLeft = i % 2 === 1;
+          return (
+            <StaggerItem key={project.id}>
+              <article className="group grid gap-4 border-b border-line py-8 transition-colors hover:bg-ink-2/40 md:grid-cols-[3rem_1fr] md:gap-8 md:py-10">
+                <span className="hud pt-1 text-smoke transition-colors group-hover:text-acid">
+                  0{i + 2}
+                </span>
 
-              <div>
-                <div className="grid gap-4 lg:grid-cols-12">
-                  <div className="lg:col-span-8">
+                <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+                  {/* Text */}
+                  <div className={`lg:col-span-6 ${plateLeft ? "lg:order-2 lg:pl-10" : "lg:order-1"}`}>
                     <div className="flex flex-wrap items-center gap-2 text-xs">
                       <span className="hud text-acid/90">{project.category}</span>
                       <span aria-hidden="true" className="text-smoke">·</span>
@@ -572,32 +549,39 @@ export default function ProjectGallery() {
                     <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fawn text-pretty">
                       {project.storyIntro || project.challenge}
                     </p>
-                  </div>
 
-                  <div className="flex flex-col justify-between gap-5 lg:col-span-4 lg:items-end">
-                    <div className="w-full space-y-2 border-t border-line pt-4 lg:border-0 lg:pt-0">
-                      {project.metrics.slice(0, 2).map((m) => (
-                        <p key={m} className="flex items-start gap-2 text-xs leading-snug text-fawn">
-                          <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-acid" />
-                          <span className="text-pretty">{m}</span>
-                        </p>
-                      ))}
+                    <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
+                      <div className="w-full space-y-2 sm:w-auto">
+                        {project.metrics.slice(0, 2).map((m) => (
+                          <p key={m} className="flex items-start gap-2 text-xs leading-snug text-fawn">
+                            <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-acid" />
+                            <span className="text-pretty">{m}</span>
+                          </p>
+                        ))}
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setSelectedProject(project)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-acid"
+                      >
+                        <span className="link-rule">Case study</span>
+                        <IconArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </button>
                     </div>
-
-                    <button
-                      type="button"
-                      onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-acid"
-                    >
-                      <span className="link-rule">Case study</span>
-                      <IconArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </button>
                   </div>
+
+                  {/* System plate */}
+                  {plate && (
+                    <div className={`lg:col-span-6 ${plateLeft ? "lg:order-1" : "lg:order-2"}`}>
+                      <FlowPlate config={plate} />
+                    </div>
+                  )}
                 </div>
-              </div>
-            </article>
-          </StaggerItem>
-        ))}
+              </article>
+            </StaggerItem>
+          );
+        })}
       </Stagger>
 
       {selectedProject && (

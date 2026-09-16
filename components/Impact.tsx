@@ -49,7 +49,8 @@ export default function Impact() {
             <span className="hud text-ash">Impact & proof</span>
           </div>
           <h2 className="font-display mt-4 max-w-3xl text-3xl font-light leading-[1.08] text-paper text-balance sm:text-4xl md:text-5xl">
-            A release is only ready when testing proves it can survive production traffic.
+            A release is only ready when testing proves it can survive{" "}
+            <em className="em-serif text-acid">production traffic.</em>
           </h2>
         </Reveal>
 
@@ -61,7 +62,7 @@ export default function Impact() {
               delay={i * 0.06}
               className={`border-t border-line py-7 pr-6 ${i !== 0 ? "lg:border-l lg:border-t" : ""} ${i === 2 ? "sm:border-t" : "sm:border-t"} sm:border-line`}
             >
-              <p className="font-mono text-4xl font-light tracking-tight text-paper md:text-5xl">
+              <p className="font-display text-5xl font-medium text-paper md:text-6xl">
                 <Counter value={m.value} suffix={m.suffix} />
               </p>
               <p className="mt-3 text-sm font-semibold text-paper">{m.label}</p>

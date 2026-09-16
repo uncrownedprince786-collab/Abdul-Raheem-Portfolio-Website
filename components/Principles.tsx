@@ -18,7 +18,7 @@ export default function Principles() {
           </div>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
             <h2 className="font-display max-w-2xl text-3xl font-light leading-[1.08] text-paper text-balance sm:text-4xl md:text-5xl">
-              My operating system for product delivery
+              My operating <em className="em-serif text-acid">system</em> for product delivery
             </h2>
             <p className="hud text-ash">OS / v7.0 — built in QA, tuned in production</p>
           </div>
