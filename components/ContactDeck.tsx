@@ -30,7 +30,7 @@ export default function ContactDeck() {
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
     setCopiedField(label);
-    showToast(`Copied ${label} (${text}) to clipboard!`);
+    showToast(`Copied ${label} to clipboard: ${text}`);
     setTimeout(() => setCopiedField(null), 2500);
   };
 
@@ -70,36 +70,37 @@ export default function ContactDeck() {
     }
   };
 
+  const field = "mt-1.5 w-full border border-line bg-ink px-3.5 py-2.5 text-sm text-paper placeholder-ash focus:border-brass focus:outline-none";
+
   return (
     <div className="grid gap-8 lg:grid-cols-12">
-      {/* Left Contact Cards */}
-      <div className="space-y-4 lg:col-span-5" data-reveal>
-        {/* Email Card with 1-click copy */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 backdrop-blur-xl transition-all hover:border-indigo-500/40">
+      {/* Dispatch stations */}
+      <div className="space-y-px lg:col-span-5">
+        {/* Email */}
+        <div className="group border border-line bg-ink-2 p-5 transition-colors hover:border-brass/50 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                <IconMail className="h-5 w-5" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-brass/40 text-brass">
+                <IconMail className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">Direct Email</p>
+                <p className="hud text-ash">Direct Email</p>
                 <a
                   href="mailto:pro.engrraheem@gmail.com"
-                  className="mt-0.5 block text-sm font-semibold text-slate-100 hover:text-indigo-300 transition-colors"
+                  className="mt-0.5 block text-sm font-semibold text-paper transition-colors hover:text-brass"
                 >
                   pro.engrraheem@gmail.com
                 </a>
               </div>
             </div>
-
             <button
               type="button"
               onClick={() => copyToClipboard("pro.engrraheem@gmail.com", "Email")}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/80 text-slate-300 transition-all hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+              className="flex h-9 w-9 items-center justify-center border border-line-2 text-fawn transition-colors hover:border-brass hover:text-brass"
               title="Copy email to clipboard"
             >
               {copiedField === "Email" ? (
-                <IconCheck className="h-4 w-4 text-emerald-400" />
+                <IconCheck className="h-4 w-4 text-moss" />
               ) : (
                 <IconCopy className="h-4 w-4" />
               )}
@@ -107,32 +108,31 @@ export default function ContactDeck() {
           </div>
         </div>
 
-        {/* Phone / WhatsApp Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 backdrop-blur-xl transition-all hover:border-indigo-500/40">
+        {/* Phone / WhatsApp */}
+        <div className="group border border-line bg-ink-2 p-5 transition-colors hover:border-brass/50 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <IconPhone className="h-5 w-5" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-brass/40 text-brass">
+                <IconPhone className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">Phone & WhatsApp</p>
+                <p className="hud text-ash">Phone & WhatsApp</p>
                 <a
                   href="tel:+923316693499"
-                  className="mt-0.5 block text-sm font-semibold text-slate-100 hover:text-emerald-300 transition-colors font-mono"
+                  className="mt-0.5 block font-mono text-sm font-semibold text-paper transition-colors hover:text-brass"
                 >
                   +92 331 6693499
                 </a>
               </div>
             </div>
-
             <button
               type="button"
               onClick={() => copyToClipboard("+923316693499", "Phone number")}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/80 text-slate-300 transition-all hover:border-emerald-500 hover:bg-emerald-600 hover:text-white"
+              className="flex h-9 w-9 items-center justify-center border border-line-2 text-fawn transition-colors hover:border-brass hover:text-brass"
               title="Copy phone to clipboard"
             >
               {copiedField === "Phone number" ? (
-                <IconCheck className="h-4 w-4 text-emerald-400" />
+                <IconCheck className="h-4 w-4 text-moss" />
               ) : (
                 <IconCopy className="h-4 w-4" />
               )}
@@ -140,31 +140,30 @@ export default function ContactDeck() {
           </div>
         </div>
 
-        {/* LinkedIn Profile Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/70 p-6 backdrop-blur-xl transition-all hover:border-indigo-500/40">
+        {/* LinkedIn */}
+        <div className="group border border-line bg-ink-2 p-5 transition-colors hover:border-brass/50 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20">
-                <IconLinkedin className="h-5 w-5" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-brass/40 text-brass">
+                <IconLinkedin className="h-5 w-5" strokeWidth={1.75} />
               </div>
               <div>
-                <p className="text-[11px] font-mono uppercase tracking-wider text-slate-400">LinkedIn Profile</p>
+                <p className="hud text-ash">LinkedIn Profile</p>
                 <a
                   href="https://www.linkedin.com/in/abdul-raheem-3489b3107/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-0.5 block text-sm font-semibold text-slate-100 hover:text-sky-300 transition-colors"
+                  className="mt-0.5 block text-sm font-semibold text-paper transition-colors hover:text-brass"
                 >
                   /in/abdul-raheem-3489b3107
                 </a>
               </div>
             </div>
-
             <a
               href="https://www.linkedin.com/in/abdul-raheem-3489b3107/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700/80 bg-slate-800/80 text-slate-300 transition-all hover:border-sky-500 hover:bg-sky-600 hover:text-white"
+              className="flex h-9 w-9 items-center justify-center border border-line-2 text-fawn transition-colors hover:border-brass hover:text-brass"
               title="Open LinkedIn"
             >
               <IconArrowUpRight className="h-4 w-4" />
@@ -172,50 +171,57 @@ export default function ContactDeck() {
           </div>
         </div>
 
-        {/* Timezone & Availability Badge Card */}
-        <div className="rounded-2xl border border-slate-800/80 bg-slate-950/70 p-6 backdrop-blur-xl">
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+        {/* Availability */}
+        <div className="border border-line bg-ink p-5 sm:p-6">
+          <div className="flex items-center gap-2.5">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-moss opacity-70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-moss" />
             </span>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-emerald-400">
-              Active Availability & Timezone
-            </h4>
+            <h4 className="hud text-moss">Active availability</h4>
           </div>
 
-          <p className="mt-3 text-xs leading-relaxed text-slate-300">
-            Based in <strong className="text-white">Lahore, Pakistan (UTC+5)</strong>. Open for Senior / Lead Technical Project & Product Manager roles with dedicated overlap for:
+          <p className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-fawn">
+            <IconMapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brass" />
+            Based in Lahore, PK (UTC+5). Open for Senior / Lead Technical Project & Product Manager roles with dedicated overlap for UK · EU · GCC · US-East.
           </p>
 
-          <div className="mt-3 flex flex-wrap gap-1.5 font-mono text-[11px]">
-            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">UK (GMT / BST)</span>
-            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">Europe (CET)</span>
-            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">Saudi Arabia / GCC (AST)</span>
-            <span className="rounded bg-slate-800 px-2.5 py-1 text-slate-300">US East Coast (EST)</span>
+          <p className="mt-3 flex items-start gap-2 text-xs leading-relaxed text-fawn">
+            <IconClock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brass" />
+            Replies within 24 hours on working days.
+          </p>
+
+          <div className="mt-4 flex items-center gap-1.5 font-mono text-[11px] text-ash">
+            <IconShieldCheck className="h-3.5 w-3.5 text-moss" />
+            Every message reviewed personally — no auto-replies.
           </div>
         </div>
       </div>
 
-      {/* Right Contact Form */}
-      <div className="lg:col-span-7" data-reveal style={{ "--reveal-delay": "120ms" } as React.CSSProperties}>
-        <div className="rounded-2xl border border-slate-800/80 bg-slate-900/80 p-7 sm:p-8 backdrop-blur-xl">
-          <h3 className="text-xl font-semibold tracking-tight text-white">
-            Send a Direct Message
+      {/* Dispatch form */}
+      <div className="lg:col-span-7">
+        <div className="border border-line bg-ink-2 p-6 sm:p-8">
+          <div className="flex items-baseline gap-3">
+            <span aria-hidden="true" className="hud text-brass">09</span>
+            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span className="hud text-ash">Open a channel</span>
+          </div>
+          <h3 className="font-display mt-4 text-2xl font-light text-paper sm:text-3xl">
+            Send a direct dispatch
           </h3>
-          <p className="mt-1 text-xs text-slate-400">
-            Discussing a new software delivery initiative, hiring for a TPM role, or need sprint consulting? Send a note directly below.
+          <p className="mt-2 max-w-lg text-sm leading-relaxed text-fawn">
+            Hiring for a TPM role, starting a delivery initiative, or need sprint consulting — send a note and I&rsquo;ll come back with something useful.
           </p>
 
           {submitted ? (
-            <div className="mt-8 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-6 text-center">
-              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 mb-3">
+            <div className="mt-8 border border-moss/50 bg-moss/10 p-6 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-moss/60 text-moss">
                 <IconCheck className="h-5 w-5" />
               </div>
-              <h4 className="text-sm font-semibold text-white">Thank you! Your message has been sent.</h4>
-              <p className="mt-2 text-xs text-slate-300 max-w-md mx-auto">
-                I review messages daily and will get back to you promptly at{" "}
-                <strong className="text-white">{formState.email}</strong>.
+              <h4 className="mt-3 text-sm font-semibold text-paper">Thank you — your message has been dispatched.</h4>
+              <p className="mx-auto mt-2 max-w-md text-xs text-fawn">
+                I review messages daily and will reply to{" "}
+                <strong className="text-paper">{formState.email}</strong> promptly.
               </p>
               <button
                 type="button"
@@ -223,23 +229,23 @@ export default function ContactDeck() {
                   setSubmitted(false);
                   setFormState({ name: "", email: "", subject: "", message: "" });
                 }}
-                className="mt-5 rounded-lg bg-slate-800 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-slate-700 transition-colors"
+                className="link-rule mt-5 inline-block font-mono text-xs text-brass"
               >
-                Send Another Note
+                Send another note
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
               {errorMsg && (
-                <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-300">
+                <div className="border border-ember/50 bg-ember/10 p-3 text-xs text-ember">
                   {errorMsg}
                 </div>
               )}
 
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="contact-name" className="block text-xs font-medium text-slate-300">
-                    Your Name <span className="text-rose-400">*</span>
+                  <label htmlFor="contact-name" className="block font-mono text-xs text-fawn">
+                    Your name <span className="text-ember">*</span>
                   </label>
                   <input
                     id="contact-name"
@@ -248,13 +254,12 @@ export default function ContactDeck() {
                     value={formState.name}
                     onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
                     placeholder="e.g. Alex Henderson"
-                    className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    className={field}
                   />
                 </div>
-
                 <div>
-                  <label htmlFor="contact-email" className="block text-xs font-medium text-slate-300">
-                    Your Work Email <span className="text-rose-400">*</span>
+                  <label htmlFor="contact-email" className="block font-mono text-xs text-fawn">
+                    Work email <span className="text-ember">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -263,13 +268,13 @@ export default function ContactDeck() {
                     value={formState.email}
                     onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
                     placeholder="e.g. alex@company.com"
-                    className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    className={field}
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="contact-subject" className="block text-xs font-medium text-slate-300">
+                <label htmlFor="contact-subject" className="block font-mono text-xs text-fawn">
                   Subject
                 </label>
                 <input
@@ -277,14 +282,14 @@ export default function ContactDeck() {
                   type="text"
                   value={formState.subject}
                   onChange={(e) => setFormState((s) => ({ ...s, subject: e.target.value }))}
-                  placeholder="e.g. Senior TPM Opportunity / SaaS Project Consultation"
-                  className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  placeholder="e.g. Senior TPM opportunity / SaaS delivery consulting"
+                  className={field}
                 />
               </div>
 
               <div>
-                <label htmlFor="contact-message" className="block text-xs font-medium text-slate-300">
-                  Message Details <span className="text-rose-400">*</span>
+                <label htmlFor="contact-message" className="block font-mono text-xs text-fawn">
+                  Message details <span className="text-ember">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -293,22 +298,25 @@ export default function ContactDeck() {
                   value={formState.message}
                   onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
                   placeholder="Tell me a bit about your product team, project goals, timeline, or open role..."
-                  className="mt-1.5 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 resize-none"
+                  className={`${field} resize-none`}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-indigo-600 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/35 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="flex w-full items-center justify-center gap-2 bg-brass px-6 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-brass-bright disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? (
                   <>
-                    <span className="h-3.5 w-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    <span>Sending Message...</span>
+                    <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-ink/30 border-t-ink" />
+                    <span>Transmitting...</span>
                   </>
                 ) : (
-                  <span>Send Message Directly</span>
+                  <>
+                    <span>Send message directly</span>
+                    <IconArrowUpRight className="h-4 w-4" />
+                  </>
                 )}
               </button>
             </form>

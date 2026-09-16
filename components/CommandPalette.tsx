@@ -12,7 +12,8 @@ import {
   IconDownload,
   IconX,
   IconChevronRight,
-  IconCode,
+  IconGateCheck,
+  IconNodeGraph,
 } from "./Icons";
 import { useToast } from "./Toast";
 
@@ -40,12 +41,22 @@ export default function CommandPalette() {
 
   const commands: CommandItem[] = [
     {
-      id: "about",
-      title: "Jump to About & Background",
+      id: "work",
+      title: "Jump to Selected Work",
       category: "Navigation",
-      icon: IconLayers,
+      icon: IconNodeGraph,
       onSelect: () => {
-        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
+        setOpen(false);
+      },
+    },
+    {
+      id: "method",
+      title: "Jump to Delivery Method",
+      category: "Navigation",
+      icon: IconGateCheck,
+      onSelect: () => {
+        document.getElementById("method")?.scrollIntoView({ behavior: "smooth" });
         setOpen(false);
       },
     },
@@ -60,18 +71,8 @@ export default function CommandPalette() {
       },
     },
     {
-      id: "projects",
-      title: "Jump to Case Studies & Deliveries",
-      category: "Navigation",
-      icon: IconCode,
-      onSelect: () => {
-        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-        setOpen(false);
-      },
-    },
-    {
       id: "skills",
-      title: "Jump to Technical Stack & PM Tooling",
+      title: "Jump to Toolkit & Capabilities",
       category: "Navigation",
       icon: IconLayers,
       onSelect: () => {
@@ -80,12 +81,12 @@ export default function CommandPalette() {
       },
     },
     {
-      id: "certificates",
-      title: "Jump to Verified Credentials & Certifications",
+      id: "credentials",
+      title: "Jump to Credentials & Certifications",
       category: "Navigation",
       icon: IconAward,
       onSelect: () => {
-        document.getElementById("certificates")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("credentials")?.scrollIntoView({ behavior: "smooth" });
         setOpen(false);
       },
     },
@@ -182,21 +183,23 @@ export default function CommandPalette() {
 
   return (
     <>
-      {/* Floating or header trigger button is in Nav, but this allows custom events */}
       {open && (
-        <div className="fixed inset-0 z-[120] flex items-start justify-center pt-20 px-4 sm:pt-28">
+        <div className="fixed inset-0 z-[120] flex items-start justify-center px-4 pt-20 sm:pt-28">
           <div
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-ink/85 backdrop-blur-md"
             onClick={() => setOpen(false)}
           />
 
           <div
-            className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-900 shadow-2xl transition-all"
+            className="relative w-full max-w-xl border border-line-2 bg-ink-2 shadow-[0_0_60px_-15px_rgba(0,0,0,0.9)]"
             onKeyDown={handleKeyNav}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Command palette"
           >
-            {/* Search header */}
-            <div className="flex items-center gap-3 border-b border-slate-800 px-4 py-3.5">
-              <IconSearch className="h-4 w-4 text-slate-400" />
+            {/* Header */}
+            <div className="flex items-center gap-3 border-b border-line px-4 py-3.5">
+              <IconSearch className="h-4 w-4 text-ash" />
               <input
                 ref={inputRef}
                 type="text"
@@ -206,22 +209,16 @@ export default function CommandPalette() {
                   setActiveIndex(0);
                 }}
                 placeholder="Type a command or jump to section..."
-                className="w-full bg-transparent text-sm text-slate-100 placeholder-slate-500 focus:outline-none"
+                className="w-full bg-transparent text-sm text-paper placeholder-ash focus:outline-none"
               />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-              >
-                <IconX className="h-4 w-4" />
-              </button>
+              <kbd className="rounded-sm border border-line-2 bg-ink px-1.5 py-0.5 font-mono text-[10px] text-ash">ESC</kbd>
             </div>
 
-            {/* Command items list */}
+            {/* List */}
             <div className="max-h-80 overflow-y-auto p-2">
               {filteredCommands.length === 0 ? (
-                <div className="p-6 text-center text-xs text-slate-500">
-                  No matching commands found for &ldquo;{query}&rdquo;
+                <div className="p-6 text-center font-mono text-xs text-ash">
+                  No matching commands for &ldquo;{query}&rdquo;
                 </div>
               ) : (
                 filteredCommands.map((cmd, idx) => {
@@ -233,31 +230,26 @@ export default function CommandPalette() {
                       type="button"
                       onClick={cmd.onSelect}
                       onMouseEnter={() => setActiveIndex(idx)}
-                      className={`flex w-full items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left text-sm transition-colors ${
-                        isActive
-                          ? "bg-indigo-600/20 text-indigo-200 border border-indigo-500/30"
-                          : "text-slate-300 hover:bg-slate-800/60 border border-transparent"
+                      className={`flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left transition-colors ${
+                        isActive ? "border border-brass/60 bg-brass/10"
+                          : "border border-transparent hover:bg-ink"
                       }`}
                     >
-                      <div className="flex items-center gap-3 min-w-0">
+                      <div className="flex min-w-0 items-center gap-3">
                         <div
-                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${
-                            isActive
-                              ? "bg-indigo-500 text-white"
-                              : "bg-slate-800 text-slate-400"
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center border ${
+                            isActive ? "border-brass text-brass" : "border-line-2 text-ash"
                           }`}
                         >
                           <Icon className="h-3.5 w-3.5" />
                         </div>
-                        <span className="truncate text-xs font-medium text-slate-200">
+                        <span className={`truncate text-xs font-medium ${isActive ? "text-paper" : "text-fawn"}`}>
                           {cmd.title}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 shrink-0">
-                        <span className="rounded bg-slate-800/80 px-2 py-0.5 text-[10px] uppercase tracking-wider text-slate-400 font-mono">
-                          {cmd.category}
-                        </span>
-                        <IconChevronRight className="h-3.5 w-3.5 text-slate-500" />
+                      <div className="flex shrink-0 items-center gap-2">
+                        <span className="hud text-ash">{cmd.category}</span>
+                        <IconChevronRight className={`h-3.5 w-3.5 ${isActive ? "text-brass" : "text-smoke"}`} />
                       </div>
                     </button>
                   );
@@ -265,19 +257,16 @@ export default function CommandPalette() {
               )}
             </div>
 
-            {/* Footer tips */}
-            <div className="flex items-center justify-between border-t border-slate-800/90 bg-slate-950/60 px-4 py-2 text-[11px] text-slate-400">
-              <div className="flex items-center gap-2">
-                <span>Navigation:</span>
-                <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-300">↑</kbd>
-                <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-300">↓</kbd>
-                <span className="ml-1">Select:</span>
-                <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-300">↵</kbd>
+            {/* Footer */}
+            <div className="flex items-center justify-between border-t border-line bg-ink px-4 py-2.5 font-mono text-[11px] text-ash">
+              <div className="flex items-center gap-3">
+                <span className="hud text-smoke">Navigate</span>
+                <kbd className="rounded-sm border border-line-2 bg-ink px-1.5 py-0.5 text-[10px] text-fawn">↑</kbd>
+                <kbd className="rounded-sm border border-line-2 bg-ink px-1.5 py-0.5 text-[10px] text-fawn">↓</kbd>
+                <span className="hud text-smoke">Select</span>
+                <kbd className="rounded-sm border border-line-2 bg-ink px-1.5 py-0.5 text-[10px] text-fawn">↵ Enter</kbd>
               </div>
-              <div className="flex items-center gap-1">
-                <span>Close:</span>
-                <kbd className="rounded border border-slate-700 bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-300">ESC</kbd>
-              </div>
+              <span className="hud text-brass">⌘K to toggle</span>
             </div>
           </div>
         </div>

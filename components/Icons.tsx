@@ -222,6 +222,15 @@ export function IconAward(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function IconAcademicCap(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+    </svg>
+  );
+}
+
 export function IconCode(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -269,6 +278,144 @@ export function IconFilter(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+  );
+}
+
+/* ===========================================================================
+   THE DISPATCH ROOM — pictography set (stroke 1.5, editorial line quality)
+   =========================================================================== */
+
+export function IconNodeGraph(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="5" cy="5" r="2.2" />
+      <circle cx="19" cy="6" r="2.2" />
+      <circle cx="12" cy="18" r="2.2" />
+      <path d="M7 6.2 16.8 6.6" />
+      <path d="M6.6 6.9 11 16.2" />
+      <path d="M17 8.1 13.4 16.6" />
+      <path d="M12 15.8 12 21" opacity="0.5" />
+    </svg>
+  );
+}
+
+export function IconDispatchRail(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M3 12h18" />
+      <path d="M3 12h18" transform="translate(0 4)" opacity="0.35" />
+      <path d="M3 12h18" transform="translate(0 -4)" opacity="0.35" />
+      <circle cx="6" cy="12" r="1.6" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" />
+      <circle cx="18" cy="12" r="1.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function IconSprintArc(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M4 9a9 9 0 0 1 16-2" />
+      <path d="M20 4v3h-3" />
+      <path d="M20 15a9 9 0 0 1-16 2" />
+      <path d="M4 20v-3h3" />
+      <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function IconGateCheck(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M13.5 2.9 21 7v5c0 4.5-3 7.5-9 9-6-1.5-9-4.5-9-9V7l7.5-4.1a1.2 1.2 0 0 1 1 0Z" />
+      <path d="m9 11.5 2 2 4-4.5" />
+    </svg>
+  );
+}
+
+export function IconCompass(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m15.5 8.5-2 5-5 2 2-5Z" />
+    </svg>
+  );
+}
+
+export function IconRoute(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="6" cy="19" r="2.4" />
+      <circle cx="18" cy="5" r="2.4" />
+      <path d="M6 16.6c0-3.5 2-6 6-6s6-.8 6-3.2" />
+      <path d="M5 4.5h10" opacity="0.5" />
+      <path d="M9 19.5h10" opacity="0.5" />
+    </svg>
+  );
+}
+
+export function IconLedger(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="4" y="3" width="16" height="18" rx="1.5" />
+      <path d="M8 8h.01M8 12h.01M8 16h.01" />
+      <path d="M12 8h5M12 12h5M12 16h5" />
+    </svg>
+  );
+}
+
+export function IconBolt(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5Z" />
+    </svg>
+  );
+}
+
+export function IconDial(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M4 19a9 9 0 1 1 16 0" />
+      <path d="M12 19V9" />
+      <path d="M12 9C15 9 16 7.6 16 6s-1-3-4-3-4 1-4 3" opacity="0.45" />
+    </svg>
+  );
+}
+
+export function IconBrackets(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M8 4c-2 1-3 2.6-3 4.5S6 12.5 8 13.6" />
+      <path d="M16 4c2 1 3 2.6 3 4.5s-1 4-3 5.1" />
+      <path d="M8 15v2a3 3 0 0 0 3 3h2" />
+    </svg>
+  );
+}
+
+export function IconTarget(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" opacity="0.7" />
+      <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function IconArrowDown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M12 4v16" />
+      <path d="m6 14 6 6 6-6" />
+    </svg>
+  );
+}
+
+export function IconChevronDown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m6 9 6 6 6-6" />
     </svg>
   );
 }

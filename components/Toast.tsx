@@ -38,22 +38,22 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <div
         aria-live="polite"
         aria-atomic="true"
-        className="fixed bottom-6 right-6 z-[100] flex max-w-sm flex-col gap-2.5 pointer-events-none"
+        className="pointer-events-none fixed bottom-6 right-6 z-[200] flex max-w-sm flex-col gap-2.5"
       >
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className="pointer-events-auto flex items-center gap-3 rounded-xl border border-slate-700/80 bg-slate-900/95 px-4 py-3 text-sm text-slate-100 shadow-2xl backdrop-blur-xl transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
+            className="pointer-events-auto flex items-center gap-3 border border-line-2 bg-ink-2 px-4 py-3 text-sm shadow-2xl backdrop-blur-xl"
           >
-            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
+            <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-moss/60 text-moss">
               <IconCheck className="h-3.5 w-3.5" />
             </div>
-            <p className="flex-1 text-xs font-medium leading-relaxed">{toast.text}</p>
+            <p className="flex-1 text-xs font-medium leading-relaxed text-fawn">{toast.text}</p>
             <button
               type="button"
               onClick={() => removeToast(toast.id)}
-              className="text-slate-400 hover:text-slate-200 transition-colors"
-              aria-label="Dismiss toast"
+              className="text-smoke transition-colors hover:text-paper"
+              aria-label="Dismiss notification"
             >
               <IconX className="h-4 w-4" />
             </button>

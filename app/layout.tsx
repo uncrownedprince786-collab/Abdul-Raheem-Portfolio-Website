@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces, IBM_Plex_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
-import ScrollEffects from "@/components/ScrollEffects";
 import CommandPalette from "@/components/CommandPalette";
 import { ToastProvider } from "@/components/Toast";
 import "./globals.css";
@@ -12,13 +11,27 @@ const inter = Inter({
   display: "swap",
 });
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT", "WONK"],
+});
+
+const plex = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plex",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 const SITE_URL = "https://abdulraheem-pm.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
+  title: "Abdul Raheem | Technical Project Manager & Scrum Master",
   description:
-    "Technical Project Manager (TPM) & Certified Scrum Master with 7+ years directing remote and onsite Agile engineering teams across the UK, Saudi Arabia, and USA. Specialized in SaaS delivery, API architecture, and predictable sprint cadences.",
+    "I turn messy product work into software that ships. Technical Project Manager & Certified Scrum Master — 7+ years directing remote and onsite Agile engineering teams across the UK, Saudi Arabia, and USA. QA-rooted, systems-driven, calm under pressure.",
   keywords: [
     "Technical Project Manager",
     "Technical Product Manager",
@@ -38,16 +51,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: "Abdul Raheem | Technical Project & Product Manager",
-    title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
+    siteName: "Abdul Raheem | Technical Project Manager",
+    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
     description:
-      "Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. With a background in Software Engineering and QA, I eliminate requirement ambiguity, protect developer focus, and give stakeholders reliable delivery dates without the drama.",
+      "I turn messy product work into software that ships. Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. Clear plans, calm execution, software that ships.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdul Raheem | Technical Project & Product Manager | Scrum Master",
+    title: "Abdul Raheem | Technical Project Manager & Scrum Master",
     description:
-      "Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States. Clear plans, calm execution, software that ships.",
+      "I turn messy product work into software that ships. Clear plans, calm execution, software that ships.",
   },
 };
 
@@ -142,11 +155,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="font-sans antialiased bg-slate-950 text-slate-100 selection:bg-indigo-600 selection:text-white">
+    <html lang="en" className={[inter.variable, fraunces.variable, plex.variable].join(" ")}>
+      <body className="font-sans antialiased bg-ink text-paper selection:bg-brass selection:text-ink">
         <a
           href="#overview"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-xs font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-sm focus:bg-brass focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-ink"
         >
           Skip to main content
         </a>
@@ -157,7 +170,6 @@ export default function RootLayout({
         <ToastProvider>
           <Nav />
           <CommandPalette />
-          <ScrollEffects />
           {children}
         </ToastProvider>
       </body>

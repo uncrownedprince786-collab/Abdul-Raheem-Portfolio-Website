@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
-  IconExternalLink,
-  IconCheckCircle,
-  IconLayers,
-  IconGitBranch,
-  IconShieldCheck,
-  IconChartBar,
-  IconX,
   IconArrowUpRight,
+  IconX,
+  IconCheckCircle,
+  IconClock,
+  IconMapPin,
 } from "./Icons";
 import { SystemDiagram } from "./SystemDiagrams";
+import { Stagger, StaggerItem } from "./motion";
 
 export type ProjectData = {
   id: string;
@@ -283,247 +281,326 @@ export const PROJECTS_DATA: ProjectData[] = [
 
 const CATEGORIES = ["All Deliveries", "Enterprise SaaS", "AI & Automation Systems", "E-Commerce & Chrome Tools"] as const;
 
+/* Abstract project plate — the systems pictogram placeholder artwork */
+function ProjectPlate({ index }: { index: number }) {
+  const seeds = [
+    "M20 40 h260 M20 120 h260 M20 200 h260 M20 280 h260",
+    "M30 60 h240 M30 140 h240 M30 220 h240",
+    "M40 40 v240 M120 40 v240 M200 40 v240 M280 40 v240",
+    "M20 40 C 260 40, 20 300, 260 300",
+  ];
+  const pattern = seeds[index % seeds.length];
+  return (
+    <svg aria-hidden="true" viewBox="0 0 300 320" fill="none" className="h-full w-full text-brass/25">
+      <path d={pattern} stroke="currentColor" strokeWidth="1" />
+      <circle cx="20" cy="40" r="3" fill="currentColor" />
+      <circle cx="280" cy="40" r="3" fill="currentColor" />
+      <circle cx="20" cy="280" r="3" fill="currentColor" />
+      <circle cx="280" cy="280" r="3" fill="currentColor" />
+      <text x="16" y="304" className="font-mono" fontSize="10" fill="currentColor" opacity="0.7">
+        0{index + 1} / SYSTEM
+      </text>
+    </svg>
+  );
+}
+
+/* ------------------------------- Case study ------------------------------- */
+function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  const sections = [
+    { n: "01", label: "The real-world challenge", body: project.details.problemAnalysis, tone: "text-ash" },
+    { n: "02", label: "PM strategy & sprint execution", body: project.details.pmStrategy, tone: "text-ash" },
+    { n: "03", label: "Technical governance & QA gate", body: project.details.architectureAndQuality, tone: "text-ash" },
+    { n: "04", label: "Business impact & outcome", body: project.details.impactSummary, tone: "text-brass" },
+  ];
+
+  return (
+    <div className="fixed inset-0 z-[130] flex items-start justify-center overflow-y-auto p-4 pt-[6vh] sm:p-8">
+      <div className="fixed inset-0 bg-ink/85 backdrop-blur-sm" onClick={onClose} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${project.title} — case study`}
+        className="relative w-full max-w-3xl border border-line-2 bg-ink-2 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 border-b border-line px-6 py-5 sm:px-8">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="hud text-brass">{project.category}</span>
+              <span aria-hidden="true" className="text-smoke">·</span>
+              <span className="text-xs font-mono text-ash">{project.location}</span>
+            </div>
+            <h2 className="font-display mt-2 text-2xl font-light leading-tight text-paper sm:text-3xl">
+              {project.title}
+            </h2>
+            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-fawn">
+              <span>{project.role}</span>
+              <span className="inline-flex items-center gap-1.5 font-mono text-ash">
+                <IconClock className="h-3.5 w-3.5" /> {project.timeline}
+              </span>
+            </div>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close case study"
+            className="rounded-sm border border-line-2 p-2 text-fawn transition-colors hover:border-brass hover:text-brass"
+          >
+            <IconX className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Client line */}
+        <p className="border-b border-line px-6 py-3 text-xs text-ash sm:px-8">
+          <span className="hud mr-2">For</span>
+          {project.client}
+        </p>
+
+        {/* Diagram */}
+        {project.diagramType && (
+          <div className="px-6 pt-6 sm:px-8">
+            <SystemDiagram type={project.diagramType} />
+          </div>
+        )}
+
+        {/* Sections */}
+        <div className="space-y-0 px-6 pt-6 sm:px-8">
+          {sections.map((s) => (
+            <div key={s.n} className="grid grid-cols-[3rem_1fr] gap-4 border-t border-line py-5 sm:grid-cols-[4rem_1fr] sm:gap-6">
+              <span className="hud pt-1 text-smoke">{s.n}</span>
+              <div>
+                <h3 className={`text-xs font-semibold uppercase tracking-wider ${s.tone}`}>{s.label}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-fawn text-pretty">{s.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Metrics */}
+        <div className="px-6 py-2 sm:px-8">
+          <div className="grid gap-2.5 sm:grid-cols-3">
+            {project.metrics.map((m) => (
+              <div key={m} className="border border-line bg-ink-3/70 px-4 py-3">
+                <p className="flex items-start gap-2 text-xs leading-snug text-fawn">
+                  <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-moss" />
+                  <span className="text-pretty">{m}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Stack + deliverables */}
+        <div className="grid gap-6 border-t border-line px-6 py-6 sm:grid-cols-2 sm:px-8">
+          <div>
+            <h4 className="hud text-ash mb-3">Methodologies & stack</h4>
+            <div className="flex flex-wrap gap-1.5">
+              {project.stack.map((t) => (
+                <span key={t} className="border border-line bg-ink-3 px-2.5 py-1 font-mono text-xs text-fawn">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h4 className="hud text-ash mb-3">Shipped deliverables</h4>
+            <ul className="space-y-1.5">
+              {project.deliverables.map((d) => (
+                <li key={d} className="flex items-center gap-2.5 text-sm text-fawn">
+                  <span className="h-1 w-4 bg-brass/70" aria-hidden="true" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex justify-end border-t border-line px-6 py-4 sm:px-8">
+          <button
+            type="button"
+            onClick={onClose}
+            className="link-rule py-2 text-sm font-medium text-paper"
+          >
+            Close story
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------ Main gallery ------------------------------ */
 export default function ProjectGallery() {
   const [activeCategory, setActiveCategory] = useState<string>("All Deliveries");
   const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
 
-  const filteredProjects =
+  const all = PROJECTS_DATA;
+  const filtered =
     activeCategory === "All Deliveries"
-      ? PROJECTS_DATA
-      : PROJECTS_DATA.filter((p) => p.category === activeCategory);
+      ? all
+      : all.filter((p) => p.category === activeCategory);
+
+  const featured = filtered[0];
+  const rest = filtered.slice(1);
 
   return (
-    <div className="space-y-10">
-      {/* Category Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5" data-reveal>
-        <div className="flex flex-wrap items-center gap-2">
+    <div>
+      {/* Filter rail */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5" aria-label="Filter projects">
+        <div className="flex flex-wrap items-center gap-1.5">
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
               type="button"
               onClick={() => setActiveCategory(cat)}
-              className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all duration-200 ${
+              aria-pressed={activeCategory === cat}
+              className={`rounded-sm px-3.5 py-1.5 font-mono text-xs transition-colors ${
                 activeCategory === cat
-                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/25 border border-indigo-500"
-                  : "border border-slate-800 bg-slate-900/80 text-slate-400 hover:border-slate-700 hover:text-slate-200"
+                  ? "bg-brass text-ink"
+                  : "border border-line-2 text-ash hover:border-brass/50 hover:text-paper"
               }`}
             >
               {cat}
             </button>
           ))}
         </div>
-        <span className="text-xs font-mono text-slate-500">
-          Showing {filteredProjects.length} of {PROJECTS_DATA.length} case studies
+        <span className="hud text-ash">
+          {filtered.length} / {all.length}
         </span>
       </div>
 
-      {/* Projects Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProjects.map((project, i) => (
-          <article
-            key={project.id}
-            data-reveal
-            style={{ "--reveal-delay": `${(i % 3) * 100}ms` } as React.CSSProperties}
-            className="group relative flex flex-col justify-between rounded-2xl border border-slate-800/80 bg-slate-900/60 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/40 hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.15)]"
-          >
-            {/* Top Tag Bar */}
-            <div>
-              <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-4">
-                <span className="rounded-md border border-slate-800 bg-slate-950/80 px-2.5 py-1 text-[11px] font-mono text-indigo-400">
-                  {project.category}
-                </span>
-                <span className="text-[11px] font-mono text-slate-500">{project.location}</span>
-              </div>
-
-              {/* Title & Client */}
-              <h3 className="mt-4 text-lg font-semibold tracking-tight text-slate-100 group-hover:text-white transition-colors">
-                {project.title}
-              </h3>
-              <p className="mt-1 text-xs text-slate-400 font-medium">{project.role}</p>
-
-              {/* Human Story Intro */}
-              <p className="mt-4 text-xs leading-relaxed text-slate-300/90 line-clamp-3">
-                {project.storyIntro || project.challenge}
-              </p>
-
-              {/* Highlight Metrics */}
-              <div className="mt-5 space-y-2 border-t border-slate-800/60 pt-4">
-                {project.metrics.slice(0, 2).map((metric) => (
-                  <div key={metric} className="flex items-start gap-2 text-xs text-emerald-400/90">
-                    <IconCheckCircle className="h-3.5 w-3.5 mt-0.5 shrink-0 text-emerald-400" />
-                    <span className="font-medium leading-tight text-slate-300">{metric}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom Actions & Stack */}
-            <div className="mt-6 pt-4 border-t border-slate-800/80">
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {project.stack.slice(0, 4).map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded bg-slate-800/60 px-2 py-0.5 text-[10px] font-medium text-slate-400"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                {project.stack.length > 4 && (
-                  <span className="rounded bg-slate-800/30 px-1.5 py-0.5 text-[10px] text-slate-500 font-mono">
-                    +{project.stack.length - 4}
-                  </span>
-                )}
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedProject(project)}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-700/80 bg-slate-800/60 py-2.5 text-xs font-medium text-slate-200 transition-all hover:border-indigo-500/50 hover:bg-indigo-600/20 hover:text-white"
-              >
-                <span>Read Story & System Flow</span>
-                <IconArrowUpRight className="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {/* Case Study Deep Dive Modal */}
-      {selectedProject && (
-        <div className="fixed inset-0 z-[130] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          <div
-            className="fixed inset-0 bg-slate-950/85 backdrop-blur-md transition-opacity"
-            onClick={() => setSelectedProject(null)}
-          />
-
-          <div
-            className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-slate-700 bg-slate-900 p-6 sm:p-8 shadow-2xl transition-all"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-start justify-between gap-4 border-b border-slate-800 pb-5">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="rounded-md border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-mono text-indigo-400">
-                    {selectedProject.category}
-                  </span>
-                  <span className="text-xs font-mono text-slate-400">· {selectedProject.location}</span>
+      {/* Featured spread */}
+      {featured && (
+        <Stagger className="mt-10">
+          <StaggerItem>
+            <article className="group relative grid overflow-hidden border border-line bg-ink-2 lg:grid-cols-[2fr_3fr]">
+              {/* Plate */}
+              <div className="relative hidden min-h-[320px] overflow-hidden lg:block">
+                <div className="absolute inset-0 note-dots opacity-40" />
+                <div className="absolute inset-0 flex items-center justify-center p-10">
+                  <ProjectPlate index={0} />
                 </div>
-                <h2 className="text-2xl font-semibold tracking-tight text-white">
-                  {selectedProject.title}
-                </h2>
-                <p className="mt-1 text-sm font-medium text-indigo-300">
-                  {selectedProject.role} · {selectedProject.timeline}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setSelectedProject(null)}
-                className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors"
-                aria-label="Close modal"
-              >
-                <IconX className="h-5 w-5" />
-              </button>
-            </div>
-
-            {/* Interactive System Flow Diagram in Modal */}
-            {selectedProject.diagramType && (
-              <div className="mt-6">
-                <SystemDiagram type={selectedProject.diagramType} />
-              </div>
-            )}
-
-            {/* Modal Story & Content Sections */}
-            <div className="mt-6 space-y-5 text-sm text-slate-300">
-              {/* Problem Analysis */}
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  1. The Real-World Challenge
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  {selectedProject.details.problemAnalysis}
-                </p>
+                <span aria-hidden="true" className="absolute left-0 top-0 h-full w-0.5 bg-brass/70" />
               </div>
 
-              {/* PM Strategy & SDLC Cadence */}
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  2. PM Strategy & Sprint Execution
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  {selectedProject.details.pmStrategy}
-                </p>
-              </div>
+              {/* Content */}
+              <div className="p-7 sm:p-9 md:p-11">
+                <div className="flex items-center gap-3 text-xs">
+                  <span className="hud text-brass">Feat.</span>
+                  <span className="h-0.5 w-6 bg-brass/50" aria-hidden="true" />
+                  <span className="font-mono text-ash">{featured.category}</span>
+                </div>
 
-              {/* Architecture, Quality & Verification */}
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/60 p-5">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  3. Technical Governance & QA Gate
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-300">
-                  {selectedProject.details.architectureAndQuality}
-                </p>
-              </div>
+                <h3 className="font-display mt-4 text-3xl font-light leading-tight text-paper text-balance">
+                  {featured.title}
+                </h3>
 
-              {/* Measurable Results */}
-              <div className="rounded-xl border border-indigo-500/20 bg-indigo-950/20 p-5">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-indigo-300">
-                  4. Business Impact & Measurable Outcome
-                </h4>
-                <p className="mt-2 text-xs leading-relaxed text-slate-200">
-                  {selectedProject.details.impactSummary}
+                <p className="mt-2 text-sm text-fawn">{featured.role}</p>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-fawn text-pretty">
+                  {featured.storyIntro || featured.challenge}
                 </p>
-                <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                  {selectedProject.metrics.map((m) => (
-                    <div key={m} className="rounded-lg border border-indigo-500/30 bg-slate-900/90 p-3">
-                      <p className="text-xs font-medium text-emerald-400">{m}</p>
-                    </div>
+
+                <div className="mt-6 flex flex-wrap gap-1.5">
+                  {featured.metrics.slice(0, 2).map((m) => (
+                    <span key={m} className="border border-moss/40 bg-moss/10 px-3 py-1.5 text-xs text-moss">
+                      {m}
+                    </span>
                   ))}
                 </div>
-              </div>
 
-              {/* Stack & Deliverables */}
-              <div className="grid gap-4 sm:grid-cols-2 pt-2">
-                <div>
-                  <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                    Methodologies & Stack
-                  </h5>
-                  <div className="flex flex-wrap gap-1.5">
-                    {selectedProject.stack.map((t) => (
-                      <span key={t} className="rounded bg-slate-800 px-2.5 py-1 text-xs text-slate-300 font-mono">
-                        {t}
-                      </span>
-                    ))}
+                <div className="mt-7 flex items-center justify-between border-t border-line pt-5">
+                  <span className="text-xs font-mono text-ash">
+                    {featured.location} · {featured.timeline}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedProject(featured)}
+                    className="group/btn inline-flex items-center gap-2 text-sm font-semibold text-brass"
+                  >
+                    <span className="link-rule">Read the case study</span>
+                    <IconArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </button>
+                </div>
+              </div>
+            </article>
+          </StaggerItem>
+        </Stagger>
+      )}
+
+      {/* Editorial rows */}
+      <Stagger className="mt-10 space-y-0 border-t border-line">
+        {rest.map((project, i) => (
+          <StaggerItem key={project.id}>
+            <article className="group grid gap-4 border-b border-line py-8 transition-colors hover:bg-ink-2/40 md:grid-cols-[3rem_1fr] md:gap-8 md:py-10">
+              <span className="hud pt-1 text-smoke transition-colors group-hover:text-brass">
+                0{i + 2}
+              </span>
+
+              <div>
+                <div className="grid gap-4 lg:grid-cols-12">
+                  <div className="lg:col-span-8">
+                    <div className="flex flex-wrap items-center gap-2 text-xs">
+                      <span className="hud text-brass/90">{project.category}</span>
+                      <span aria-hidden="true" className="text-smoke">·</span>
+                      <span className="font-mono text-ash">{project.location}</span>
+                      <span aria-hidden="true" className="text-smoke">·</span>
+                      <span className="font-mono text-ash">{project.timeline}</span>
+                    </div>
+
+                    <h3 className="font-display mt-2 text-2xl font-light leading-tight text-paper transition-colors group-hover:text-brass sm:text-3xl">
+                      {project.title}
+                    </h3>
+
+                    <p className="mt-1.5 text-sm text-fawn">{project.role}</p>
+
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fawn text-pretty">
+                      {project.storyIntro || project.challenge}
+                    </p>
+                  </div>
+
+                  <div className="flex flex-col justify-between gap-5 lg:col-span-4 lg:items-end">
+                    <div className="w-full space-y-2 border-t border-line pt-4 lg:border-0 lg:pt-0">
+                      {project.metrics.slice(0, 2).map((m) => (
+                        <p key={m} className="flex items-start gap-2 text-xs leading-snug text-fawn">
+                          <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-moss" />
+                          <span className="text-pretty">{m}</span>
+                        </p>
+                      ))}
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProject(project)}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-brass"
+                    >
+                      <span className="link-rule">Case study</span>
+                      <IconArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </button>
                   </div>
                 </div>
-                <div>
-                  <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                    Shipped Deliverables
-                  </h5>
-                  <ul className="space-y-1 text-xs text-slate-300">
-                    {selectedProject.deliverables.map((d) => (
-                      <li key={d} className="flex items-center gap-2">
-                        <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
-            </div>
+            </article>
+          </StaggerItem>
+        ))}
+      </Stagger>
 
-            {/* Modal Footer */}
-            <div className="mt-8 flex justify-end border-t border-slate-800 pt-5">
-              <button
-                type="button"
-                onClick={() => setSelectedProject(null)}
-                className="rounded-xl bg-slate-800 px-5 py-2.5 text-xs font-medium text-slate-200 hover:bg-slate-700 transition-colors"
-              >
-                Close Story
-              </button>
-            </div>
-          </div>
-        </div>
+      {selectedProject && (
+        <CaseStudy project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
     </div>
   );

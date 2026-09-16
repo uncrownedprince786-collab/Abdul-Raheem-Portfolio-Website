@@ -1,49 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import {
-  IconKanban,
-  IconShieldCheck,
-  IconGitBranch,
-  IconTerminal,
-  IconCheckCircle,
-  IconArrowUpRight,
-  IconClock,
-  IconUsers,
-  IconLayers,
-} from "./Icons";
+import { AnimatePresence, motion } from "framer-motion";
+import { IconSprintArc, IconNodeGraph, IconGateCheck, IconDispatchRail, IconBolt } from "./Icons";
 
 const PHASES = [
   {
     id: "discovery",
     phaseNumber: "Phase 01",
-    title: "Discovery & Scope Defense",
+    title: "Discovery & scope defense",
     tagline: "Before a single line of code is written",
-    icon: IconLayers,
-    color: "from-indigo-500/20 to-indigo-600/5 text-indigo-400 border-indigo-500/30",
-    activePill: "bg-indigo-600 text-white",
+    icon: IconSprintArc,
     keyArtifacts: ["PRD (Product Requirement Document)", "Gherkin Acceptance Criteria (Given/When/Then)", "User Story Map", "Technical API Contract"],
     narrative:
       "Most sprint delays happen before sprint planning ever starts. I work with business stakeholders and engineering leads to turn fuzzy ideas into testable user stories with rock-solid acceptance criteria. If edge cases aren't solved in the document, they will haunt the team in code.",
     pmRules: [
       "No story enters the sprint without explicit 'Definition of Ready' (DoR).",
       "Edge cases (network drops, empty states, auth timeouts) defined upfront.",
-      "API payload structures agreed upon between frontend and backend leads.",
+      "API payload structures agreed between frontend and backend leads.",
     ],
   },
   {
     id: "execution",
     phaseNumber: "Phase 02",
-    title: "Sprint Execution & Velocity",
+    title: "Sprint execution & velocity",
     tagline: "Protecting engineer focus and unblocking fast",
-    icon: IconKanban,
-    color: "from-sky-500/20 to-sky-600/5 text-sky-400 border-sky-500/30",
-    activePill: "bg-sky-600 text-white",
+    icon: IconNodeGraph,
     keyArtifacts: ["Jira / Linear Sprint Board", "Daily Standup Notes", "Burndown & Velocity Telemetry", "Risk & Blocker Register"],
     narrative:
       "My daily goal during active sprints is simple: eliminate friction so developers can stay in deep work. Standups are sharp (15 mins max), blockers are cleared within 2 hours, and mid-sprint scope creep is strictly quarantined to future backlogs.",
     pmRules: [
-      "Strict WIP (Work-In-Progress) limits prevent multitasking paralysis.",
+      "Strict WIP limits prevent multitasking paralysis.",
       "Daily asynchronous updates for remote time zones with instant escalation paths.",
       "Zero scope additions mid-sprint unless explicitly swapped with equal story points.",
     ],
@@ -51,35 +38,31 @@ const PHASES = [
   {
     id: "qa-gate",
     phaseNumber: "Phase 03",
-    title: "Verification & QA Gateway",
+    title: "Verification & QA gateway",
     tagline: "Because releases are only ready when testing says so",
-    icon: IconShieldCheck,
-    color: "from-emerald-500/20 to-emerald-600/5 text-emerald-400 border-emerald-500/30",
-    activePill: "bg-emerald-600 text-white",
+    icon: IconGateCheck,
     keyArtifacts: ["TestRail Test Matrix", "Staging Demo Run", "UAT Sign-Off Document", "Defect Severity Triage"],
     narrative:
       "Coming from QA roots, I never treat testing as a last-minute scramble. Features move to Staging, run through regression suites, and are validated against real customer workflows before getting a production greenlight.",
     pmRules: [
       "Critical and High defects block release unconditionally.",
-      "User Acceptance Testing (UAT) conducted with real stakeholders on staging.",
-      "Cross-browser and mobile responsive checks verified on physical test devices.",
+      "UAT conducted with real stakeholders on staging.",
+      "Cross-browser and mobile responsive checks on physical devices.",
     ],
   },
   {
     id: "release",
     phaseNumber: "Phase 04",
-    title: "Zero-Downtime Release & Retrospective",
+    title: "Zero-downtime release & retrospective",
     tagline: "Calm deployments and continuous team evolution",
-    icon: IconGitBranch,
-    color: "from-violet-500/20 to-violet-600/5 text-violet-400 border-violet-500/30",
-    activePill: "bg-violet-600 text-white",
+    icon: IconDispatchRail,
     keyArtifacts: ["Release Checklist", "Rollback Protocol", "Live Telemetry Dashboard", "Sprint Retrospective Notes"],
     narrative:
       "Deployments should be routine, not heart-pounding events. Releases are scheduled with rollback plans in place. After launch, we review telemetry and hold a blameless retrospective to find one process improvement for the next sprint.",
     pmRules: [
       "Documented rollback procedure verified before production deployment.",
       "Post-deployment smoke testing performed within 15 minutes of cutover.",
-      "Bi-weekly retrospective turns team pain points into concrete Jira backlog items.",
+      "Bi-weekly retrospective turns team pain points into concrete backlog items.",
     ],
   },
 ];
@@ -87,115 +70,127 @@ const PHASES = [
 export default function SprintLifecycle() {
   const [activeIdx, setActiveIdx] = useState(0);
   const current = PHASES[activeIdx];
-  const Icon = current.icon;
+  const ActiveIcon = current.icon;
 
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl" data-reveal>
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-6">
-        <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 uppercase tracking-wider mb-1">
-            <span className="h-2 w-2 rounded-full bg-indigo-400" />
-            <span>Interactive Delivery Methodology</span>
-          </div>
-          <h3 className="text-xl font-bold tracking-tight text-white">
-            How I Run Sprints: From Requirement to Zero-Downtime Release
-          </h3>
-        </div>
-
-        {/* Phase Selector Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-950 p-1">
-          {PHASES.map((p, idx) => (
+    <div className="border border-line bg-ink-2 p-6 sm:p-8">
+      {/* Node rail */}
+      <div className="grid gap-px border border-line bg-line sm:grid-cols-4" role="tablist" aria-label="Phases">
+        {PHASES.map((p, idx) => {
+          const Icon = p.icon;
+          const active = activeIdx === idx;
+          return (
             <button
               key={p.id}
               type="button"
+              role="tab"
+              aria-selected={active}
+              aria-controls={`phase-panel-${p.id}`}
               onClick={() => setActiveIdx(idx)}
-              className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
-                activeIdx === idx
-                  ? p.activePill
-                  : "text-slate-400 hover:text-slate-200 hover:bg-slate-900"
+              className={`relative px-5 py-5 text-left transition-colors ${
+                active ? "bg-brass text-ink" : "bg-ink-3 text-fawn hover:bg-ink-4"
               }`}
             >
-              {p.phaseNumber.replace("Phase ", "P")}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content Area */}
-      <div className="mt-8 grid gap-8 lg:grid-cols-12 items-start">
-        {/* Left Phase Overview */}
-        <div className="lg:col-span-7 space-y-5">
-          <div className="flex items-center gap-3">
-            <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border bg-gradient-to-br ${current.color}`}>
-              <Icon className="h-5 w-5" />
-            </div>
-            <div>
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-                {current.phaseNumber} · {current.tagline}
+              <span className={`font-mono text-[10px] ${active ? "text-ink/70" : "text-ash"}`}>
+                0{idx + 1}
               </span>
-              <h4 className="text-lg font-bold text-white leading-snug">{current.title}</h4>
-            </div>
-          </div>
-
-          <p className="text-xs leading-relaxed text-slate-300">
-            {current.narrative}
-          </p>
-
-          <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-4">
-            <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">
-              Core PM Governance Rules
-            </h5>
-            <ul className="space-y-2">
-              {current.pmRules.map((rule) => (
-                <li key={rule} className="flex items-start gap-2 text-xs text-slate-300">
-                  <IconCheckCircle className="h-3.5 w-3.5 mt-0.5 shrink-0 text-emerald-400" />
-                  <span>{rule}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Right Artifacts & Tooling Deck */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-xl border border-slate-800 bg-slate-950/90 p-5">
-            <h5 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-              Phase Deliverables & Artifacts
-            </h5>
-            <div className="space-y-2">
-              {current.keyArtifacts.map((art) => (
-                <div
-                  key={art}
-                  className="flex items-center justify-between rounded-lg border border-slate-850 bg-slate-900/80 px-3 py-2 text-xs text-slate-200"
-                >
-                  <span className="font-medium">{art}</span>
-                  <span className="text-[10px] font-mono text-indigo-400">Signed Off</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Navigation Footer */}
-          <div className="flex items-center justify-between pt-2">
-            <button
-              type="button"
-              onClick={() => setActiveIdx((prev) => (prev > 0 ? prev - 1 : PHASES.length - 1))}
-              className="text-xs font-mono text-slate-400 hover:text-white transition-colors"
-            >
-              ← Previous Phase
+              <span className="mt-2 flex items-center gap-2 text-sm font-semibold">
+                <Icon className="h-4 w-4 shrink-0" />
+                {p.title.split(" &")[0]}
+              </span>
+              <span className={`hud mt-1.5 block ${active ? "text-ink/70" : "text-ash"}`}>
+                {p.tagline}
+              </span>
+              {active && (
+                <motion.span
+                  layoutId="phase-hairline"
+                  className="absolute inset-x-0 bottom-0 h-0.5 bg-brass-bright"
+                  aria-hidden="true"
+                />
+              )}
             </button>
-            <span className="text-xs font-mono text-slate-500">{activeIdx + 1} / {PHASES.length}</span>
-            <button
-              type="button"
-              onClick={() => setActiveIdx((prev) => (prev < PHASES.length - 1 ? prev + 1 : 0))}
-              className="text-xs font-mono text-indigo-400 hover:text-indigo-300 transition-colors"
-            >
-              Next Phase →
-            </button>
-          </div>
-        </div>
+          );
+        })}
       </div>
+
+      {/* Active panel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current.id}
+          id={`phase-panel-${current.id}`}
+          role="tabpanel"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 grid gap-8 lg:grid-cols-12"
+        >
+          {/* Narrative */}
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-brass/50 text-brass">
+                <ActiveIcon className="h-5 w-5" />
+              </div>
+              <div>
+                <span className="hud text-ash">{current.phaseNumber} · {current.tagline}</span>
+                <h4 className="font-display mt-0.5 text-xl font-light text-paper">{current.title}</h4>
+              </div>
+            </div>
+
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-fawn text-pretty">{current.narrative}</p>
+
+            <div className="mt-7 border-l-2 border-brass/50 pl-5">
+              <h5 className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass">
+                Core governance rules
+              </h5>
+              <ul className="mt-3 space-y-2.5">
+                {current.pmRules.map((rule) => (
+                  <li key={rule} className="flex items-start gap-2.5 text-sm text-fawn">
+                    <IconBolt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brass/80" aria-hidden="true" />
+                    <span className="text-pretty">{rule}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Artifacts */}
+          <div className="lg:col-span-5">
+            <div className="border border-line bg-ink-3/60 p-5">
+              <h5 className="hud text-ash mb-3">Phase deliverables & artifacts</h5>
+              <div className="space-y-2">
+                {current.keyArtifacts.map((art) => (
+                  <div
+                    key={art}
+                    className="flex items-center justify-between gap-3 border border-line bg-ink-2 px-3.5 py-2.5"
+                  >
+                    <span className="text-xs font-medium text-paper">{art}</span>
+                    <span className="font-mono text-[10px] text-brass">signed off</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
+                <button
+                  type="button"
+                  onClick={() => setActiveIdx((prev) => (prev > 0 ? prev - 1 : PHASES.length - 1))}
+                  className="font-mono text-xs text-ash transition-colors hover:text-paper"
+                >
+                  ← Previous
+                </button>
+                <span className="font-mono text-xs text-ash">{activeIdx + 1} / {PHASES.length}</span>
+                <button
+                  type="button"
+                  onClick={() => setActiveIdx((prev) => (prev < PHASES.length - 1 ? prev + 1 : 0))}
+                  className="font-mono text-xs text-brass transition-colors hover:text-brass-bright"
+                >
+                  Next →
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
