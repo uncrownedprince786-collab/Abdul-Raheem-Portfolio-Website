@@ -10,6 +10,7 @@ import {
   IconMapPin,
   IconClock,
   IconArrowUpRight,
+  IconDownload,
   IconShieldCheck,
 } from "./Icons";
 import { useToast } from "./Toast";
@@ -170,6 +171,28 @@ export default function ContactDeck() {
             </a>
           </div>
         </div>
+
+        {/* Résumé download */}
+        <a
+          href="/abdul-raheem-resume.pdf"
+          download="Abdul_Raheem_Technical_Project_Manager_Resume.pdf"
+          className="group block border border-line bg-ink-2 p-5 transition-colors hover:border-acid/50 sm:p-6"
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-acid/40 text-acid">
+                <IconDownload className="h-5 w-5" strokeWidth={1.75} />
+              </div>
+              <div>
+                <p className="hud text-ash">Résumé / PDF</p>
+                <p className="mt-0.5 block text-sm font-semibold text-paper transition-colors group-hover:text-acid">
+                  Technical Project Manager &amp; Scrum Master
+                </p>
+              </div>
+            </div>
+            <IconArrowUpRight className="h-4 w-4 shrink-0 text-fawn transition-colors group-hover:text-acid" />
+          </div>
+        </a>
 
         {/* Availability */}
         <div className="border border-line bg-ink p-5 sm:p-6">
