@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { PROFILE } from "@/app/data";
-import { IconArrowUpRight, IconMenu, IconX } from "./Icons";
+import { IconArrowUpRight, IconDownload, IconMenu, IconX } from "./Icons";
 
 const LINKS = [
   { id: "work", label: "Work" },
@@ -98,7 +98,7 @@ export default function Nav() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <span className="hidden items-center gap-2 border border-line bg-ink-2/70 px-3 py-2 lg:inline-flex">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="blink-dot absolute inset-0 rounded-full bg-acid" />
@@ -107,6 +107,14 @@ export default function Nav() {
                 Accepting new engagements
               </span>
             </span>
+            <a
+              href="/abdul-raheem-resume.pdf"
+              download="Abdul_Raheem_Technical_Project_Manager_Resume.pdf"
+              className="hidden items-center gap-2 border border-line-2 px-4 py-2 font-mono text-xs text-fawn transition-colors hover:border-acid hover:text-paper sm:inline-flex"
+            >
+              <IconDownload className="h-3.5 w-3.5" strokeWidth={1.75} />
+              Résumé
+            </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 bg-acid px-4 py-2 font-mono text-xs font-semibold text-ink transition-colors hover:bg-acid-bright"
