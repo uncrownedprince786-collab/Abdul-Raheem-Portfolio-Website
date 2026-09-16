@@ -112,3 +112,78 @@ export function StaggerItem({ children, className }: { children: ReactNode; clas
     </motion.div>
   );
 }
+
+type LineRevealProps = {
+  lines: ReactNode[];
+  className?: string;
+  lineClassName?: string;
+  delay?: number;
+  staggerDelay?: number;
+};
+
+/**
+ * Editorial masked line reveal — each line slides up from behind a mask.
+ * Reads like a film title card. Honors prefers-reduced-motion.
+ */
+export function LineReveal({
+  lines,
+  className,
+  lineClassName,
+  delay = 0,
+  staggerDelay = 0.09,
+}: LineRevealProps) {
+  const reduced = useReduced();
+  return (
+    <div className={className}>
+      {lines.map((line, i) => (
+        <div key={i} className="overflow-hidden">
+          <motion.div
+            className={lineClassName}
+            initial={reduced ? { opacity: 1 } : { opacity: 0, y: "108%", rotate: 1.5 }}
+            animate={reduced ? { opacity: 1 } : { opacity: 1, y: "0%", rotate: 0 }}
+            transition={{
+              duration: 0.85,
+              ease: EASE,
+              delay: delay + i * staggerDelay,
+            }}
+            style={{ transformOrigin: "0% 100%" }}
+          >
+            {line}
+          </motion.div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export const fadeScale: Variants = {
+  hidden: { opacity: 0, scale: 0.985 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: EASE },
+  },
+};
+
+export function FadeScale({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduced = useReduced();
+  return (
+    <motion.div
+      className={className}
+      initial={reduced ? { opacity: 1 } : { opacity: 0, scale: 0.985 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-64px 0px -48px 0px" }}
+      transition={{ duration: 0.7, ease: EASE, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}

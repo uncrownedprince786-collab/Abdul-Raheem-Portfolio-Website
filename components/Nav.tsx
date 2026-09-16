@@ -67,7 +67,7 @@ export default function Nav() {
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6" aria-label="Primary">
           {/* Wordmark */}
           <a href="#top" className="group flex items-baseline gap-2" onClick={() => setOpen(false)}>
-            <span className="font-mono text-xs text-brass transition-colors group-hover:text-brass-bright">
+            <span className="font-mono text-xs text-acid transition-colors group-hover:text-acid-bright">
               AR.
             </span>
             <span className="font-display text-lg font-light tracking-tight text-paper">
@@ -89,7 +89,7 @@ export default function Nav() {
                   {active === link.id && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-x-0 -bottom-0.5 h-px bg-brass"
+                      className="absolute inset-x-0 -bottom-0.5 h-px bg-acid"
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     />
                   )}
@@ -103,7 +103,7 @@ export default function Nav() {
               href={PROFILE.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-2 border border-brass/50 px-4 py-2 font-mono text-xs text-brass transition-colors hover:border-brass hover:bg-brass hover:text-ink sm:inline-flex"
+              className="hidden items-center gap-2 border border-acid/50 px-4 py-2 font-mono text-xs text-acid transition-colors hover:border-acid hover:bg-acid hover:text-ink sm:inline-flex"
             >
               <IconDownload className="h-3.5 w-3.5" strokeWidth={1.75} />
               Résumé
@@ -113,7 +113,7 @@ export default function Nav() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
-              className="border border-line-2 p-2.5 text-fawn transition-colors hover:border-brass hover:text-brass lg:hidden"
+              className="border border-line-2 p-2.5 text-fawn transition-colors hover:border-acid hover:text-acid lg:hidden"
             >
               {open ? <IconX className="h-4 w-4" /> : <IconArrowUpRight className="h-4 w-4" />}
             </button>
@@ -145,7 +145,7 @@ export default function Nav() {
                       onClick={() => setOpen(false)}
                       className="group flex items-baseline justify-between border-b border-line py-4"
                     >
-                      <span className="font-display text-3xl font-light text-paper transition-colors group-hover:text-brass">
+                      <span className="font-display text-3xl font-light text-paper transition-colors group-hover:text-acid">
                         {link.label}
                       </span>
                       <span className="hud text-ash">
@@ -166,7 +166,7 @@ export default function Nav() {
                   href={PROFILE.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-brass px-6 py-4 font-mono text-sm font-semibold text-ink"
+                  className="flex items-center justify-center gap-2 bg-acid px-6 py-4 font-mono text-sm font-semibold text-ink"
                 >
                   <IconDownload className="h-4 w-4" strokeWidth={1.75} />
                   Download résumé

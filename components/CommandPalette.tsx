@@ -231,14 +231,14 @@ export default function CommandPalette() {
                       onClick={cmd.onSelect}
                       onMouseEnter={() => setActiveIndex(idx)}
                       className={`flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left transition-colors ${
-                        isActive ? "border border-brass/60 bg-brass/10"
+                        isActive ? "border border-acid/60 bg-acid/10"
                           : "border border-transparent hover:bg-ink"
                       }`}
                     >
                       <div className="flex min-w-0 items-center gap-3">
                         <div
                           className={`flex h-7 w-7 shrink-0 items-center justify-center border ${
-                            isActive ? "border-brass text-brass" : "border-line-2 text-ash"
+                            isActive ? "border-acid text-acid" : "border-line-2 text-ash"
                           }`}
                         >
                           <Icon className="h-3.5 w-3.5" />
@@ -249,7 +249,7 @@ export default function CommandPalette() {
                       </div>
                       <div className="flex shrink-0 items-center gap-2">
                         <span className="hud text-ash">{cmd.category}</span>
-                        <IconChevronRight className={`h-3.5 w-3.5 ${isActive ? "text-brass" : "text-smoke"}`} />
+                        <IconChevronRight className={`h-3.5 w-3.5 ${isActive ? "text-acid" : "text-smoke"}`} />
                       </div>
                     </button>
                   );
@@ -266,7 +266,7 @@ export default function CommandPalette() {
                 <span className="hud text-smoke">Select</span>
                 <kbd className="rounded-sm border border-line-2 bg-ink px-1.5 py-0.5 text-[10px] text-fawn">↵ Enter</kbd>
               </div>
-              <span className="hud text-brass">⌘K to toggle</span>
+              <span className="hud text-acid">⌘K to toggle</span>
             </div>
           </div>
         </div>

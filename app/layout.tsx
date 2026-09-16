@@ -1,27 +1,28 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import Nav from "@/components/Nav";
 import CommandPalette from "@/components/CommandPalette";
+import CursorSpotlight from "@/components/CursorSpotlight";
 import { ToastProvider } from "@/components/Toast";
 import "./globals.css";
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-geist-mono",
   display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
 });
 
-const plex = IBM_Plex_Mono({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-plex",
-  weight: ["400", "500"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
@@ -155,11 +156,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={[inter.variable, fraunces.variable, plex.variable].join(" ")}>
-      <body className="font-sans antialiased bg-ink text-paper selection:bg-brass selection:text-ink">
+    <html
+      lang="en"
+      className={[geistSans.variable, geistMono.variable, instrument.variable].join(" ")}
+    >
+      <body className="bg-ink font-sans text-paper antialiased selection:bg-acid selection:text-ink">
         <a
           href="#overview"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-sm focus:bg-brass focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-ink"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-acid focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:font-semibold focus:text-ink"
         >
           Skip to main content
         </a>
@@ -170,6 +174,7 @@ export default function RootLayout({
         <ToastProvider>
           <Nav />
           <CommandPalette />
+          <CursorSpotlight />
           {children}
         </ToastProvider>
       </body>

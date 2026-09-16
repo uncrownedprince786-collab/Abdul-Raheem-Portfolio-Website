@@ -20,10 +20,10 @@ export function Section({ id, index, eyebrow, title, subtitle, children, classNa
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal className="mb-14 md:mb-20">
           <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="hud text-brass">
+            <span aria-hidden="true" className="hud text-acid">
               {index}
             </span>
-            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
             <span className="hud text-ash">{eyebrow}</span>
           </div>
 

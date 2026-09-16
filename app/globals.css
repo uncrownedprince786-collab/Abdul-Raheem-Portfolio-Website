@@ -1,41 +1,45 @@
 @import "tailwindcss";
 
 /* ===========================================================================
-   THE DISPATCH ROOM — Design tokens
-   Dark editorial + systems. One primary accent (brass) + one supporting
-   data accent (ice). Serif display for story, grotesk sans for interface,
-   monospace for metadata only.
+   SIGNAL & SYSTEMS — Design tokens
+   Premium technical editorial. Near-black warm canvas, parchment neutrals,
+   ONE electric accent (lime) used as punctuation — never decoration.
+   Geist for type, Instrument Serif italic for editorial emphasis,
+   Geist Mono reserved for numbers and tiny metadata.
    =========================================================================== */
 
 @theme {
-  /* Canvas & surfaces (warm black ink) */
+  /* Canvas & surfaces (warm near-black, never pure #000) */
   --color-ink: #0a0a0b;
-  --color-ink-2: #0f0f12;
-  --color-ink-3: #141419;
-  --color-ink-4: #1a1a21;
-  --color-ink-5: #23232c;
-  --color-line: #232329;
-  --color-line-2: #2f2f38;
+  --color-ink-2: #0e0e11;
+  --color-ink-3: #141418;
+  --color-ink-4: #1a1a1f;
+  --color-ink-5: #232329;
+  --color-line: #212126;
+  --color-line-2: #2e2e35;
 
-  /* Type */
-  --color-paper: #f1ede3;
-  --color-fawn: #a8a294;
-  --color-ash: #716d63;
-  --color-smoke: #4a4743;
+  /* Warm type ramp (parchment undertone, not cool blue-grays) */
+  --color-paper: #f0e9da;
+  --color-fawn: #b3ac9c;
+  --color-ash: #7a7466;
+  --color-smoke: #4b463c;
 
-  /* Accents */
-  --color-brass: #c4a054;
-  --color-brass-bright: #ddbe7e;
-  --color-brass-dim: #8a6f35;
-  --color-ice: #7fb4dd;
-  --color-moss: #7fa68c;
-  --color-ember: #cd7a55;
+  /* Single chromatic voice — electric lime */
+  --color-acid: #a3e635;
+  --color-acid-bright: #c9f26b;
+  --color-acid-dim: #6b8f1a;
+  --color-acid-soft: rgba(163, 230, 53, 0.09);
+
+  /* Functional only — form errors / warnings */
+  --color-signal: #ff6a4d;
+  --color-signal-soft: rgba(255, 106, 77, 0.1);
 
   /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-mono: var(--font-plex), ui-monospace, "SFMono-Regular", Menlo,
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
     Consolas, "Liberation Mono", monospace;
 }
 
@@ -44,14 +48,14 @@
    --------------------------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 6.5rem;
   color-scheme: dark;
 }
 
 body {
   background-color: #0a0a0b;
-  color: #f1ede3;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  color: #f0e9da;
+  font-feature-settings: "ss01", "cv02", "cv04";
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,18 +63,18 @@ body {
 }
 
 ::selection {
-  background-color: #c4a054;
+  background-color: #a3e635;
   color: #0a0a0b;
 }
 
 :focus-visible {
-  outline: 2px solid #c4a054;
+  outline: 2px solid #a3e635;
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 :where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 2px solid #c4a054;
+  outline: 2px solid #a3e635;
   outline-offset: 2px;
 }
 
@@ -79,7 +83,7 @@ img {
 }
 
 /* ---------------------------------------------------------------------------
-   Typography helpers
+   Typography system
    --------------------------------------------------------------------------- */
 .text-balance {
   text-wrap: balance;
@@ -88,44 +92,71 @@ img {
   text-wrap: pretty;
 }
 
-/* Fraunces optical sizing: allow it to breathe at display sizes */
+/* Geist tight tracking on display sizes — part of the voice */
+.font-display,
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
 .font-display {
   font-optical-sizing: auto;
 }
 
-/* HUD / data label (monospace smallcaps metadata) */
+/* Oversized hero scale */
+.text-hero {
+  font-size: clamp(2.75rem, 9vw, 8rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+
+/* Section display scale */
+.text-section {
+  font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+/* Small uppercase label — sans, not mono (mono stays scarce) */
 .hud {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  font-size: 0.625rem;
-  line-height: 1.4;
+  font-size: 0.6875rem;
+  line-height: 1.3;
+}
+
+/* Editorial serif emphasis (italic) */
+.em-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Tabular figures for metrics / coordinates */
+.tabular {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
 }
 
 /* ---------------------------------------------------------------------------
-   Backgrounds & pictographic systems
+   Motifs — signal & systems visuals
    --------------------------------------------------------------------------- */
 
-/* Dispatch rails: fine horizontal guidlines like a mechanical blueprint */
-.dispatch-rails {
+/* Fine field grid behind schematics */
+.field-grid {
   background-image:
-    linear-gradient(to right, rgba(241, 237, 227, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(241, 237, 227, 0.028) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(to right, rgba(240, 233, 218, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 233, 218, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-.dispatch-rails-fade {
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
-}
-
-/* Field note paper dots — quiet, abstract */
-.note-dots {
-  background-image: radial-gradient(rgba(241, 237, 227, 0.09) 1px, transparent 1px);
-  background-size: 22px 22px;
-}
-
-/* Brass tick marks used on portrait / frame corners */
+/* Corner tick frame (portrait / key visuals) */
 .tick-frame {
   position: relative;
 }
@@ -133,27 +164,27 @@ img {
 .tick-frame::after {
   content: "";
   position: absolute;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   pointer-events: none;
-  border: 1px solid rgba(196, 160, 84, 0.55);
+  border: 1px solid rgba(163, 230, 53, 0.6);
 }
 .tick-frame::before {
-  top: -10px;
-  left: -10px;
+  top: -9px;
+  left: -9px;
   border-right: 0;
   border-bottom: 0;
 }
 .tick-frame::after {
-  bottom: -10px;
-  right: -10px;
+  bottom: -9px;
+  right: -9px;
   border-left: 0;
   border-top: 0;
 }
 
-/* Underline treatment for serif links */
+/* Underline treatment for links */
 .link-rule {
-  background-image: linear-gradient(to right, rgba(196, 160, 84, 0.7), rgba(196, 160, 84, 0.7));
+  background-image: linear-gradient(to right, rgba(163, 230, 53, 0.85), rgba(163, 230, 53, 0.85));
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;
@@ -161,6 +192,57 @@ img {
 }
 .link-rule:hover {
   background-size: 100% 2px;
+}
+
+/* Traveling signal pulse on rails (opacity-only, cheap) */
+@keyframes pulse-travel {
+  0% { opacity: 0; transform: translateX(0); }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(calc(100vw)); }
+}
+.signal-pulse {
+  animation: pulse-travel 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.blink-dot {
+  animation: blink-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes rail-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 112px 0; }
+}
+.rail-drift {
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(240, 233, 218, 0.07) 0 1px,
+    transparent 1px 28px
+  );
+  animation: rail-drift 4s linear infinite;
+}
+
+/* Pulse traveling across a contained rail */
+@keyframes pulse-through {
+  0% { left: -4%; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: 96%; opacity: 0; }
+}
+.pulse-through {
+  position: absolute;
+  top: 50%;
+  animation: pulse-through 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Slow technical rotation */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ---------------------------------------------------------------------------
@@ -174,12 +256,12 @@ img {
   background: #0a0a0b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1f1f26;
+  background: #26262c;
   border-radius: 5px;
   border: 2px solid #0a0a0b;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2f2f38;
+  background: #3a3a42;
 }
 
 /* ---------------------------------------------------------------------------

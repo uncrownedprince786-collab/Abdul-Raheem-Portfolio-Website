@@ -16,8 +16,8 @@ export default function Toolkit() {
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal className="mb-14 md:mb-20">
           <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="hud text-brass">06</span>
-            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span aria-hidden="true" className="hud text-acid">06</span>
+            <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
             <span className="hud text-ash">Toolkit</span>
           </div>
           <h2 className="font-display mt-4 max-w-2xl text-4xl font-light leading-[1.05] text-paper text-balance sm:text-5xl">
@@ -46,7 +46,7 @@ export default function Toolkit() {
                       }`}
                     >
                       <span className="flex items-baseline gap-4">
-                        <span className={`font-mono text-xs ${selected ? "text-brass" : "text-smoke"}`}>
+                        <span className={`font-mono text-xs ${selected ? "text-acid" : "text-smoke"}`}>
                           0{i + 1}
                         </span>
                         <span className="font-display text-2xl font-light tracking-tight">
@@ -57,7 +57,7 @@ export default function Toolkit() {
                         aria-hidden="true"
                         animate={{ opacity: selected ? 1 : 0, x: selected ? 0 : -4 }}
                         transition={{ duration: 0.3 }}
-                        className="h-1.5 w-6 bg-brass"
+                        className="h-1.5 w-6 bg-acid"
                       />
                     </button>
                   </li>
@@ -79,7 +79,7 @@ export default function Toolkit() {
               >
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <p className="hud text-brass">Capability 0{active + 1} / 05</p>
+                    <p className="hud text-acid">Capability 0{active + 1} / 05</p>
                     <h3 className="font-display mt-3 text-3xl font-light text-paper md:text-4xl">
                       {group.category}
                     </h3>
@@ -97,7 +97,7 @@ export default function Toolkit() {
                       initial={reduced ? { opacity: 1 } : { opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.04 * ti, duration: 0.35 }}
-                      className="border border-line bg-ink px-3.5 py-2 font-mono text-xs text-fawn transition-colors hover:border-brass/60 hover:text-paper"
+                      className="border border-line bg-ink px-3.5 py-2 font-mono text-xs text-fawn transition-colors hover:border-acid/60 hover:text-paper"
                     >
                       {tool}
                     </motion.span>

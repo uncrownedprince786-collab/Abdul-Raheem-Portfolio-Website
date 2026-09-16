@@ -1,10 +1,10 @@
 "use client";
 
 import { PRINCIPLES } from "@/app/data";
-import { IconCompass, IconLedger, IconBrackets, IconDial } from "./Icons";
+import { IconTarget, IconLedger, IconHumanNode, IconPulse } from "./Icons";
 import { Reveal, Stagger, StaggerItem } from "./motion";
 
-const ICONS = [IconCompass, IconLedger, IconBrackets, IconDial];
+const ICONS = [IconTarget, IconLedger, IconHumanNode, IconPulse];
 
 export default function Principles() {
   return (
@@ -12,8 +12,8 @@ export default function Principles() {
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal className="mb-14 md:mb-20">
           <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="hud text-brass">04</span>
-            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span aria-hidden="true" className="hud text-acid">04</span>
+            <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
             <span className="hud text-ash">How I think</span>
           </div>
           <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
@@ -31,10 +31,10 @@ export default function Principles() {
               <StaggerItem key={p.title}>
                 <article className="group relative h-full bg-ink p-8 transition-colors duration-300 hover:bg-ink-2 md:p-10">
                   <div className="flex items-start justify-between">
-                    <span className="font-mono text-sm text-ash transition-colors group-hover:text-brass">
+                    <span className="font-mono text-sm text-ash transition-colors group-hover:text-acid">
                       0{i + 1}
                     </span>
-                    <Icon className="h-7 w-7 text-line-2 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-brass" aria-hidden="true" />
+                    <Icon className="h-7 w-7 text-line-2 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:text-acid" aria-hidden="true" />
                   </div>
 
                   <h3 className="font-display mt-10 text-2xl font-light leading-tight text-paper md:text-3xl">
@@ -47,7 +47,7 @@ export default function Principles() {
 
                   <span
                     aria-hidden="true"
-                    className="mt-8 block h-px w-10 bg-line-2 transition-all duration-500 group-hover:w-full group-hover:bg-brass"
+                    className="mt-8 block h-px w-10 bg-line-2 transition-all duration-500 group-hover:w-full group-hover:bg-acid"
                   />
                 </article>
               </StaggerItem>

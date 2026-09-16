@@ -291,7 +291,7 @@ function ProjectPlate({ index }: { index: number }) {
   ];
   const pattern = seeds[index % seeds.length];
   return (
-    <svg aria-hidden="true" viewBox="0 0 300 320" fill="none" className="h-full w-full text-brass/25">
+    <svg aria-hidden="true" viewBox="0 0 300 320" fill="none" className="h-full w-full text-acid/25">
       <path d={pattern} stroke="currentColor" strokeWidth="1" />
       <circle cx="20" cy="40" r="3" fill="currentColor" />
       <circle cx="280" cy="40" r="3" fill="currentColor" />
@@ -323,7 +323,7 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
     { n: "01", label: "The real-world challenge", body: project.details.problemAnalysis, tone: "text-ash" },
     { n: "02", label: "PM strategy & sprint execution", body: project.details.pmStrategy, tone: "text-ash" },
     { n: "03", label: "Technical governance & QA gate", body: project.details.architectureAndQuality, tone: "text-ash" },
-    { n: "04", label: "Business impact & outcome", body: project.details.impactSummary, tone: "text-brass" },
+    { n: "04", label: "Business impact & outcome", body: project.details.impactSummary, tone: "text-acid" },
   ];
 
   return (
@@ -340,7 +340,7 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
         <div className="flex items-start justify-between gap-4 border-b border-line px-6 py-5 sm:px-8">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="hud text-brass">{project.category}</span>
+              <span className="hud text-acid">{project.category}</span>
               <span aria-hidden="true" className="text-smoke">·</span>
               <span className="text-xs font-mono text-ash">{project.location}</span>
             </div>
@@ -359,7 +359,7 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
             type="button"
             onClick={onClose}
             aria-label="Close case study"
-            className="rounded-sm border border-line-2 p-2 text-fawn transition-colors hover:border-brass hover:text-brass"
+            className="rounded-sm border border-line-2 p-2 text-fawn transition-colors hover:border-acid hover:text-acid"
           >
             <IconX className="h-4 w-4" />
           </button>
@@ -397,7 +397,7 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
             {project.metrics.map((m) => (
               <div key={m} className="border border-line bg-ink-3/70 px-4 py-3">
                 <p className="flex items-start gap-2 text-xs leading-snug text-fawn">
-                  <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-moss" />
+                  <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-acid" />
                   <span className="text-pretty">{m}</span>
                 </p>
               </div>
@@ -422,7 +422,7 @@ function CaseStudy({ project, onClose }: { project: ProjectData; onClose: () => 
             <ul className="space-y-1.5">
               {project.deliverables.map((d) => (
                 <li key={d} className="flex items-center gap-2.5 text-sm text-fawn">
-                  <span className="h-1 w-4 bg-brass/70" aria-hidden="true" />
+                  <span className="h-1 w-4 bg-acid/70" aria-hidden="true" />
                   {d}
                 </li>
               ))}
@@ -471,8 +471,8 @@ export default function ProjectGallery() {
               aria-pressed={activeCategory === cat}
               className={`rounded-sm px-3.5 py-1.5 font-mono text-xs transition-colors ${
                 activeCategory === cat
-                  ? "bg-brass text-ink"
-                  : "border border-line-2 text-ash hover:border-brass/50 hover:text-paper"
+                  ? "bg-acid text-ink"
+                  : "border border-line-2 text-ash hover:border-acid/50 hover:text-paper"
               }`}
             >
               {cat}
@@ -491,18 +491,19 @@ export default function ProjectGallery() {
             <article className="group relative grid overflow-hidden border border-line bg-ink-2 lg:grid-cols-[2fr_3fr]">
               {/* Plate */}
               <div className="relative hidden min-h-[320px] overflow-hidden lg:block">
-                <div className="absolute inset-0 note-dots opacity-40" />
+                <div className="absolute inset-0 field-grid opacity-60" />
                 <div className="absolute inset-0 flex items-center justify-center p-10">
                   <ProjectPlate index={0} />
                 </div>
-                <span aria-hidden="true" className="absolute left-0 top-0 h-full w-0.5 bg-brass/70" />
+                <span aria-hidden="true" className="absolute left-0 top-0 h-full w-0.5 bg-acid/70" />
+                <span aria-hidden="true" className="pulse-through h-1 w-1 rounded-full bg-acid" />
               </div>
 
               {/* Content */}
               <div className="p-7 sm:p-9 md:p-11">
                 <div className="flex items-center gap-3 text-xs">
-                  <span className="hud text-brass">Feat.</span>
-                  <span className="h-0.5 w-6 bg-brass/50" aria-hidden="true" />
+                  <span className="hud text-acid">Feat.</span>
+                  <span className="h-0.5 w-6 bg-acid/50" aria-hidden="true" />
                   <span className="font-mono text-ash">{featured.category}</span>
                 </div>
 
@@ -517,7 +518,7 @@ export default function ProjectGallery() {
 
                 <div className="mt-6 flex flex-wrap gap-1.5">
                   {featured.metrics.slice(0, 2).map((m) => (
-                    <span key={m} className="border border-moss/40 bg-moss/10 px-3 py-1.5 text-xs text-moss">
+                    <span key={m} className="border border-acid/40 bg-acid/10 px-3 py-1.5 text-xs text-acid">
                       {m}
                     </span>
                   ))}
@@ -530,7 +531,7 @@ export default function ProjectGallery() {
                   <button
                     type="button"
                     onClick={() => setSelectedProject(featured)}
-                    className="group/btn inline-flex items-center gap-2 text-sm font-semibold text-brass"
+                    className="group/btn inline-flex items-center gap-2 text-sm font-semibold text-acid"
                   >
                     <span className="link-rule">Read the case study</span>
                     <IconArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
@@ -547,7 +548,7 @@ export default function ProjectGallery() {
         {rest.map((project, i) => (
           <StaggerItem key={project.id}>
             <article className="group grid gap-4 border-b border-line py-8 transition-colors hover:bg-ink-2/40 md:grid-cols-[3rem_1fr] md:gap-8 md:py-10">
-              <span className="hud pt-1 text-smoke transition-colors group-hover:text-brass">
+              <span className="hud pt-1 text-smoke transition-colors group-hover:text-acid">
                 0{i + 2}
               </span>
 
@@ -555,14 +556,14 @@ export default function ProjectGallery() {
                 <div className="grid gap-4 lg:grid-cols-12">
                   <div className="lg:col-span-8">
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <span className="hud text-brass/90">{project.category}</span>
+                      <span className="hud text-acid/90">{project.category}</span>
                       <span aria-hidden="true" className="text-smoke">·</span>
                       <span className="font-mono text-ash">{project.location}</span>
                       <span aria-hidden="true" className="text-smoke">·</span>
                       <span className="font-mono text-ash">{project.timeline}</span>
                     </div>
 
-                    <h3 className="font-display mt-2 text-2xl font-light leading-tight text-paper transition-colors group-hover:text-brass sm:text-3xl">
+                    <h3 className="font-display mt-2 text-2xl font-light leading-tight text-paper transition-colors group-hover:text-acid sm:text-3xl">
                       {project.title}
                     </h3>
 
@@ -577,7 +578,7 @@ export default function ProjectGallery() {
                     <div className="w-full space-y-2 border-t border-line pt-4 lg:border-0 lg:pt-0">
                       {project.metrics.slice(0, 2).map((m) => (
                         <p key={m} className="flex items-start gap-2 text-xs leading-snug text-fawn">
-                          <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-moss" />
+                          <IconCheckCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-acid" />
                           <span className="text-pretty">{m}</span>
                         </p>
                       ))}
@@ -586,7 +587,7 @@ export default function ProjectGallery() {
                     <button
                       type="button"
                       onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-brass"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-acid"
                     >
                       <span className="link-rule">Case study</span>
                       <IconArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

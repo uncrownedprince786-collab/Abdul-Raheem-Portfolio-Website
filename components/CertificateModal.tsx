@@ -163,7 +163,7 @@ function CertModal({ cert, onClose }: { cert: CertificateItem; onClose: () => vo
       >
         <div className="flex items-start justify-between gap-4 border-b border-line px-6 py-5 sm:px-8">
           <div>
-            <span className="hud text-brass">{cert.badgeType}</span>
+            <span className="hud text-acid">{cert.badgeType}</span>
             <h3 className="font-display mt-2 text-2xl font-light text-paper">{cert.name}</h3>
             <p className="mt-1 text-xs text-ash">{cert.issuer} · {cert.date}</p>
           </div>
@@ -171,7 +171,7 @@ function CertModal({ cert, onClose }: { cert: CertificateItem; onClose: () => vo
             type="button"
             onClick={onClose}
             aria-label="Close credential"
-            className="rounded-sm border border-line-2 p-2 text-fawn transition-colors hover:border-brass hover:text-brass"
+            className="rounded-sm border border-line-2 p-2 text-fawn transition-colors hover:border-acid hover:text-acid"
           >
             <IconX className="h-4 w-4" />
           </button>
@@ -197,7 +197,7 @@ function CertModal({ cert, onClose }: { cert: CertificateItem; onClose: () => vo
               href={cert.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-brass px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-brass-bright"
+              className="inline-flex items-center justify-center gap-2 bg-acid px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-acid-bright"
             >
               Open official record
               <IconExternalLink className="h-4 w-4" />
@@ -232,7 +232,7 @@ export default function CertificateGallery() {
           <StaggerItem key={k.name}>
             <div className="group bg-ink p-6 transition-colors hover:bg-ink-2 md:p-7">
               <div className="flex items-start justify-between gap-4">
-                <div className="flex h-10 w-10 items-center justify-center border border-line-2 text-brass">
+                <div className="flex h-10 w-10 items-center justify-center border border-line-2 text-acid">
                   <IconAward className="h-5 w-5" />
                 </div>
                 {k.href ? (
@@ -240,7 +240,7 @@ export default function CertificateGallery() {
                     href={k.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-ash transition-colors hover:text-brass"
+                    className="text-ash transition-colors hover:text-acid"
                     aria-label={`Verify ${k.name} online`}
                   >
                     <IconExternalLink className="h-4 w-4" />
@@ -257,7 +257,7 @@ export default function CertificateGallery() {
               <button
                 type="button"
                 onClick={() => openBySrc(k.certId)}
-                className="link-rule mt-4 font-mono text-xs text-brass"
+                className="link-rule mt-4 font-mono text-xs text-acid"
                 disabled={k.certId === "bsc"}
               >
                 {k.certId === "bsc" ? "Transcripts on request" : "Inspect credential"}
@@ -271,7 +271,7 @@ export default function CertificateGallery() {
       <Reveal delay={0.05} className="mt-4">
         <div className="flex flex-col gap-3 border border-line bg-ink-2 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div className="flex items-start gap-3">
-            <IconAcademicCap className="mt-0.5 h-5 w-5 text-brass" aria-hidden="true" />
+            <IconAcademicCap className="mt-0.5 h-5 w-5 text-acid" aria-hidden="true" />
             <p className="max-w-2xl text-sm leading-relaxed text-fawn">
               <span className="font-semibold text-paper">Bachelor of Science in Software Engineering (BSSE)</span>{" "}
               — Superior University, Lahore. Firm grounding in SDLC, relational database modeling, algorithms
@@ -288,7 +288,7 @@ export default function CertificateGallery() {
           type="button"
           onClick={() => setShowAll((v) => !v)}
           aria-expanded={showAll}
-          className="link-rule inline-flex items-center gap-2 font-mono text-xs text-brass"
+          className="link-rule inline-flex items-center gap-2 font-mono text-xs text-acid"
         >
           {showAll ? "Hide" : "Reveal"} the Google PM specialization track · {secondary.length} course certificates
           <IconChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${showAll ? "rotate-180" : ""}`} aria-hidden="true" />
@@ -312,7 +312,7 @@ export default function CertificateGallery() {
                     className="object-contain p-2"
                   />
                 </div>
-                <h4 className="mt-3 text-sm font-medium leading-snug text-paper transition-colors group-hover:text-brass">
+                <h4 className="mt-3 text-sm font-medium leading-snug text-paper transition-colors group-hover:text-acid">
                   {cert.name}
                 </h4>
                 <p className="mt-1 text-xs text-ash">{cert.issuer}</p>

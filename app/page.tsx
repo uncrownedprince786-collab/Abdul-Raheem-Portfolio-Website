@@ -31,13 +31,13 @@ function FaqAccordion() {
               <span className="hidden font-mono text-xs text-smoke sm:block">0{i + 1}</span>
               <h3 className="text-sm font-medium leading-snug text-paper sm:text-base">{faq.q}</h3>
             </span>
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-line-2 text-fawn transition-all duration-300 group-open:rotate-180 group-open:border-brass group-open:text-brass">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-line-2 text-fawn transition-all duration-300 group-open:rotate-180 group-open:border-acid group-open:text-acid">
               <IconChevronDown className="h-3.5 w-3.5" />
             </span>
           </summary>
           <div className="border-t border-line px-6 pb-6 sm:px-8">
             <p className="max-w-3xl pt-5 text-sm leading-relaxed text-fawn text-pretty">
-              <span className="mr-3 inline-block h-0.5 w-6 bg-brass/70 align-middle" aria-hidden="true" />
+              <span className="mr-3 inline-block h-0.5 w-6 bg-acid/70 align-middle" aria-hidden="true" />
               {faq.a}
             </p>
           </div>
@@ -50,12 +50,12 @@ function FaqAccordion() {
 export default function Home() {
   return (
     <main id="main" className="relative">
-      {/* Dispatch header strip */}
+      {/* Signal header strip */}
       <div className="overflow-hidden border-b border-line bg-ink-2">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ash sm:px-6">
-          <span>Dispatch Room / Abdul Raheem</span>
+          <span>Signal &amp; Systems / Abdul Raheem</span>
           <span className="hidden sm:inline-flex">
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-moss align-middle" aria-hidden="true" />
+            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-acid align-middle" aria-hidden="true" />
             Accepting new engagements
           </span>
           <span>EST. 2019</span>
@@ -161,7 +161,7 @@ export default function Home() {
                 ["FAQ", "#faq"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (
-                <a key={href} href={href} className="hud text-ash transition-colors hover:text-brass">
+                <a key={href} href={href} className="hud text-ash transition-colors hover:text-acid">
                   {label}
                 </a>
               ))}
@@ -174,9 +174,9 @@ export default function Home() {
             </p>
             <a
               href="#top"
-              className="link-rule inline-flex items-center gap-2 font-mono text-xs text-brass"
+              className="link-rule inline-flex items-center gap-2 font-mono text-xs text-acid"
             >
-              Back to dispatch
+              Back to top
               <IconArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>

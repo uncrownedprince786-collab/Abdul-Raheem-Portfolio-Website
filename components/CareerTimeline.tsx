@@ -12,11 +12,11 @@ function RoleEntry({ role, index }: { role: (typeof CAREER_EXPERIENCE)[number]; 
     <div className="relative pl-10 sm:pl-14">
       {/* Node */}
       <span aria-hidden="true" className="absolute -left-[5px] top-1.5">
-        <span className="block h-2.5 w-2.5 rounded-full border border-brass bg-ink" />
+        <span className="block h-2.5 w-2.5 rounded-full border border-acid bg-ink" />
       </span>
 
       {/* Meta line */}
-      <p className="font-mono text-xs text-brass">
+      <p className="font-mono text-xs text-acid">
         {role.duration}
         <span className="text-smoke"> · </span>
         <span className="text-ash">{role.year}</span>
@@ -34,7 +34,7 @@ function RoleEntry({ role, index }: { role: (typeof CAREER_EXPERIENCE)[number]; 
         </span>
       </div>
 
-      <p className="mt-4 max-w-2xl border-l-2 border-brass/50 pl-4 text-sm italic leading-relaxed text-fawn text-pretty">
+      <p className="mt-4 max-w-2xl border-l-2 border-acid/50 pl-4 text-sm italic leading-relaxed text-fawn text-pretty">
         &ldquo;{role.storyQuote}&rdquo;
       </p>
 
@@ -44,7 +44,7 @@ function RoleEntry({ role, index }: { role: (typeof CAREER_EXPERIENCE)[number]; 
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          className="link-rule inline-flex items-center gap-2 py-1 font-mono text-xs text-brass"
+          className="link-rule inline-flex items-center gap-2 py-1 font-mono text-xs text-acid"
         >
           {open ? "Collapse" : "Expand"} delivery detail
           <IconChevronDown
@@ -62,7 +62,7 @@ function RoleEntry({ role, index }: { role: (typeof CAREER_EXPERIENCE)[number]; 
           <ul className="mt-4 space-y-2.5">
             {role.bullets.map((b) => (
               <li key={b.slice(0, 40)} className="flex items-start gap-2.5 text-sm leading-relaxed text-fawn">
-                <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-brass/70" />
+                <span aria-hidden="true" className="mt-2 h-px w-4 shrink-0 bg-acid/70" />
                 <span className="text-pretty">{b}</span>
               </li>
             ))}
@@ -107,8 +107,8 @@ export default function CareerTimeline() {
           className="mb-14 md:mb-20"
         >
           <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="hud text-brass">05</span>
-            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span aria-hidden="true" className="hud text-acid">05</span>
+            <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
             <span className="hud text-ash">Career journey</span>
           </div>
           <h2 className="font-display mt-4 max-w-3xl text-4xl font-light leading-[1.05] text-paper text-balance sm:text-5xl">
@@ -126,7 +126,7 @@ export default function CareerTimeline() {
           <motion.span
             aria-hidden="true"
             style={{ scaleY, opacity }}
-            className="absolute top-0 bottom-0 left-0 w-px origin-top bg-gradient-to-b from-brass via-brass/70 to-brass/30"
+            className="absolute top-0 bottom-0 left-0 w-px origin-top bg-gradient-to-b from-acid via-acid/70 to-acid/30"
           />
 
           <ol ref={listRef} className="space-y-14">

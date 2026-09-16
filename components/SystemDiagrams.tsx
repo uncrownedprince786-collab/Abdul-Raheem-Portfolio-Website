@@ -12,10 +12,9 @@ type Step = {
   nodeTech: string;
 };
 
-const DIAGRAMS: Record<DiagramType, { label: string; accent: "brass" | "ice" | "moss"; steps: Step[] }> = {
+const DIAGRAMS: Record<DiagramType, { label: string; steps: Step[] }> = {
   shorex: {
     label: "System flow: circular logistics",
-    accent: "brass",
     steps: [
       {
         title: "1. Customer Pickup Request",
@@ -45,7 +44,6 @@ const DIAGRAMS: Record<DiagramType, { label: string; accent: "brass" | "ice" | "
   },
   lms: {
     label: "System flow: guardrailed AI assistant",
-    accent: "ice",
     steps: [
       {
         title: "1. Student Query Intake",
@@ -75,7 +73,6 @@ const DIAGRAMS: Record<DiagramType, { label: string; accent: "brass" | "ice" | "
   },
   scraper: {
     label: "System flow: high-throughput scraper",
-    accent: "moss",
     steps: [
       {
         title: "1. Scheduled Target Crawl",
@@ -105,7 +102,6 @@ const DIAGRAMS: Record<DiagramType, { label: string; accent: "brass" | "ice" | "
   },
   dgcars: {
     label: "System flow: mobility dispatch",
-    accent: "brass",
     steps: [
       {
         title: "1. Passenger Ride Request",
@@ -136,33 +132,19 @@ const DIAGRAMS: Record<DiagramType, { label: string; accent: "brass" | "ice" | "
 };
 
 const ACCENTS = {
-  brass: {
-    dot: "bg-brass",
-    text: "text-brass",
-    border: "border-brass/60",
-    activeBg: "bg-brass/10 shadow-[0_0_28px_-8px_rgba(196,160,84,0.45)]",
-    label: "text-brass",
-  },
-  ice: {
-    dot: "bg-ice",
-    text: "text-ice",
-    border: "border-ice/60",
-    activeBg: "bg-ice/10 shadow-[0_0_28px_-8px_rgba(127,180,221,0.45)]",
-    label: "text-ice",
-  },
-  moss: {
-    dot: "bg-moss",
-    text: "text-moss",
-    border: "border-moss/60",
-    activeBg: "bg-moss/10 shadow-[0_0_28px_-8px_rgba(127,166,140,0.45)]",
-    label: "text-moss",
+  acid: {
+    dot: "bg-acid",
+    text: "text-acid",
+    border: "border-acid/60",
+    activeBg: "bg-acid/10",
+    label: "text-acid",
   },
 } as const;
 
 export function SystemDiagram({ type }: { type: DiagramType }) {
   const [activeStep, setActiveStep] = useState(0);
   const meta = DIAGRAMS[type];
-  const a = ACCENTS[meta.accent];
+  const a = ACCENTS.acid;
   const current = meta.steps[activeStep];
 
   return (

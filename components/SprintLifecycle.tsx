@@ -88,7 +88,7 @@ export default function SprintLifecycle() {
               aria-controls={`phase-panel-${p.id}`}
               onClick={() => setActiveIdx(idx)}
               className={`relative px-5 py-5 text-left transition-colors ${
-                active ? "bg-brass text-ink" : "bg-ink-3 text-fawn hover:bg-ink-4"
+                active ? "bg-acid text-ink" : "bg-ink-3 text-fawn hover:bg-ink-4"
               }`}
             >
               <span className={`font-mono text-[10px] ${active ? "text-ink/70" : "text-ash"}`}>
@@ -104,7 +104,7 @@ export default function SprintLifecycle() {
               {active && (
                 <motion.span
                   layoutId="phase-hairline"
-                  className="absolute inset-x-0 bottom-0 h-0.5 bg-brass-bright"
+                  className="absolute inset-x-0 bottom-0 h-0.5 bg-acid-bright"
                   aria-hidden="true"
                 />
               )}
@@ -128,7 +128,7 @@ export default function SprintLifecycle() {
           {/* Narrative */}
           <div className="lg:col-span-7">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-brass/50 text-brass">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-acid/50 text-acid">
                 <ActiveIcon className="h-5 w-5" />
               </div>
               <div>
@@ -139,14 +139,14 @@ export default function SprintLifecycle() {
 
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-fawn text-pretty">{current.narrative}</p>
 
-            <div className="mt-7 border-l-2 border-brass/50 pl-5">
-              <h5 className="font-mono text-[11px] uppercase tracking-[0.18em] text-brass">
+            <div className="mt-7 border-l-2 border-acid/50 pl-5">
+              <h5 className="font-mono text-[11px] uppercase tracking-[0.18em] text-acid">
                 Core governance rules
               </h5>
               <ul className="mt-3 space-y-2.5">
                 {current.pmRules.map((rule) => (
                   <li key={rule} className="flex items-start gap-2.5 text-sm text-fawn">
-                    <IconBolt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brass/80" aria-hidden="true" />
+                    <IconBolt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-acid/80" aria-hidden="true" />
                     <span className="text-pretty">{rule}</span>
                   </li>
                 ))}
@@ -165,7 +165,7 @@ export default function SprintLifecycle() {
                     className="flex items-center justify-between gap-3 border border-line bg-ink-2 px-3.5 py-2.5"
                   >
                     <span className="text-xs font-medium text-paper">{art}</span>
-                    <span className="font-mono text-[10px] text-brass">signed off</span>
+                    <span className="font-mono text-[10px] text-acid">signed off</span>
                   </div>
                 ))}
               </div>
@@ -182,7 +182,7 @@ export default function SprintLifecycle() {
                 <button
                   type="button"
                   onClick={() => setActiveIdx((prev) => (prev < PHASES.length - 1 ? prev + 1 : 0))}
-                  className="font-mono text-xs text-brass transition-colors hover:text-brass-bright"
+                  className="font-mono text-xs text-acid transition-colors hover:text-acid-bright"
                 >
                   Next →
                 </button>

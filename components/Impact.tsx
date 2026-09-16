@@ -44,8 +44,8 @@ export default function Impact() {
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal className="mb-14 md:mb-16">
           <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="hud text-brass">01</span>
-            <span aria-hidden="true" className="h-0.5 w-8 bg-brass/50" />
+            <span aria-hidden="true" className="hud text-acid">01</span>
+            <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
             <span className="hud text-ash">Impact & proof</span>
           </div>
           <h2 className="font-display mt-4 max-w-3xl text-3xl font-light leading-[1.08] text-paper text-balance sm:text-4xl md:text-5xl">
@@ -61,7 +61,7 @@ export default function Impact() {
               delay={i * 0.06}
               className={`border-t border-line py-7 pr-6 ${i !== 0 ? "lg:border-l lg:border-t" : ""} ${i === 2 ? "sm:border-t" : "sm:border-t"} sm:border-line`}
             >
-              <p className="font-mono text-4xl font-light tracking-tight text-brass md:text-5xl">
+              <p className="font-mono text-4xl font-light tracking-tight text-paper md:text-5xl">
                 <Counter value={m.value} suffix={m.suffix} />
               </p>
               <p className="mt-3 text-sm font-semibold text-paper">{m.label}</p>
@@ -72,11 +72,11 @@ export default function Impact() {
 
         {/* Field note band */}
         <Reveal delay={0.1} className="mt-14 md:mt-20">
-          <div className="note-dots border border-line bg-ink-2 px-6 py-8 md:px-10 md:py-10">
-            <p className="hud text-brass mb-4">Field note · 2019</p>
+          <div className="field-grid border border-line bg-ink-2 px-6 py-8 md:px-10 md:py-10">
+            <p className="hud text-acid mb-4">Field note · 2019</p>
             <blockquote className="font-display max-w-3xl text-2xl font-light leading-snug text-paper text-pretty md:text-3xl">
               &ldquo;I spent my first year in tech deliberately breaking software — and learned that{" "}
-              <em className="text-brass italic">90% of bugs and missed deadlines come from vague requirements.</em>{" "}
+              <em className="text-acid italic">90% of bugs and missed deadlines come from vague requirements.</em>{" "}
               Today, that&rsquo;s the first thing I fix.&rdquo;
             </blockquote>
           </div>
