@@ -515,7 +515,7 @@ export default function ProjectGallery() {
 
       {/* Featured spread */}
       {featured && FLOWS[featured.id] && (
-        <Stagger className="mt-10">
+        <Stagger className="mt-8">
           <StaggerItem>
             <article className="group relative grid overflow-hidden border border-line bg-ink-2 lg:grid-cols-[7fr_5fr]">
               {/* System plate */}
@@ -573,7 +573,7 @@ export default function ProjectGallery() {
       )}
 
       {/* Editorial rows — plate + story alternating */}
-      <Stagger className="mt-10 space-y-0 border-t border-line">
+      <Stagger className="mt-8 space-y-0 border-t border-line">
         {rest.map((project, i) => {
           const plate = FLOWS[project.id];
           const plateLeft = i % 2 === 1;

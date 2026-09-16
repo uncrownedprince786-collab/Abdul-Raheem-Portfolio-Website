@@ -5,10 +5,10 @@ import { Reveal } from "./motion";
 
 export default function Impact() {
   return (
-    <section id="impact" className="relative border-t border-line py-16 md:py-24">
+    <section id="impact" className="relative border-t border-line py-14 md:py-20">
       <span aria-hidden="true" className="section-mark" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="mb-10 md:mb-14">
+        <Reveal className="mb-8 md:mb-12">
           <div className="flex items-baseline gap-3">
             <span aria-hidden="true" className="hud text-acid">01</span>
             <span aria-hidden="true" className="h-0.5 w-8 bg-acid/50" />
@@ -41,7 +41,7 @@ export default function Impact() {
         </div>
 
         {/* Field note band */}
-        <Reveal delay={0.08} className="mt-10 md:mt-14">
+        <Reveal delay={0.08} className="mt-8 md:mt-12">
           <div className="field-grid border border-line bg-ink-2 px-6 py-8 md:px-10 md:py-10">
             <p className="hud text-acid mb-4">Field note · 2019</p>
             <blockquote className="font-display max-w-3xl text-2xl font-light leading-snug text-paper text-pretty md:text-3xl">

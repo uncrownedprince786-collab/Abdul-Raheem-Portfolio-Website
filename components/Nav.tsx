@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { PROFILE } from "@/app/data";
-import { IconArrowUpRight, IconDownload, IconX } from "./Icons";
+import { IconArrowUpRight, IconMenu, IconX } from "./Icons";
 
 const LINKS = [
   { id: "work", label: "Work" },
@@ -75,8 +75,8 @@ export default function Nav() {
             </span>
           </a>
 
-          {/* Desktop links */}
-          <ul className="hidden items-center gap-6 lg:flex">
+          {/* Desktop links — optically centered */}
+          <ul className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex">
             {LINKS.map((link) => (
               <li key={link.id}>
                 <a
@@ -99,20 +99,20 @@ export default function Nav() {
           </ul>
 
           <div className="flex items-center gap-3">
+            <span className="hidden items-center gap-2 border border-line bg-ink-2/70 px-3 py-2 lg:inline-flex">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="blink-dot absolute inset-0 rounded-full bg-acid" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-fawn">
+                Accepting new engagements
+              </span>
+            </span>
             <a
               href="#contact"
-              className="hidden items-center gap-2 border border-line-2 px-4 py-2 font-mono text-xs text-paper transition-colors hover:border-acid hover:text-acid lg:inline-flex"
+              className="inline-flex items-center gap-2 bg-acid px-4 py-2 font-mono text-xs font-semibold text-ink transition-colors hover:bg-acid-bright"
             >
               Let&rsquo;s talk
-            </a>
-            <a
-              href={PROFILE.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden items-center gap-2 border border-acid/50 px-4 py-2 font-mono text-xs text-acid transition-colors hover:border-acid hover:bg-acid hover:text-ink sm:inline-flex"
-            >
-              <IconDownload className="h-3.5 w-3.5" strokeWidth={1.75} />
-              Résumé
+              <IconArrowUpRight className="h-3.5 w-3.5" />
             </a>
             <button
               type="button"
@@ -121,7 +121,7 @@ export default function Nav() {
               aria-label={open ? "Close menu" : "Open menu"}
               className="border border-line-2 p-2.5 text-fawn transition-colors hover:border-acid hover:text-acid lg:hidden"
             >
-              {open ? <IconX className="h-4 w-4" /> : <IconArrowUpRight className="h-4 w-4" />}
+              {open ? <IconX className="h-4 w-4" /> : <IconMenu className="h-4 w-4" />}
             </button>
           </div>
         </nav>
@@ -169,13 +169,12 @@ export default function Nav() {
                 className="mt-auto space-y-4"
               >
                 <a
-                  href={PROFILE.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#contact"
+                  onClick={() => setOpen(false)}
                   className="flex items-center justify-center gap-2 bg-acid px-6 py-4 font-mono text-sm font-semibold text-ink"
                 >
-                  <IconDownload className="h-4 w-4" strokeWidth={1.75} />
-                  Download résumé
+                  Let&rsquo;s talk
+                  <IconArrowUpRight className="h-4 w-4" />
                 </a>
                 <p className="hud text-center text-ash">
                   {PROFILE.location} · {PROFILE.overlap}

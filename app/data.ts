@@ -18,7 +18,7 @@ export const PROFILE = {
   positioning:
     "I turn messy product work into software that ships.",
   summary:
-    "Seven years leading remote and onsite Agile teams across the UK, Saudi Arabia, and the United States — with a Software Engineering and QA background that means requirements are never vague and releases never surprise anyone.",
+    "Seven years leading remote Agile teams across the UK, Saudi Arabia, and the US — with a Software Engineering and QA background that keeps requirements sharp and releases unsurprising.",
   location: "Lahore, PK (UTC+5)",
   overlap: "UK · EU · GCC · US-East",
   email: "pro.engrraheem@gmail.com",

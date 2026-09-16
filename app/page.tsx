@@ -50,18 +50,6 @@ function FaqAccordion() {
 export default function Home() {
   return (
     <main id="main" className="relative">
-      {/* Signal header strip */}
-      <div className="overflow-hidden border-b border-line bg-ink-2">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ash sm:px-6">
-          <span>Signal &amp; Systems / Abdul Raheem</span>
-          <span className="hidden sm:inline-flex">
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-acid align-middle" aria-hidden="true" />
-            Accepting new engagements
-          </span>
-          <span>EST. 2019</span>
-        </div>
-      </div>
-
       {/* 00 — Hero */}
       <Hero hasPhoto={hasProfilePhoto} />
 

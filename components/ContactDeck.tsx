@@ -213,6 +213,13 @@ export default function ContactDeck() {
             Hiring for a TPM role, starting a delivery initiative, or need sprint consulting — send a note and I&rsquo;ll come back with something useful.
           </p>
 
+          <div className="mt-4 inline-flex items-center gap-2 border border-acid/40 bg-acid/10 px-3.5 py-1.5">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="blink-dot absolute inset-0 rounded-full bg-acid" />
+            </span>
+            <span className="hud text-acid">Open to TPM / Scrum Master roles &mdash; remote or hybrid</span>
+          </div>
+
           {submitted ? (
             <div className="mt-8 border border-acid/50 bg-acid/10 p-6 text-center">
               <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full border border-acid/60 text-acid">

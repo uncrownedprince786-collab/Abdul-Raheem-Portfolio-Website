@@ -97,7 +97,7 @@ export default function CareerTimeline() {
   const opacity = useTransform(scrollYProgress, [0, 0.06], [0, 1]);
 
   return (
-    <section id="experience" className="relative border-t border-line py-16 bg-ink-2/40 md:py-24">
+    <section id="experience" className="relative border-t border-line py-14 bg-ink-2/40 md:py-20">
       <span aria-hidden="true" className="section-mark" />
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <motion.div
@@ -105,7 +105,7 @@ export default function CareerTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10 md:mb-14"
+          className="mb-8 md:mb-12"
         >
           <div className="flex items-baseline gap-3">
             <span aria-hidden="true" className="hud text-acid">05</span>

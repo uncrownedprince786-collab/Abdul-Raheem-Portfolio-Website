@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { PROFILE } from "@/app/data";
 import { LineReveal } from "./motion";
 import {
-  IconDownload,
   IconArrowUpRight,
   IconMapPin,
   IconClock,
@@ -26,7 +25,7 @@ const PIPELINE = [
 
 export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
   return (
-    <section id="overview" className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16">
+    <section id="overview" className="relative overflow-hidden pt-20 pb-12 md:pt-24 md:pb-16">
       {/* Field grid backdrop */}
       <div
         aria-hidden="true"
@@ -111,14 +110,6 @@ export default function Hero({ hasPhoto }: { hasPhoto: boolean }) {
                 className="link-rule inline-flex items-center gap-2 py-3 text-sm font-medium text-paper"
               >
                 See selected work
-              </a>
-              <a
-                href={PROFILE.resume}
-                download="Abdul_Raheem_Resume.pdf"
-                className="inline-flex items-center gap-2 border border-line-2 bg-ink-2/70 px-4 py-3 text-sm font-medium text-fawn transition-colors hover:border-acid/60 hover:text-paper"
-              >
-                <IconDownload className="h-4 w-4" />
-                <span>CV</span>
               </a>
             </motion.div>
 

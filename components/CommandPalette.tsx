@@ -9,7 +9,6 @@ import {
   IconMail,
   IconPhone,
   IconLinkedin,
-  IconDownload,
   IconX,
   IconChevronRight,
   IconGateCheck,
@@ -113,20 +112,6 @@ export default function CommandPalette() {
       category: "Actions",
       icon: IconPhone,
       onSelect: () => handleCopy("+92 331 6693499", "Phone"),
-    },
-    {
-      id: "download-resume",
-      title: "Download Resume (Abdul_Raheem_Resume.pdf)",
-      category: "Actions",
-      icon: IconDownload,
-      onSelect: () => {
-        const link = document.createElement("a");
-        link.href = "/abdul-raheem-resume.pdf";
-        link.download = "Abdul_Raheem_Resume.pdf";
-        link.click();
-        showToast("Downloading Abdul Raheem's Resume (PDF)");
-        setOpen(false);
-      },
     },
     {
       id: "open-linkedin",
